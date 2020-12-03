@@ -7,6 +7,7 @@
 
 ## コンセプト
 パブリックドメイン本で言語学習
+様々な人の翻訳を蓄積
 
 ## バージョン
 Ruby 2.6.5
@@ -66,4 +67,11 @@ https://drive.google.com/file/d/1tOMtV767uYTzz35J5mwLdMHmQetP4NwG/view?usp=shari
 ## 使用予定Gem
 * carrierwave
 * mini_magick
-* devise
+* ransack
+
+## 課題要件
+- 就業Termから２つ以上の技術
+  - devise
+  - コメント機能
+- カリキュラム外から１つ以上の技術
+  - gem ransack
