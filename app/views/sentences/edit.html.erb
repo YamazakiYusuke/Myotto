@@ -1,0 +1,21 @@
+<h1>センテンスの編集</h1>
+<%= form_with(model: @sentence, local: true) do |form| %>
+  <% if  @sentence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize( @sentence.errors.count, "error") %> prohibited this  sentence from being saved:</h2>
+      <ul>
+      <%  @sentence.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.text_area(:content) %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

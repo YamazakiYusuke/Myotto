@@ -1,2 +1,29 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<h1>本のタイトル: <%= @book.title %></h1>
+<p>
+  著者: <%= @book.author %> ・ 
+  刊行: <% if @book.issued_date.nil? %>
+    Unknow
+  <% else %>
+    <%= @book.issued_date.strftime("%Y") %>
+  <% end %> ・ 
+  レベル: <%= @book.level %> ・ 
+  言語: <%= @book.language %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>センテンス</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @book.sentences.each do |sentence| %>
+      <tr>
+        <td><%= sentence.content %></td>
+        <td><%= link_to('編集', edit_sentence_path(id:sentence.id)) %></td>
+        <td><%= link_to('消去', sentence_path(id:sentence.id), method: :delete, data: { confirm: '消去しますか？' }) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
