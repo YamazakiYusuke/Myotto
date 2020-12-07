@@ -18,7 +18,9 @@ class BooksController < ApplicationController
       render :new
     else
       if @book.save
+        if Sentence.make_sentences_from_book(@book.language, @book.id, params[:book][:content])
         redirect_to books_path, notice: "本を登録しました"
+        end
       else
         render :new
       end
@@ -47,6 +49,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :issued_date, :level, :language,)
+    params.require(:book).permit(:title, :author, :issued_date, :level, :language, sentences_attributes:[:content])
   end
 end
