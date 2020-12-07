@@ -1,0 +1,34 @@
+<h1>本一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>著者</th>
+      <th>刊行年</th>
+      <th>レベル</th>
+      <th>言語</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td>
+          <% if book.issued_date.nil? %>
+            <%= 'Unknow' %>
+          <% else %>
+            <%= book.issued_date.strftime("%Y") %>
+          <% end %>
+        </td>
+        <td><%= book.level %></td>
+        <td><%= book.language %></td>
+        <td><%= link_to('読む', book_path(id:book.id)) %></td>
+        <td><%= link_to('編集', edit_book_path(id:book.id)) %></td>
+        <td><%= link_to('消去', book_path(id:book.id), method: :delete, data: { confirm: '消去しますか？' }) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
