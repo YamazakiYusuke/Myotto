@@ -9,18 +9,13 @@ class Sentence < ApplicationRecord
     # あまりに短い文を結合
     if language == "EN" || language == "RU"
       spliter = /\.|\?|!/
-      split_chars = content.split("").select{ |s| s.match(spliter) }
-      sentences = content.split(spliter).zip(split_chars).map{|s| s.join }
-      sentences.each do |s|
-        Sentence.create(content: s,book_id: book_id)
-      end
     else language == "JP"
       spliter = /\。|\？|!/
-      split_chars = content.split("").select{ |s| s.match(spliter) }
-      sentences = content.split(spliter).zip(split_chars).map{|s| s.join }
-      sentences.each do |s|
-        Sentence.create(content: s,book_id: book_id)
-      end
+    end
+    split_chars = content.split("").select{ |s| s.match(spliter) }
+    sentences = content.split(spliter).zip(split_chars).map{|s| s.join }
+    sentences.each do |s|
+      Sentence.create(content: s,book_id: book_id)
     end
   end 
 end

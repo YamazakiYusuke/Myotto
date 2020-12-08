@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+  belongs_to :user
   has_many :sentences, dependent: :destroy
 
   accepts_nested_attributes_for :sentences, allow_destroy: true
