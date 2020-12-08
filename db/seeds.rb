@@ -31,3 +31,4 @@ contents = ["They were indeed a queer-looking party that assembled on the bankâ€
     book_id: book_id
   )
 end
+

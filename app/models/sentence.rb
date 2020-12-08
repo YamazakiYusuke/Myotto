@@ -1,5 +1,6 @@
 class Sentence < ApplicationRecord
   belongs_to :book
+  has_many :translations, dependent: :destroy
 
   validates :content, presence: true
 
