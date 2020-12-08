@@ -7,7 +7,8 @@
     <%= @book.issued_date.strftime("%Y") %>
   <% end %> ・ 
   レベル: <%= @book.level %> ・ 
-  言語: <%= @book.language %>
+  言語: <%= @book.language %> ・ 
+  本の登録者: <%= @book.user[:name] %>
 </p>
 
 <table>
