@@ -4,10 +4,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       ## Database authenticatable
-      t.string :name,               null: false
-      t.integer :native,            null: false
-      t.integer :language1,         null: false
-      t.integer :level1,            null: false
+      t.string :name,               null: false, limit: 100
+      t.integer :native,            null: false, limit: 2
+      t.integer :language1,         null: false, limit: 2
+      t.integer :level1,            null: false, limit: 2
+      t.string :profile, limit: 150
       t.string :icon
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

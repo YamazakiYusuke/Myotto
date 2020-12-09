@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 2020_12_08_050324) do
   enable_extension "plpgsql"
 
   create_table "books", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "author", default: "不明"
+    t.string "title", limit: 100, null: false
+    t.string "author", limit: 100, default: "不明"
     t.datetime "issued_date"
-    t.integer "level", default: 0
-    t.integer "language", default: 0, null: false
+    t.integer "level", limit: 2, default: 0
+    t.integer "language", limit: 2, default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -46,10 +46,11 @@ ActiveRecord::Schema.define(version: 2020_12_08_050324) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "native", null: false
-    t.integer "language1", null: false
-    t.integer "level1", null: false
+    t.string "name", limit: 100, null: false
+    t.integer "native", limit: 2, null: false
+    t.integer "language1", limit: 2, null: false
+    t.integer "level1", limit: 2, null: false
+    t.string "profile", limit: 150
     t.string "icon"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
