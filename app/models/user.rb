@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :translations, dependent: :destroy
 
+  mount_uploader :icon, IconUploader
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

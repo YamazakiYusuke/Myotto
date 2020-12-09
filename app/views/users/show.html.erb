@@ -1,0 +1,23 @@
+<p><%= image_tag @user.icon.url %></p>
+<p>
+  <%= @user.name %>
+  <%= @user.native %> →
+  <%= @user.language1 %>
+  (<%= @user.level1 %>)
+</p>
+
+
+<h2>自己紹介部分はダミー　カラムの追加 user#editの編集が必要</h2>
+<strong>自己紹介</strong>
+<p>こんにちは!アメリカの大学生です大学を卒業してから、日本で働きたいです遠慮なく話してくだしさい</p>
+
+<strong>↓10個の翻訳だけここに表示して、ShoｗAllボタンを押したら全部表示みたいにしたい
+・それかページネーション</strong>
+
+<% @translations.each do |t| %>
+<div>
+  <%= t.sentence.book.title %><br /> 
+  原文: <%= t.sentence.content %><br /> 
+  翻訳: <%= t.content %><br /><br />
+</div>
+<% end %>

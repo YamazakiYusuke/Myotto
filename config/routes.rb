@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'books#index'
   devise_for :users
+  resources :users, only: [:show]
   resources :books
   resources :sentences
   resources :translations
