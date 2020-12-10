@@ -56,3 +56,16 @@ book_ids = Book.all.map { |n| n.id }
   )
 end
 
+sentence_ids = Sentence.all.map { |n| n.id }
+
+1000.times do |n|
+  content = ["翻訳AAAAAAAAAAAAAAAAAAAAAAAAA","翻訳BBBBBBBBBBBBBBBBBBBBBBBB","翻訳CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC","翻訳DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"].sample
+  user_id = user_ids.sample
+  sentence_id =sentence_ids.sample
+
+  Translation.create!(
+    content: content,
+    user_id: user_id,
+    sentence_id:sentence_id
+  )
+end

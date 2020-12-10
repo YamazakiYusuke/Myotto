@@ -36,8 +36,10 @@
   </div>
 
   <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <% if params[:action] == "new" %>
+      <%= form.label :content %>
+      <%= form.text_area :content %>
+    <% end %>
   </div>
 
   <div>

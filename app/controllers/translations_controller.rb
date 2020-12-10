@@ -1,28 +1,33 @@
 class TranslationsController < ApplicationController
-  before_action :set_translation, only: [:show, :edit, :update, :destroy]
+  before_action :set_translation, only: [:edit, :update, :destroy]
 
   def index
     # 検索機能追加
-    @translations = Translation.all.includes(:sentence)
+    users = User.where(native: current_user.language1).where(language1: current_user.native)
+    @translations = users.map { |n| n.translations }
+    binding.pry
+
+    @translations = Translation.all.includes(:sentence, :user).limit(100).order(created_at: :desc)
 
   end
 
-  def show ## <= 12/9 8.10ここから
+  def show
     # show/viewにコメント機能、like機能追加
+    @translation = Translation.includes(:user, :sentence).find(params[:id])
   end
 
   def new
     @translation = Translation.new
+    @translation[:sentence_id] = params[:id].to_i
   end
 
   def create
     @translation = current_user.translations.new(translation_params)
-    @translation[]
     if params[:back]
       render :new
     else
       if @translation.save
-        redirect_to translations_path
+        redirect_to translation_path(@translation.id), notice: '翻訳を作成しました'
       else
         render :new
       end
@@ -34,7 +39,7 @@ class TranslationsController < ApplicationController
 
   def update
     if @translation.update(translation_params)
-      redirect_to translations_path, notice: '翻訳を編集しました'
+      redirect_to translation_path(@translation.id), notice: '翻訳を編集しました'
     else
       render :edit
     end
@@ -51,6 +56,6 @@ class TranslationsController < ApplicationController
   end
 
   def translation_params
-    params.require(:translation).permit(:content)
+    params.require(:translation).permit(:content, :sentence_id)
   end
 end

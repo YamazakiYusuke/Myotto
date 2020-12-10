@@ -1,24 +1,11 @@
 <h1>みんなの翻訳</h1>
 
-
-<table>
-  <thead>
-    <tr>
-      <th>原文</th>
-      <th>翻訳</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @translations.each do |translation| %>
-      <tr>
-        <td><%= translation.sentence.content %></td>
-        <td><%= translation.content %></td>
-        <td><%= link_to 'Show', translation_path(translation.id) %></td>
-        <td><%= link_to 'Edit', edit_translation_path(translation) %>後でtranslations#showに移動</td> 
-        <td><%= link_to 'Destroy', translation_path(translation.id), method: :delete, data: { confirm: 'Are you sure?' } %>後でtranslations#showに移動</td>  
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @translations.each do |translation| %>
+  <span>icon:</span><br /> 
+  <span>投稿者: <strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong><%= translation.user.native %> →
+  <%= translation.user.language1 %></span><br /> 
+    <span>原文: <%= translation.sentence.content %></span><br /> 
+    <span>翻訳: <%= translation.content %></span><br /> 
+    <span><%= link_to 'Show', translation_path(translation.id) %></span>
+    <br /> <br />  
+<% end %>

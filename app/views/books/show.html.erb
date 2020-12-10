@@ -22,6 +22,7 @@
     <% @book.sentences.order(id: "ASC").each do |sentence| %>
       <tr>
         <td><%= sentence.content %></td>
+        <td><%= link_to('翻訳', new_translation_path(id:sentence.id)) %></td>
         <td><%= link_to('編集', edit_sentence_path(id:sentence.id)) %></td>
         <td><%= link_to('消去', sentence_path(id:sentence.id), method: :delete, data: { confirm: '消去しますか？' }) %></td>
       </tr>

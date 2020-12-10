@@ -3,6 +3,7 @@ class Sentence < ApplicationRecord
   has_many :translations, dependent: :destroy
 
   validates :content, presence: true
+  validates :content,    length: { in: 0..1000 } 
 
   def self.make_sentences_from_book(language,book_id,content)
     # "" or 「」の中で切らないようにする。
