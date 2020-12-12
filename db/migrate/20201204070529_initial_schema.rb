@@ -53,12 +53,14 @@ class InitialSchema < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :user_book_favarites do |t|
+    create_table :user_book_favorites do |t|
       t.references :user, foreign_key: true
       t.references :book, foreign_key: true
 
       t.timestamps
     end
+
+    add_index :user_book_favorites, [:user_id, :book_id], unique: true
 
     create_table :locales do |t|
       t.string :name
@@ -79,7 +81,7 @@ class InitialSchema < ActiveRecord::Migration[5.2]
     create_table :book_locale_statuses do |t|
       t.references :book, foreign_key: true
       t.references :locale, foreign_key: true
-      t.boolean :is_main
+      t.boolean :is_main, null: false
       t.string :difficulty
       
       t.timestamps
@@ -93,12 +95,14 @@ class InitialSchema < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :user_translation_favarites do |t|
+    create_table :user_translation_favorites do |t|
       t.references :translation, foreign_key: true
       t.references :user, foreign_key: true
 
       t.timestamps
     end
+
+    add_index :user_translation_favorites, [:translation_id, :user_id], unique: true
 
     create_table :user_translation_comments do |t|
       t.references :translation, foreign_key: true
@@ -109,18 +113,22 @@ class InitialSchema < ActiveRecord::Migration[5.2]
     end
 
     create_table :relationships do |t|
-      t.references :follower_id, foreign_key: { to_table: :users }
-      t.references :followed_id, foreign_key: { to_table: :users }
+      t.references :follower, foreign_key: { to_table: :users }
+      t.references :followed, foreign_key: { to_table: :users }
 
       t.timestamps
     end
 
+    add_index :relationships, [:follower_id, :followed_id], unique: true
+
     create_table :dm_pairs do |t|
-      t.references :sender_id, foreign_key: { to_table: :users }
-      t.references :recipient_id, foreign_key: { to_table: :users }
+      t.references :sender, foreign_key: { to_table: :users }
+      t.references :recipient, foreign_key: { to_table: :users }
       
       t.timestamps
     end
+
+    add_index :dm_pairs, [:sender_id, :recipient_id], unique: true
 
     create_table :rooms do |t|
       t.references :user, foreign_key: true
@@ -136,4 +144,3 @@ class InitialSchema < ActiveRecord::Migration[5.2]
     raise ActiveRecord::IrreversibleMigration, 'The initial migration is not revertable'
   end
 end
-

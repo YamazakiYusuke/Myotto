@@ -7,22 +7,7 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= f.label :native %><br />
-    <%= f.select(:native, [['EN'], ['JP'], ['RU']]) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :language1 %><br />
-    <%= f.select(:language1, [['EN'], ['JP'], ['RU']]) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :level1 %><br />
-    <%= f.select(:level1, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']]) %>
-  </div>
-
+  
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

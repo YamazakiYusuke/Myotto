@@ -6,8 +6,8 @@
   <% else %>
     <%= @book.issued_date.strftime("%Y") %>
   <% end %> ・ 
-  レベル: <%= @book.level %> ・ 
-  言語: <%= @book.language %> ・ 
+  レベル: <%= @book.book_locale_statuse.difficulty %> ・ 
+  言語: <%= @book.book_locale_statuse.locale.name %> ・ 
   本の登録者: <%= @book.user[:name] %>
 </p>
 
@@ -22,9 +22,9 @@
     <% @book.sentences.order(id: "ASC").each do |sentence| %>
       <tr>
         <td><%= sentence.content %></td>
-        <td><%= link_to('翻訳', new_translation_path(id:sentence.id)) %></td>
-        <td><%= link_to('編集', edit_sentence_path(id:sentence.id)) %></td>
-        <td><%= link_to('消去', sentence_path(id:sentence.id), method: :delete, data: { confirm: '消去しますか？' }) %></td>
+        <td><%= link_to('翻訳', new_translation_path(sentence_id: sentence.id)) %></td>
+        <td><%= link_to('編集', edit_book_sentence_path(@book.id, sentence.id)) %></td>
+        <td><%= link_to('消去', book_sentence_path(@book.id, sentence.id), method: :delete, data: { confirm: '消去しますか？' }) %></td>
       </tr>
     <% end %>
   </tbody>

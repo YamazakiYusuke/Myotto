@@ -1,9 +1,9 @@
 <p><%= image_tag @user.icon.url if @user.icon.url %></p>
 <p>
   <%= @user.name %>
-  <%= @user.native %> →
-  <%= @user.language1 %>
-  (<%= @user.level1 %>)
+  <%= @locales.find(@native[:locale_id])[:name] %>→
+  <%= @locales.find(@wanted[:locale_id])[:name] %>
+  (<%= @wanted[:wanted_level] %>)
 </p>
 
 <strong>自己紹介</strong>
@@ -13,9 +13,9 @@
 ・それかページネーション</strong>
 
 <% @translations.each do |t| %>
-<div>
-  <%= t.sentence.book.title %><br /> 
-  原文: <%= t.sentence.content %><br /> 
-  翻訳: <%= t.content %><br /><br />
-</div>
+  <div>
+    <%= t.sentence.book.title %><br /> 
+    原文: <%= t.sentence.content %><br /> 
+    翻訳: <%= t.content %><br /><br />
+  </div>
 <% end %>

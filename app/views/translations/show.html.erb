@@ -1,9 +1,5 @@
 <br /> 
 <span><%= @translation.user.name %></span>
-<br /> 
-<span><%= @translation.user.native %> → <%= @translation.user.language1 %></span>
-<br /> 
-<span><%= @translation.user.level1 %></span>
 <br />
 <h3>タイトル: <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %></h3>
 <span>著者: <%= @translation.sentence.book.author %></span>

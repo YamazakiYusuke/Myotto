@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
 
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :native, :language1, :level1, :profile, :icon, :icon_cache])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile, :icon, :icon_cache, user_locale_statuses_attributes:[ :user_id, :locale_id, :is_native, :is_wanted, :wanted_level ]])
   end
 end

@@ -26,13 +26,15 @@
   </div>
 
   <div>
-    <%= form.label :level %>
-    <%= form.select(:level, [['Unknow'], ['Beginner'], ['Intermediate'], ['Advanced']]) %>
+    <%= form.label :difficulty %>
+    <%= form.select(:difficulty, [['Unknow', 'Unknow'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']]) %>
   </div>
 
   <div>
-    <%= form.label :language %>
-    <%= form.select(:language, [['EN'], ['JP'], ['RU']]) %>
+    <% if params[:action] == "new" %>
+      <%= form.label :locale_id %>
+      <%= form.select(:locale_id, [[@locales[0].name, @locales[0].id], [@locales[1].name, @locales[1].id], [@locales[2].name, @locales[2].id]]) %>
+    <% end %>
   </div>
 
   <div>

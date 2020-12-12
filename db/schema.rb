@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
   create_table "book_locale_statuses", force: :cascade do |t|
     t.bigint "book_id"
     t.bigint "locale_id"
-    t.boolean "is_main"
+    t.boolean "is_main", null: false
     t.string "difficulty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,12 +37,13 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
   end
 
   create_table "dm_pairs", force: :cascade do |t|
-    t.bigint "sender_id_id"
-    t.bigint "recipient_id_id"
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipient_id_id"], name: "index_dm_pairs_on_recipient_id_id"
-    t.index ["sender_id_id"], name: "index_dm_pairs_on_sender_id_id"
+    t.index ["recipient_id"], name: "index_dm_pairs_on_recipient_id"
+    t.index ["sender_id", "recipient_id"], name: "index_dm_pairs_on_sender_id_and_recipient_id", unique: true
+    t.index ["sender_id"], name: "index_dm_pairs_on_sender_id"
   end
 
   create_table "locales", force: :cascade do |t|
@@ -52,12 +53,13 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.bigint "follower_id_id"
-    t.bigint "followed_id_id"
+    t.bigint "follower_id"
+    t.bigint "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["followed_id_id"], name: "index_relationships_on_followed_id_id"
-    t.index ["follower_id_id"], name: "index_relationships_on_follower_id_id"
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -89,13 +91,14 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
     t.index ["user_id"], name: "index_translations_on_user_id"
   end
 
-  create_table "user_book_favarites", force: :cascade do |t|
+  create_table "user_book_favorites", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_user_book_favarites_on_book_id"
-    t.index ["user_id"], name: "index_user_book_favarites_on_user_id"
+    t.index ["book_id"], name: "index_user_book_favorites_on_book_id"
+    t.index ["user_id", "book_id"], name: "index_user_book_favorites_on_user_id_and_book_id", unique: true
+    t.index ["user_id"], name: "index_user_book_favorites_on_user_id"
   end
 
   create_table "user_locale_statuses", force: :cascade do |t|
@@ -120,13 +123,14 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
     t.index ["user_id"], name: "index_user_translation_comments_on_user_id"
   end
 
-  create_table "user_translation_favarites", force: :cascade do |t|
+  create_table "user_translation_favorites", force: :cascade do |t|
     t.bigint "translation_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["translation_id"], name: "index_user_translation_favarites_on_translation_id"
-    t.index ["user_id"], name: "index_user_translation_favarites_on_user_id"
+    t.index ["translation_id", "user_id"], name: "index_user_translation_favorites_on_translation_id_and_user_id", unique: true
+    t.index ["translation_id"], name: "index_user_translation_favorites_on_translation_id"
+    t.index ["user_id"], name: "index_user_translation_favorites_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -158,21 +162,21 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
   add_foreign_key "book_locale_statuses", "books"
   add_foreign_key "book_locale_statuses", "locales"
   add_foreign_key "books", "users"
-  add_foreign_key "dm_pairs", "users", column: "recipient_id_id"
-  add_foreign_key "dm_pairs", "users", column: "sender_id_id"
-  add_foreign_key "relationships", "users", column: "followed_id_id"
-  add_foreign_key "relationships", "users", column: "follower_id_id"
+  add_foreign_key "dm_pairs", "users", column: "recipient_id"
+  add_foreign_key "dm_pairs", "users", column: "sender_id"
+  add_foreign_key "relationships", "users", column: "followed_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "rooms", "dm_pairs"
   add_foreign_key "rooms", "users"
   add_foreign_key "sentences", "books"
   add_foreign_key "translations", "sentences"
   add_foreign_key "translations", "users"
-  add_foreign_key "user_book_favarites", "books"
-  add_foreign_key "user_book_favarites", "users"
+  add_foreign_key "user_book_favorites", "books"
+  add_foreign_key "user_book_favorites", "users"
   add_foreign_key "user_locale_statuses", "locales"
   add_foreign_key "user_locale_statuses", "users"
   add_foreign_key "user_translation_comments", "translations"
   add_foreign_key "user_translation_comments", "users"
-  add_foreign_key "user_translation_favarites", "translations"
-  add_foreign_key "user_translation_favarites", "users"
+  add_foreign_key "user_translation_favorites", "translations"
+  add_foreign_key "user_translation_favorites", "users"
 end

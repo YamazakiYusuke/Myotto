@@ -3,11 +3,7 @@ class TranslationsController < ApplicationController
 
   def index
     # 検索機能追加
-    users = User.where(native: current_user.language1).where(language1: current_user.native)
-    @translations = users.map { |n| n.translations }
-    binding.pry
-
-    @translations = Translation.all.includes(:sentence, :user).limit(100).order(created_at: :desc)
+    @translations = Translation.all.includes(:sentence, :user).order(created_at: :desc)
 
   end
 
@@ -18,7 +14,7 @@ class TranslationsController < ApplicationController
 
   def new
     @translation = Translation.new
-    @translation[:sentence_id] = params[:id].to_i
+    @translation[:sentence_id] = params[:sentence_id]
   end
 
   def create
