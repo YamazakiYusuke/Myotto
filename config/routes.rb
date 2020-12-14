@@ -3,13 +3,16 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
-  resources :users, only: [:show, :new, :edit, :update]
+
+  resources :users, only: [:show, :edit, :update]
 
   resources :books do
     resources :sentences
   end
 
-  resources :translations 
+  resources :translations do
+    resources :user_translation_comments, only: [:create]
+  end
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

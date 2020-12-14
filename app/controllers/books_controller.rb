@@ -1,9 +1,9 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :set_locale, only: [:new, :edit]
+  before_action :set_locale, only: [:new, :create, :edit]
 
   def index
-    @books = Book.all.includes(book_locale_statuse: :locale)
+    @books = Book.all.includes(book_locale_statuses: :locale)
   end
 
   def show
@@ -11,16 +11,15 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @book.book_locale_statuses.build if @book.book_locale_statuses.size == 0
+    binding.pry
   end
 
-  def create  #<= fat code 要リファクタ
+  def create #<=問題あり
     @book =  current_user.books.new(book_params)
+    binding.pry
     if @book.save
-      @locale_statuse = BookLocaleStatuse.new(book_locale_statuse_params)
-      @locale_statuse[:is_main] = true
-      @locale_statuse[:book_id] = @book.id
-      @locale_statuse.save
-      Sentence.make_sentences_from_book(@locale_statuse.locale_id, @book.id, params[:book][:content])
+      Sentence.make_sentences_from_book(@book.book_locale_statuses[0].locale_id, @book.id, params[:book][:content])
       redirect_to books_path, notice: "本を登録しました"
     else
       render :new
@@ -30,9 +29,8 @@ class BooksController < ApplicationController
   def edit
   end
 
-  def update
+  def update #<=問題あり
     if @book.update(book_params)
-      @book.book_locale_statuse.update(book_locale_statuse_params)
       redirect_to books_path, notice: '本を編集しました'
     else
       render :edit
@@ -54,10 +52,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :issued_date)
-  end
-
-  def book_locale_statuse_params
-    params.require(:book).permit(:locale_id, :difficulty)
+    params.require(:book).permit(:title, :author, :issued_date, book_locale_statuses_attributes: [:locale_id, :is_main, :difficulty])
   end
 end

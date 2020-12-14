@@ -25,12 +25,12 @@ locales_ids = Locale.all.map { |n| n.id }
 
 
 user_ids.each do |n|
-  UserLocaleStatuse.create!(
+  UserLocaleStatus.create!(
     user_id: n,
     locale_id: locales_ids.sample,
     is_native: true
   )
-  UserLocaleStatuse.create!(
+  UserLocaleStatus.create!(
     user_id: n,
     locale_id: locales_ids.sample,
     is_wanted: true,
@@ -55,7 +55,7 @@ end
 book_ids = Book.all.map { |n| n.id }
 
 book_ids.each do |n|
-  BookLocaleStatuse.create!(
+  BookLocaleStatus.create!(
     book_id: n,
     locale_id: locales_ids.sample,
     is_main: true
@@ -69,18 +69,16 @@ end
     "So, I also wanted to enjoy it as much as possible. ",
     "I have seen videos on YouTube where Japanese people try (taste test)Dr. Pepper and root beer, and say it tastes like medicine. ",
     "Alice kept her eyes anxiously fixed on it, for she felt sure she would catch a bad cold if she did not get dry very soon."]  
-  content = contents.sample
-  book_id = book_ids.sample
 
   Sentence.create!(
-    content: content,
-    book_id: book_id,
+    content: contents.sample,
+    book_id: book_ids.sample,
   )
 end
 
 sentence_ids = Sentence.all.map { |n| n.id }
 
-1000.times do |n|
+100.times do |n|
   content = ["あまりよくソーダを飲みませんが、日本に行った時、自販機で100円の(値段の)メロンソーダがありました!","アメリカで、メロンソーダを見つけるのがすこし難しいので、ソーダを飲む時、いつもドクターペッパーやルートビアを飲みます。","だから、メロンソーダはできるだけ飲みたかったです","私はYouTubeで日本人がドクターペッパーやルートビアの味見をして、それが薬のような味だと言う動画をYouTubeで見たことがあります。"].sample
 
   Translation.create!(

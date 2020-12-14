@@ -3,31 +3,35 @@
 <%= form_with(model: @user, local: true) do |f| %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label 'name (Required field)' %><br />
     <%= f.text_field :name %>
   </div>
 
-  <%= form.fields_for :user_locale_statuses do |form| %>
+  <% s = 'Native' %>
+  <%= f.fields_for :user_locale_statuses do |form| %>
 
     <div class="field">
-      <%= form.label :locale_id %><br />
-      <%= form.select(:locale_id, [[@locales[0].name, @locales[0].id], [@locales[1].name, @locales[1].id], [@locales[2].name, @locales[2].id]]) %>
-    </div>
-    
-    <div class="field">
-      <%= form.label :locale_id %><br />
+      <%= form.label "#{s}(Required field)" %><br />
       <%= form.select(:locale_id, [[@locales[0].name, @locales[0].id], [@locales[1].name, @locales[1].id], [@locales[2].name, @locales[2].id]]) %>
     </div>
 
     <div class="field">
-      <%= form.label :wanted_level %><br />
-      <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']]) %>
+      <%  if s == 'Learnig' %>
+        <%= form.label "#{s} Level" %><br />
+        <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']]) %>
+      <% end %>
     </div>
+
+    <% if s == 'Native' %>
+      <%= form.hidden_field :is_native, value: 'true' %>
+    <% elsif s == 'Learnig' %>
+      <%= form.hidden_field :is_wanted, value: 'true' %>
+    <% end %>
+    <% s = 'Learnig' %>
 
   <% end %>
-
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label "email(Required field)" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 

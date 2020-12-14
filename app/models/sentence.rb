@@ -9,6 +9,7 @@ class Sentence < ApplicationRecord
     # "" or 「」の中で切らないようにする。
     # 段落の頭だけスペース
     # あまりに短い文を結合
+    binding.pry
     if locale == 1 || locale == 3
       spliter = /\.|\?|!/
     else

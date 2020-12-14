@@ -6,8 +6,8 @@
   <% else %>
     <%= @book.issued_date.strftime("%Y") %>
   <% end %> ・ 
-  レベル: <%= @book.book_locale_statuse.difficulty %> ・ 
-  言語: <%= @book.book_locale_statuse.locale.name %> ・ 
+  レベル: <%= @book.book_locale_statuses[0].difficulty %> ・ 
+  言語: <%= @book.book_locale_statuses[0].locale.name %> ・ 
   本の登録者: <%= @book.user[:name] %>
 </p>
 
