@@ -1,16 +1,15 @@
 class TranslationsController < ApplicationController
   before_action :set_translation, only: [:edit, :update, :destroy]
 
-  def index
-    # 検索機能追加
-    @translations = Translation.all.includes(:sentence, :user).order(created_at: :desc)
-
+  def index    
+    @search = Translation.ransack(params[:q])
+    @translations = @search.result.includes(:sentence, :user).order(created_at: :desc)
   end
 
   def show
-    # show/viewにコメント機能、like機能追加
     @translation = Translation.includes(:user, :sentence).find(params[:id])
     @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(created_at: :desc)
+    @favorite = current_user.user_translation_favorites.find_by(translation_id: @translation.id)
   end
 
   def new

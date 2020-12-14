@@ -28,12 +28,12 @@
   <%= form.fields_for :book_locale_statuses do |f| %>
     <div>
       <%= f.label :difficulty %>
-      <%= f.select(:difficulty, [['Unknow', 'Unknow'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']]) %>
+      <%= f.select(:difficulty, [['Unknow', 'Unknow'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']], include_blank: true) %>
     </div>
 
     <div>
       <%= f.label :locale_id %>
-      <%= f.select(:locale_id, [[@locales[0].name, @locales[0].id], [@locales[1].name, @locales[1].id], [@locales[2].name, @locales[2].id]]) %>
+      <%= f.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
     </div>
 
     <%= f.hidden_field :is_main, value: 'true' %>

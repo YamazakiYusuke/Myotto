@@ -13,8 +13,9 @@ class User < ApplicationRecord
   # has_many :senders, through: :passive_relationships, source: :follower
   # has_many :recipients, through: :passive_relationships, source: :follower
 ################
-  has_many :rooms, dependent: :destroy
+  # has_many :rooms, dependent: :destroy
 
+  
   # mount_uploader :icon, ImageUploader 
 
   validates :name,    length: { in: 1..100 }  

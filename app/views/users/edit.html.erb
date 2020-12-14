@@ -12,13 +12,13 @@
 
     <div class="field">
       <%= form.label "#{s}(Required field)" %><br />
-      <%= form.select(:locale_id, [[@locales[0].name, @locales[0].id], [@locales[1].name, @locales[1].id], [@locales[2].name, @locales[2].id]]) %>
+      <%= form.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
     </div>
 
     <div class="field">
       <%  if s == 'Learnig' %>
         <%= form.label "#{s} Level" %><br />
-        <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']]) %>
+        <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']], include_blank: true) %>
       <% end %>
     </div>
 

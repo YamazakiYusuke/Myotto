@@ -1,6 +1,10 @@
-<br /> 
-<span><%= @translation.user.name %></span>
 <br />
+<strong><%= link_to(@translation.user.name, user_path(@translation.user.id)) %></strong>
+<span>
+  <%= @translation.user.user_locales[0].name %>→
+  <%= @translation.user.user_locales[1].name %>
+  ( <%= @translation.user.user_locale_statuses[1].wanted_level %> )
+</span>
 <h3>タイトル: <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %></h3>
 <span>著者: <%= @translation.sentence.book.author %></span>
 <br /> 
@@ -16,6 +20,14 @@
 </div>
 <br /><br /><br />
 
+<%= @translation.user_translation_favorites.count %>
+<% unless @translation.user_id == current_user.id %>
+  <% if @favorite.present? %>
+    <%= link_to 'Remove LIKE', translation_user_translation_favorite_path(@translation.id, @favorite.id), method: :delete %>
+  <% else %>
+    <%= link_to 'LIKE!', translation_user_translation_favorites_path(translation_id: @translation.id), method: :post %>
+  <% end %>
+<% end %>
 <%= form_with(model: UserTranslationComment.new, url: translation_user_translation_comments_path(@translation.id), method: :post, local:true) do |f| %>
   <div>
     <%= f.label('コメント入力欄') %>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:new, :show, :edit, :update]
-  before_action :set_locale, only: [:show, :new, :edit]
+  before_action :set_locale, only: [:show]
 
   def show
     @translations = Translation.where(user_id: params[:id]).includes(sentence: :book)

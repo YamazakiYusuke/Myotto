@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :translations do
     resources :user_translation_comments, only: [:create]
+    resources :user_translation_favorites, only: [:create, :destroy]
   end
 
   if Rails.env.development?

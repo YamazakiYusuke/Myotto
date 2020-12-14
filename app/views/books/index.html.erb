@@ -1,5 +1,13 @@
 <h1>本一覧</h1>
 
+<%= search_form_for @search,url: books_path do |f| %>
+  <%= f.label :title_cont, "author" %>
+  <%= f.search_field :title_cont %>
+  <%= f.label :book_locale_statuses_locale_id_cont, "locale" %>
+  <%= f.collection_select :book_locale_statuses_locale_id_cont, Locale.all, :id, :name, include_blank: true %>
+  <div class="actions"><%= f.submit "検索" %></div>
+<% end %>
+
 <table>
   <thead>
     <tr>
