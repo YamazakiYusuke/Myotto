@@ -10,6 +10,7 @@ class TranslationsController < ApplicationController
   def show
     # show/viewにコメント機能、like機能追加
     @translation = Translation.includes(:user, :sentence).find(params[:id])
+    @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(created_at: :desc)
   end
 
   def new

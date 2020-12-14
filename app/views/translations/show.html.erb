@@ -14,4 +14,19 @@
   <span><%= link_to 'Edit', edit_translation_path(@translation.id) %></span> 
   <span><%= link_to 'Destroy', translation_path(@translation.id), method: :delete, data: { confirm: 'Are you sure?' } %></span>
 </div>
+<br /><br /><br />
 
+<%= form_with(model: UserTranslationComment.new, url: translation_user_translation_comments_path(@translation.id), method: :post, local:true) do |f| %>
+  <div>
+    <%= f.label('コメント入力欄') %>
+    <%= f.text_field :content %>
+  </div>
+    <%= f.submit('コメント') %>
+    <%= f.hidden_field :translation_id, value: @translation.id %>
+<% end %>
+<br />
+<h3>添削・コメント</h3>
+<% @comments.each do |comment| %>
+  <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong><br />
+  <span><%= comment.content %></span><br />
+<% end %>
