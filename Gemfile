@@ -49,3 +49,5 @@ gem 'mini_magick'
 gem 'ransack'
 gem 'bcrypt', '3.1.11'
 
+gem 'kaminari'
+
