@@ -1,11 +1,11 @@
 <h1>本一覧</h1>
 
 <%= search_form_for @search,url: books_path do |f| %>
-  <%= f.label :title_cont, "author" %>
+  <%= f.label :title_cont, "Title" %>
   <%= f.search_field :title_cont %>
-  <%= f.label :book_locale_statuses_locale_id_cont, "locale" %>
-  <%= f.collection_select :book_locale_statuses_locale_id_cont, Locale.all, :id, :name, include_blank: true %>
-  <div class="actions"><%= f.submit "検索" %></div>
+  <%= f.label :book_locale_statuses_locale_id, "locale(未完成)" %>
+  <%= f.collection_select :book_locale_statuses_locale_id, Locale.all, :id, :name, include_blank: true %>
+  <%= f.submit "検索" %></div>
 <% end %>
 
 <table>
@@ -33,7 +33,7 @@
         </td>
         <td>
           <% if book.book_locale_statuses[0].difficulty.present? %>
-            <%= book.book_locale_statuses.difficulty %> 
+            <%= book.book_locale_statuses[0].difficulty %> 
           <% else %>
             <%= 'Unknow' %>
           <% end %>

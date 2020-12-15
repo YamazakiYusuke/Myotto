@@ -3,7 +3,7 @@ class UserTranslationCommentsController < ApplicationController
 
   def create
     @comment = current_user.user_translation_comments.new(user_translation_comment_params)
-    binding.pry
+
     if @comment.save
       redirect_to translation_path(@comment.translation_id), notice: 'コメントしました'
     else

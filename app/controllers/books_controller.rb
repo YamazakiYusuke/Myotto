@@ -14,7 +14,7 @@ class BooksController < ApplicationController
     @book.book_locale_statuses.build if @book.book_locale_statuses.size == 0
   end
 
-  def create #<=問題あり
+  def create 
     @book =  current_user.books.new(book_params)
     if @book.save
       Sentence.make_sentences_from_book(@book.book_locale_statuses[0].locale_id, @book.id, params[:book][:content])
@@ -27,7 +27,7 @@ class BooksController < ApplicationController
   def edit
   end
 
-  def update #<=問題あり
+  def update
     if @book.update(book_params)
       redirect_to books_path, notice: '本を編集しました'
     else
@@ -46,6 +46,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :issued_date, book_locale_statuses_attributes: [:locale_id, :is_main, :difficulty])
+    params.require(:book).permit(:title, :author, :issued_date, book_locale_statuses_attributes: [:locale_id, :book_id, :is_main, :difficulty])
   end
 end

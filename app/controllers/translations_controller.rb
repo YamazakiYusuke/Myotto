@@ -1,9 +1,11 @@
 class TranslationsController < ApplicationController
   before_action :set_translation, only: [:edit, :update, :destroy]
 
-  def index    
-    @search = Translation.ransack(params[:q])
-    @translations = @search.result.includes(:sentence, :user).order(created_at: :desc)
+  def index  #要リファクタ 検索機能追加
+    user_localses =  UserLocaleStatus.where(is_wanted: current_user.user_locale_statuses.find_by(is_native: true).locale_id).includes(user: :translations)
+    users = user_localses.map { |n| n.user }
+    @translations = users.map { |n| n.translations }
+    @translations = @translations[0]
   end
 
   def show

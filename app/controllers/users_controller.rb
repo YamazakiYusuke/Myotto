@@ -1,16 +1,30 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:new, :show, :edit, :update]
-  before_action :set_locale, only: [:show]
+  before_action :set_user, only: [:show, :edit, :update]
+  # before_action :set_locale, only: [:show]
 
   def show
     @translations = Translation.where(user_id: params[:id]).includes(sentence: :book)
   end
 
-  def edit #editするたびにどんどん増えていく
-    2.times { @user.user_locale_statuses.build } if @user.user_locale_statuses.size == 0
+  def new
+    @user = User.new
+    2.times { @user.user_locale_statuses.build }
   end
 
-  def update #<= エラー
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to translations_path, notice: 'アカウントを作成しました！'
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
     if @user.update(user_params)
       redirect_to translations_path, notice: 'アカウントを編集しました'
     else
@@ -28,7 +42,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :profile, :icon, :email, user_locale_statuses_attributes: [:locale_id, :is_native, :is_wanted, :wanted_level] )
+    params.require(:user).permit(:name, :profile, :icon, :email, :password, :password_confirmation,
+                                  user_locale_statuses_attributes: [:locale_id, :is_native, :is_wanted, :wanted_level] )
   end
 
 end

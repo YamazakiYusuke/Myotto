@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
   root to: 'translations#index'
-  devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
-
-  resources :users, only: [:show, :edit, :update]
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   resources :books do
     resources :sentences

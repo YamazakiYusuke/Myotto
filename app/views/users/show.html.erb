@@ -1,17 +1,15 @@
 
 <p>
   <%= @user.name %>
-  <%= @user.user_locale_statuses[0].locale.name %>→
-  <%= @user.user_locale_statuses[1].locale.name %>
+  <%= @user.locales[0].name %>→
+  <%= @user.locales[1].name %>
   (<%= @user.user_locale_statuses[1].wanted_level %>)
 </p>
 
 <strong>自己紹介</strong>
 <p><%= @user.profile %></p>
-
-<strong>↓10個の翻訳だけここに表示して、ShoｗAllボタンを押したら全部表示みたいにしたい
-・それかページネーション</strong>
-
+<%= link_to('プロフィール編集', edit_user_path(current_user.id)) %>
+<br/>
 <% @translations.each do |t| %>
   <div>
     <%= t.sentence.book.title %><br /> 

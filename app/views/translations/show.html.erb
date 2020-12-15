@@ -1,8 +1,8 @@
 <br />
 <strong><%= link_to(@translation.user.name, user_path(@translation.user.id)) %></strong>
 <span>
-  <%= @translation.user.user_locales[0].name %>→
-  <%= @translation.user.user_locales[1].name %>
+  <%= @translation.user.locales[0].name %>→
+  <%= @translation.user.locales[1].name %>
   ( <%= @translation.user.user_locale_statuses[1].wanted_level %> )
 </span>
 <h3>タイトル: <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %></h3>
@@ -20,7 +20,7 @@
 </div>
 <br /><br /><br />
 
-<%= @translation.user_translation_favorites.count %>
+<span><%= @translation.user_translation_favorites.count %>LIKE</span>
 <% unless @translation.user_id == current_user.id %>
   <% if @favorite.present? %>
     <%= link_to 'Remove LIKE', translation_user_translation_favorite_path(@translation.id, @favorite.id), method: :delete %>
