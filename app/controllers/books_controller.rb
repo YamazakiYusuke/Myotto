@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user, only: [:index, :show]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index

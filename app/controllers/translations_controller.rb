@@ -1,4 +1,5 @@
 class TranslationsController < ApplicationController
+  before_action :authenticate_user, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   before_action :set_translation, only: [:edit, :update, :destroy]
 
   def index  #要リファクタ 検索機能追加

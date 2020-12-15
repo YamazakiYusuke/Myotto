@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'translations#index'
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
   resources :books do
     resources :sentences

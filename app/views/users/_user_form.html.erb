@@ -52,15 +52,6 @@
     </div> 
   <% end %>
 
-  <% if params[:action] == "edit" %>
-    <div class="field">
-      <%= f.label :icon※要改善  %>
-      <%= image_tag(user.icon.url) if user.icon && user.icon.url %>
-      <%= f.file_field :icon %>
-      <%= f.hidden_field :icon_cache %>
-    </div> 
-  <% end %>
-
   <div>
     <%= f.label :password %>
     <%= f.password_field :password %>

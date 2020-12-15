@@ -1,0 +1,11 @@
+<h2>
+  <% if @which == 'following'%>
+    フォロー
+  <% else %>
+    フォロワー
+  <% end %>
+</h2>
+<% @users.each do |user| %>
+  <%= link_to(user.name, user_path(user.id)) %>
+  <br>
+<% end %>

@@ -23,8 +23,8 @@
       <tr>
         <td><%= sentence.content %></td>
         <td><%= link_to('翻訳', new_translation_path(sentence_id: sentence.id)) %></td>
-        <td><%= link_to('編集', edit_book_sentence_path(@book.id, sentence.id)) %></td>
-        <td><%= link_to('消去', book_sentence_path(@book.id, sentence.id), method: :delete, data: { confirm: '消去しますか？' }) %></td>
+        <td><%= link_to('編集', edit_book_sentence_path(@book.id, sentence.id)) if admin_user? %></td>
+        <td><%= link_to('消去', book_sentence_path(@book.id, sentence.id), method: :delete, data: { confirm: '消去しますか？' }) if admin_user? %></td>
       </tr>
     <% end %>
   </tbody>

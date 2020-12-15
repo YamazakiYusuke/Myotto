@@ -39,7 +39,7 @@ class InitialSchema < ActiveRecord::Migration[5.2]
     add_index :user_book_favorites, [:user_id, :book_id], unique: true
 
     create_table :locales do |t|
-      t.string :name
+      t.string :name, unique: true
       
       t.timestamps
     end
@@ -89,21 +89,23 @@ class InitialSchema < ActiveRecord::Migration[5.2]
     end
 
     create_table :relationships do |t|
-      t.references :follower, foreign_key: { to_table: :users }
-      t.references :followed, foreign_key: { to_table: :users }
-
+      t.integer :follower_id
+      t.integer :followed_id
       t.timestamps
     end
 
+    add_index :relationships, :follower_id
+    add_index :relationships, :followed_id
     add_index :relationships, [:follower_id, :followed_id], unique: true
 
     create_table :dm_pairs do |t|
-      t.references :sender, foreign_key: { to_table: :users }
-      t.references :recipient, foreign_key: { to_table: :users }
+      t.integer :sender_id
+      t.integer :recipient_id
       
       t.timestamps
     end
-
+    add_index :dm_pairs, :sender_id
+    add_index :dm_pairs, :recipient_id
     add_index :dm_pairs, [:sender_id, :recipient_id], unique: true
 
     create_table :rooms do |t|

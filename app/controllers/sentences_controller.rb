@@ -1,22 +1,6 @@
 class SentencesController < ApplicationController
+  before_action :admin_user, only: [:edit, :update, :destroy]
   before_action :set_sentence, only: [:edit, :update, :destroy]
-
-  # def new
-  #   @sentence = Sentence.new
-  # end
-
-  # def create
-  #   @sentence = Sentence.new(sentence_params)
-  #   if params[:back]
-  #     render :new
-  #   else
-  #     if @sentence.save
-  #       redirect_to sentences_path
-  #     else
-  #       render :new
-  #     end
-  #   end
-  # end
 
   def edit
   end

@@ -1,4 +1,5 @@
 class UserTranslationFavoritesController < ApplicationController
+  before_action :authenticate_user, only: [:index, :show]
   def create
     favorite = current_user.user_translation_favorites.create(translation_id: params[:translation_id])
     redirect_to translation_path(favorite.translation_id), notice: "#{favorite.translation.user.name}さんの翻訳をLIKEしました"

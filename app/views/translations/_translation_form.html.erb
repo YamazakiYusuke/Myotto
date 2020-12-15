@@ -10,7 +10,7 @@
     </div>
   <% end %>
   <div class="new_post_box">
-    原文:<br />
+    原文:<br/>
     <span><%= @translation.sentence.content %></span>
     <div class="field">
       <%= form.label :翻訳 %>
@@ -19,7 +19,7 @@
     <div class="field">
       <%= form.hidden_field :sentence_id, valuse: translation.sentence_id %>
     </div>
-    <br /> 
+    <br/> 
     <div class="actions">
       <%= form.submit %>
     </div>

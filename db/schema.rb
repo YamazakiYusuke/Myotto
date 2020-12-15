@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
   end
 
   create_table "dm_pairs", force: :cascade do |t|
-    t.bigint "sender_id"
-    t.bigint "recipient_id"
+    t.integer "sender_id"
+    t.integer "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipient_id"], name: "index_dm_pairs_on_recipient_id"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.bigint "follower_id"
-    t.bigint "followed_id"
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
@@ -148,10 +148,6 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
   add_foreign_key "book_locale_statuses", "books"
   add_foreign_key "book_locale_statuses", "locales"
   add_foreign_key "books", "users"
-  add_foreign_key "dm_pairs", "users", column: "recipient_id"
-  add_foreign_key "dm_pairs", "users", column: "sender_id"
-  add_foreign_key "relationships", "users", column: "followed_id"
-  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "rooms", "dm_pairs"
   add_foreign_key "rooms", "users"
   add_foreign_key "sentences", "books"

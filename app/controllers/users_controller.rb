@@ -1,6 +1,17 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, only: [:index, :show, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
-  # before_action :set_locale, only: [:show]
+  before_action :authority_user_edit, only: [:edit, :update]
+
+  def index
+    if params[:which] == 'following'
+      @users = User.find(params[:user_id]).following
+      @which = 'following'
+    else params[:which] == 'followers'
+      @users = User.find(params[:user_id]).followers
+      @which = 'followers'
+    end
+  end
 
   def show
     @translations = Translation.where(user_id: params[:id]).includes(sentence: :book)
@@ -34,7 +45,7 @@ class UsersController < ApplicationController
 
   private
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
   def set_locale
@@ -42,8 +53,14 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :profile, :icon, :email, :password, :password_confirmation,
+    params.require(:user).permit(:name, :profile, :icon, :icon_cache, :email, :password, :password_confirmation,
                                   user_locale_statuses_attributes: [:locale_id, :is_native, :is_wanted, :wanted_level] )
   end
 
+  def authority_user_edit
+    unless @user.id == current_user.id
+      flash[:notice] = 'You can\'t edit this acount '
+      redirect_to user_path(@user.id)
+    end
+  end
 end

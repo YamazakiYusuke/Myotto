@@ -1,4 +1,4 @@
-<br />
+<br/>
 <strong><%= link_to(@translation.user.name, user_path(@translation.user.id)) %></strong>
 <span>
   <%= @translation.user.locales[0].name %>→
@@ -7,18 +7,18 @@
 </span>
 <h3>タイトル: <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %></h3>
 <span>著者: <%= @translation.sentence.book.author %></span>
-<br /> 
-<br /> 
-<br /> 
+<br/> 
+<br/> 
+<br/> 
 <strong>原文</strong>
 <p><%= @translation.sentence.content %></p>
 <strong>翻訳</strong>
 <p><%= @translation.content %></p>
 <div>
-  <span><%= link_to 'Edit', edit_translation_path(@translation.id) %></span> 
-  <span><%= link_to 'Destroy', translation_path(@translation.id), method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  <span><%= link_to 'Edit', edit_translation_path(@translation.id) if @translation.user_id == current_user.id %></span> 
+  <span><%= link_to 'Destroy', translation_path(@translation.id), method: :delete, data: { confirm: 'Are you sure?' } if @translation.user_id == current_user.id %></span>
 </div>
-<br /><br /><br />
+<br/>
 
 <span><%= @translation.user_translation_favorites.count %>LIKE</span>
 <% unless @translation.user_id == current_user.id %>
@@ -28,6 +28,7 @@
     <%= link_to 'LIKE!', translation_user_translation_favorites_path(translation_id: @translation.id), method: :post %>
   <% end %>
 <% end %>
+
 <%= form_with(model: UserTranslationComment.new, url: translation_user_translation_comments_path(@translation.id), method: :post, local:true) do |f| %>
   <div>
     <%= f.label('コメント入力欄') %>
@@ -36,9 +37,10 @@
     <%= f.submit('コメント') %>
     <%= f.hidden_field :translation_id, value: @translation.id %>
 <% end %>
-<br />
+<br/>
+
 <h3>添削・コメント</h3>
 <% @comments.each do |comment| %>
-  <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong><br />
-  <span><%= comment.content %></span><br />
+  <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong><br/>
+  <span><%= comment.content %></span><br/>
 <% end %>

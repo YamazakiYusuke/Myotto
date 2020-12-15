@@ -1,10 +1,9 @@
 <h1>みんなの翻訳</h1>
 
 <% @translations.each do |translation| %>
-  <span>icon:</span><br /> 
-  <span>投稿者: <strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br /> 
-    <span>原文: <%= translation.sentence.content %></span><br /> 
-    <span>翻訳: <%= translation.content %></span><br /> 
+  <span>投稿者: <strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br/> 
+    <span>原文: <%= translation.sentence.content %></span><br/> 
+    <span>翻訳: <%= translation.content %></span><br/> 
     <span><%= link_to 'Show', translation_path(translation.id) %></span>
-    <br /><br />  
+    <br/><br/>  
 <% end %>
