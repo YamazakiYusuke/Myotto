@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @translations = Translation.where(user_id: params[:id]).includes(sentence: :book)
+    @translations = Translation.where(user_id: params[:id]).includes(sentence: :book).page(params[:page]).per(10)
   end
 
   def new

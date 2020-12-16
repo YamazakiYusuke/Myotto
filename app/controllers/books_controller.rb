@@ -5,10 +5,11 @@ class BooksController < ApplicationController
 
   def index
     @search = Book.ransack(params[:q])
-    @books = @search.result.includes(book_locale_statuses: :locale)
+    @books = @search.result.includes(book_locale_statuses: :locale).page(params[:page]).per(20)
   end
 
   def show
+    @sentences = @book.sentences.order(id: "ASC").page(params[:page]).per(20)
   end
 
   def new

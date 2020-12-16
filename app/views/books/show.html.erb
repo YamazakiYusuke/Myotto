@@ -19,7 +19,7 @@
   </thead>
 
   <tbody>
-    <% @book.sentences.order(id: "ASC").each do |sentence| %>
+    <% @sentences.each do |sentence| %>
       <tr>
         <td><%= sentence.content %></td>
         <td><%= link_to('翻訳', new_translation_path(sentence_id: sentence.id)) %></td>
@@ -29,3 +29,4 @@
     <% end %>
   </tbody>
 </table>
+<div><%= paginate @sentences %></div>

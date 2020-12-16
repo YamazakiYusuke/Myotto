@@ -17,11 +17,12 @@
 <strong>自己紹介</strong>
 <p><%= @user.profile %></p>
 <%= link_to('プロフィール編集', edit_user_path(current_user.id)) %>
-<br/>
+<br/><br/>
 <% @translations.each do |t| %>
   <div>
-    <%= t.sentence.book.title %><br/> 
+    <%= link_to(t.sentence.book.title, book_path(t.sentence.book.id)) %><br/> 
     原文: <%= t.sentence.content %><br/> 
     翻訳: <%= t.content %><br/><br/>
   </div>
 <% end %>
+<div><%= paginate @translations %></div>
