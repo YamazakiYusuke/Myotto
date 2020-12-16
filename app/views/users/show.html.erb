@@ -1,0 +1,27 @@
+
+<p>
+  <%= @user.name %>
+  <%= @user.locales[0].name %>→
+  <%= @user.locales[1].name %>
+  (<%= @user.user_locale_statuses[1].wanted_level %>)
+</p>
+<p>
+  <%= link_to('フォロー', users_path(user_id: @user, which: 'following')) %>
+  <%= link_to('フォロワー', users_path(user_id: @user, which: 'followers')) %>
+</p>
+<p>
+  <%= render 'follow_form', user: @user unless @user.id == current_user.id %>
+</p>
+
+<br/>
+<strong>自己紹介</strong>
+<p><%= @user.profile %></p>
+<%= link_to('プロフィール編集', edit_user_path(current_user.id)) %>
+<br/>
+<% @translations.each do |t| %>
+  <div>
+    <%= t.sentence.book.title %><br/> 
+    原文: <%= t.sentence.content %><br/> 
+    翻訳: <%= t.content %><br/><br/>
+  </div>
+<% end %>

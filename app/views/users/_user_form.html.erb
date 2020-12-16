@@ -1,0 +1,68 @@
+<% if user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(user.errors.count, "error") %> prohibited this <%= user.name %> from being saved:</h2>
+    <ul>
+    <% user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: user, local: true) do |f| %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div> 
+  
+  <% s = 'Native' %>
+  <%= f.fields_for :user_locale_statuses do |form| %>
+
+    <div class="field">
+      <%= form.label "#{s}(Required field)" %> 
+      <%= form.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
+    </div> 
+    
+    <div class="field">
+      <%  if s == 'Learnig' %>
+        <%= form.label "#{s} Level" %> 
+        <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']], include_blank: true) %>
+      <% end %>
+    </div> 
+
+    <% if s == 'Native' %>
+      <%= form.hidden_field :is_native, value: 'true' %>
+    <% elsif s == 'Learnig' %>
+      <%= form.hidden_field :is_wanted, value: 'true' %>
+    <% end %>
+    <% s = 'Learnig' %>
+
+  <% end %>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div> 
+
+  <% if params[:action] == "edit" %>
+    <div class="field">
+      <%= f.label :profile%>
+      <%= f.text_area :profile %>
+    </div> 
+  <% end %>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div> 
+  
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div> 
+
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

@@ -1,8 +1,11 @@
 class BooksController < ApplicationController
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user, only: [:index, :show]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    @search = Book.ransack(params[:q])
+    @books = @search.result.includes(book_locale_statuses: :locale)
   end
 
   def show
@@ -10,20 +13,16 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @book.book_locale_statuses.build if @book.book_locale_statuses.size == 0
   end
 
-  def create
+  def create 
     @book =  current_user.books.new(book_params)
-    if params[:back]
-      render :new
+    if @book.save
+      Sentence.make_sentences_from_book(@book.book_locale_statuses[0].locale_id, @book.id, params[:book][:content])
+      redirect_to books_path, notice: "本を登録しました"
     else
-      if @book.save
-        if Sentence.make_sentences_from_book(@book.language, @book.id, params[:book][:content])
-        redirect_to books_path, notice: "本を登録しました"
-        end
-      else
-        render :new
-      end
+      render :new
     end
   end
 
@@ -49,6 +48,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :issued_date, :level, :language, sentences_attributes:[:content])
+    params.require(:book).permit(:title, :author, :issued_date, book_locale_statuses_attributes: [:locale_id, :book_id, :is_main, :difficulty])
   end
 end

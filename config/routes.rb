@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users
-  root to: 'books#index'
-  resources :books
-  resources :sentences
+  get 'sessions/new'
+  root to: 'translations#index'
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :relationships, only: [:create, :destroy]
+
+  resources :books do
+    resources :sentences
+  end
+
+  resources :translations do
+    resources :user_translation_comments, only: [:create]
+    resources :user_translation_favorites, only: [:create, :destroy]
+  end
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

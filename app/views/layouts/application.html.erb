@@ -10,19 +10,20 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
+    <%= link_to "みんなの翻訳", translations_path %>
+    <% if logged_in?  %>
       <%= link_to "本一覧", books_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <%= link_to "マイページ", user_path(current_user.id) %>
+      <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
     <% else %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to "新規登録", new_user_path %>
+      <%= link_to "ログイン", new_session_path %>
     <% end %>
 
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
+
+
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
 
     <%= yield %>

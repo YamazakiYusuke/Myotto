@@ -1,5 +1,5 @@
 <h1>センテンスの編集</h1>
-<%= form_with(model: @sentence, local: true) do |form| %>
+<%= form_with(model: @sentence, url: {controller: 'sentences', action: 'update' }, local: true) do |form| %>
   <% if  @sentence.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize( @sentence.errors.count, "error") %> prohibited this  sentence from being saved:</h2>

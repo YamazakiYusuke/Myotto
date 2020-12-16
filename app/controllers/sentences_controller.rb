@@ -1,35 +1,11 @@
 class SentencesController < ApplicationController
-  before_action :set_sentence, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @sentences = Sentence.all
-  end
-
-  def show
-  end
-
-  def new
-    @sentence = Sentence.new
-  end
-
-  def create
-    @sentence = Sentence.new(sentence_params)
-    if params[:back]
-      render :new
-    else
-      if @sentence.save
-        redirect_to sentences_path
-      else
-        render :new
-      end
-    end
-  end
+  before_action :admin_user, only: [:edit, :update, :destroy]
+  before_action :set_sentence, only: [:edit, :update, :destroy]
 
   def edit
   end
 
   def update
-    binding.pry
     if @sentence.update(sentence_params)
       redirect_to book_path(@sentence.book_id), notice: 'センテンスを編集しました'
     else

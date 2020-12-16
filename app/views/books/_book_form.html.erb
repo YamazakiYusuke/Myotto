@@ -25,19 +25,25 @@
     <%= form.date_field(:issued_date) %>
   </div>
 
-  <div>
-    <%= form.label :level %>
-    <%= form.select(:level, [['Unknow'], ['Beginner'], ['Intermediate'], ['Advanced']]) %>
-  </div>
+  <%= form.fields_for :book_locale_statuses do |f| %>
+    <div>
+      <%= f.label :difficulty %>
+      <%= f.select(:difficulty, [['Unknow', 'Unknow'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']], include_blank: true) %>
+    </div>
+
+    <div>
+      <%= f.label :locale_id %>
+      <%= f.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
+    </div>
+
+    <%= f.hidden_field :is_main, value: 'true' %>
+  <% end %>
 
   <div>
-    <%= form.label :language %>
-    <%= form.select(:language, [['EN'], ['JP'], ['RU']]) %>
-  </div>
-
-  <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <% if params[:action] == "new" %>
+      <%= form.label :content %>
+      <%= form.text_area :content %>
+    <% end %>
   </div>
 
   <div>

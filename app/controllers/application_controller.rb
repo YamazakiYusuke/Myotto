@@ -1,7 +1,18 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
-  protected
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :native, :language1, :level1, :icon])
+  protect_from_forgery with: :exception
+  include SessionsHelper
+
+  def authenticate_user
+    unless logged_in?
+      flash[:notice] = 'Please login'
+      redirect_to new_session_path
+    end
+  end
+
+  def admin_user
+    unless current_user.admin
+      flash[:notice] = 'You can\'t enter here '
+      redirect_to books_path
+    end
   end
 end

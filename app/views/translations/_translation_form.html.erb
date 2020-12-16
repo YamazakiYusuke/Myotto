@@ -1,0 +1,27 @@
+<%= form_with(model: translation, local:true ) do |form| %>
+  <% if translation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(translation.errors.count, "error") %> prohibited this translation from being saved:</h2>
+      <ul>
+      <% translation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="new_post_box">
+    原文:<br/>
+    <span><%= @translation.sentence.content %></span>
+    <div class="field">
+      <%= form.label :翻訳 %>
+      <%= form.text_area :content %>
+    </div>
+    <div class="field">
+      <%= form.hidden_field :sentence_id, valuse: translation.sentence_id %>
+    </div>
+    <br/> 
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  </div>
+<% end %>
