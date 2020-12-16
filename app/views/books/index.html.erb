@@ -1,4 +1,4 @@
-<h1>本一覧</h1>
+<h1><%= t('.all') %></h1>
 
 <%= search_form_for @search,url: books_path do |f| %>
   <%= f.label :title_cont, "Title" %>

@@ -21,7 +21,7 @@ class BooksController < ApplicationController
     @book =  current_user.books.new(book_params)
     if @book.save
       Sentence.make_sentences_from_book(@book.book_locale_statuses[0].locale_id, @book.id, params[:book][:content])
-      redirect_to books_path, notice: "本を登録しました"
+      redirect_to books_path, notice: t('.registered_book')
     else
       render :new
     end
@@ -32,7 +32,7 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to books_path, notice: '本を編集しました'
+      redirect_to books_path, notice: t('.edited_book')
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_url, notice: '本を削除しました'
+    redirect_to books_url, notice: t('.destroyed_book')
   end
 
   private
