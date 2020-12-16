@@ -21,7 +21,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'launchy'
 end
 
@@ -50,4 +49,5 @@ gem 'ransack'
 gem 'bcrypt', '3.1.11'
 
 gem 'kaminari'
+gem 'faker'
 

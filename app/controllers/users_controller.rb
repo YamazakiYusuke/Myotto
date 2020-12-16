@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    2.times { @user.user_locale_statuses.build }
+    2.times { @user.user_locale_statuses.build } if @user.user_locale_statuses.size == 0
   end
 
   def create
