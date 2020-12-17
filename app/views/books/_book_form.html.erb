@@ -1,7 +1,7 @@
 <%= form_with(model: book, local: true) do |form| %>
   <% if  book.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize( book.errors.count, "error") %> <%= t('.reject save') %></h2>
+      <h2><%= pluralize( book.errors.count, t('.error')) %> <%= t('.reject_save') %></h2>
       <ul>
       <%  book.errors.full_messages.each do |message| %>
         <li><%= message %></li>

@@ -1,6 +1,24 @@
 ---
 ja:
   activerecord:
+    models:
+      book: 本
+    attributes:
+      book:
+        title: タイトル
+      book_locale_statuses:
+        locale: 言語
+      sentence:
+        content: センテンス
+      translation:
+        content: 翻訳
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        profile: プロフィール
+      user_locale_statuses:
+        locale: Native,Learning
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -55,6 +73,8 @@ ja:
       difficulty: 難しさ
       locale_id: 言語
       content: 本文
+      error: つの問題
+      reject_save: により保存に失敗しました
     create:
       registered_book: 新しく本を追加しました
     edit:
@@ -73,12 +93,13 @@ ja:
       registration: 登録者
       show: 詳細
       sentence_translations: 翻訳
-
     update:
       edited_sentence: センテンスを編集しました
     edit:
       edit_sentence: センテンスを編集
       submit: 更新
+      error: つの問題
+      reject_save: により保存に失敗しました
     destroy:
       destroyed_sentence: センテンスを削除しました
   sessions:
@@ -114,6 +135,8 @@ ja:
       original: 原文
       translation: 翻訳
       submit: 送信
+      error: つの問題
+      reject_save: により保存に失敗しました
     new:
       new_translation: 翻訳作成
     create:
@@ -154,6 +177,8 @@ ja:
       password: パスワード
       password_confirmation: パスワード確認
       submit: 送信
+      error: つの問題
+      reject_save: により保存に失敗しました
     new:
       sign_up: 新規登録
     create:

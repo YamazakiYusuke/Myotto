@@ -2,7 +2,7 @@ class Sentence < ApplicationRecord
   belongs_to :book
   has_many :translations, dependent: :destroy
 
-  validates :book, presence: true
+  validates :book_id, presence: true
   validates :content,  length: { in: 0..1000 } 
 
   def self.make_sentences_from_book(locale , book_id , content)

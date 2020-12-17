@@ -1,12 +1,194 @@
 ---
 ru:
   activerecord:
+    models:
+      book: Книга
+    attributes:
+      book:
+        title: Титл
+      book_locale_statuses:
+        locale: Язык
+      sentence:
+        content: Предложение
+      translation:
+        content: Перевод
+      user:
+        name: Имя
+        email: И-мэйл
+        password: Пароль
+        profile: Профиль
+      user_locale_statuses:
+        locale: Native,Learning
     errors:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
         restrict_dependent_destroy:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
           has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+  layouts:
+    application:
+      all_new_posts: Переводы
+      all_books: Книги
+      my_page: Моя профиль
+      logout: Выйти
+      create_user: Создать аккаунт
+      login: Вход
+  books:
+    index:
+      login_request: ログインが必要です
+      all_book: 本一覧
+      title: Титл
+      locale: Язык
+      search: 検索
+      create_book: 新しく本を登録
+      author: 著者
+      issued_date:  刊行年
+      difficulty: 難しさ
+      read: 読む
+      edit: 編集
+      destroy: 削除
+      unknown: 不明
+      are_you_sure: "この本を削除すると、紐ずいているセンテンス、翻訳などがすべて削除されます。\nそれでも削除しますか？"
+    show:
+      title: Титл
+      author: 著者
+      issued_date: 刊行日
+      unknown: 不明
+      difficulty: 難しさ
+      locale: Язык
+      registration: 登録者
+      translate: Переводする
+      show_translation: Переводを見る
+      edit: 編集
+      destroy: 削除
+      confirm: このセンテンスを削除すると、紐ずいている翻訳も削除されます。それでも削除しますか？
+    new:
+      admin_only: 管理権限がありません
+      new_book: 新しい本を登録
+    book_form:
+      send: 送信
+      title: Титл
+      author: 著者
+      issued_date: 刊行日
+      difficulty: 難しさ
+      locale_id: Язык
+      content: 本文
+      error: つの問題
+      reject_save: により保存に失敗しました
+    create:
+      registered_book: 新しく本を追加しました
+    edit:
+      edit_book: 本の編集
+    update:
+      edited_book: 本を編集しました
+    destroy:
+      destroyed_book: 本を削除しました
+  sentences:
+    show:
+      title: Титл
+      author: 著者
+      issued_date:  刊行年
+      difficulty: 難しさ
+      locale: Язык
+      registration: 登録者
+      show: 詳細
+      sentence_translations: Перевод
+    update:
+      edited_sentence: Предложениеを編集しました
+    edit:
+      edit_sentence: Предложениеを編集
+      submit: 更新
+      error: つの問題
+      reject_save: により保存に失敗しました
+    destroy:
+      destroyed_sentence: Предложениеを削除しました
+  sessions:
+    new:
+      login: ログイン
+      email: И-мэйл
+      password: Пароль
+    create:
+      logined_in: ログインしました
+      login_failed: ログインに失敗しました
+    destroy:
+      logout: ログアウトしました
+  translations:
+    index:
+      new_post: みんなのПеревод
+      contributor: 投稿者
+      original: 原文
+      translation: Перевод
+      show: 詳細
+    show:
+      title: Титл
+      author: 著者
+      original: 原文
+      translation: Перевод
+      edit: 編集
+      destroy: 削除
+      confirm: 削除してよろしいですか？
+      comment_area: 添削・コメント
+      submit: 送信
+      correction_comment: 添削・コメント
+      comment_size: コメント
+    translation_form:
+      original: 原文
+      translation: Перевод
+      submit: 送信
+      error: つの問題
+      reject_save: により保存に失敗しました
+    new:
+      new_translation: Перевод作成
+    create:
+      new_posted: Переводを投稿しました
+    edit:
+      edit_translation: Переводを編集
+    update:
+      edited_post: Переводを編集しました
+    destroy:
+      destoryed_post: Переводを削除しました
+  user_translation_comments:
+    create: 
+      commented: コメントしました
+      file_comment: コメントできませんでした
+  users:
+    index:
+      follow: フォロー
+      follower: フォロワー
+    show:
+      follow: フォロー
+      follower: フォロワー
+      profile: Профиль
+      edit_profile: Профильを編集
+      original: 原文
+      translation: Перевод
+      edit: 編集
+      destroy: 削除
+      confirm: 本当に削除しますか？
+      show: 詳細
+    follow_form:
+      follow: フォロー
+      unfollow: フォロー解除
+    user_form:
+      name: Имя
+      must: (Нужно)
+      level: 習熟度
+      profile: Профиль
+      password: Пароль
+      password_confirmation: Пароль(Ещё раз)
+      submit: 送信
+      error: つの問題
+      reject_save: により保存に失敗しました
+    new:
+      sign_up: Регистрация
+    create:
+      created_account: アカウントを作成しました！
+    edit:
+      edit_account: アカウントを編集
+    update:
+      edited_account: アカウントを編集しました
+  reject_edit: このアカウントは、編集できません
+  
   date:
     abbr_day_names:
     - Вс

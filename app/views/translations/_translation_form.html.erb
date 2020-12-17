@@ -1,7 +1,7 @@
 <%= form_with(model: translation, local:true ) do |form| %>
   <% if translation.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(translation.errors.count, "error") %> <%= t('.reject_save') %></h2>
+      <h2><%= pluralize(translation.errors.count, t('.error')) %> <%= t('.reject_save') %></h2>
       <ul>
       <% translation.errors.full_messages.each do |message| %>
         <li><%= message %></li>
