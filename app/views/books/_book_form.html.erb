@@ -1,7 +1,7 @@
 <%= form_with(model: book, local: true) do |form| %>
   <% if  book.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize( book.errors.count, "error") %> prohibited this  book from being saved:</h2>
+      <h2><%= pluralize( book.errors.count, "error") %> <%= t('.reject save') %></h2>
       <ul>
       <%  book.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,28 +11,28 @@
   <% end %>
 
   <div>
-    <%= form.label :title %>
+    <%= form.label t('.title') %>
     <%= form.text_field(:title) %>
   </div>
 
   <div>
-    <%= form.label :author %>
+    <%= form.label t('.author') %>
     <%= form.text_field(:author) %>
   </div>
 
   <div>
-    <%= form.label :issued_date %>
+    <%= form.label t('.issued_date') %>
     <%= form.date_field(:issued_date) %>
   </div>
 
   <%= form.fields_for :book_locale_statuses do |f| %>
     <div>
-      <%= f.label :difficulty %>
-      <%= f.select(:difficulty, [['Unknow', 'Unknow'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']], include_blank: true) %>
+      <%= f.label t('.difficulty') %>
+      <%= f.select(:difficulty, [['Unknown', 'Unknown'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']], include_blank: true) %>
     </div>
 
     <div>
-      <%= f.label :locale_id %>
+      <%= f.label t('.locale_id') %>
       <%= f.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
     </div>
 
@@ -41,12 +41,12 @@
 
   <div>
     <% if params[:action] == "new" %>
-      <%= form.label :content %>
+      <%= form.label t('.content') %>
       <%= form.text_area :content %>
     <% end %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit t('.send') %>
   </div>
 <% end %>

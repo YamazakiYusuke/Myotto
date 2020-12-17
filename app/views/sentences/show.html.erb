@@ -1,0 +1,22 @@
+<h1><%= t('.title') %>: <%= @book.title %></h1>
+<p>
+  <%= t('.author') %>: <%= @book.author %> ・ 
+  <%= t('.issued_date') %>: <% if @book.issued_date.nil? %>
+    <%= t('.unknown') %>
+  <% else %>
+    <%= @book.issued_date.strftime("%Y") %>
+  <% end %> ・ 
+  <%= t('.difficulty') %>: <%= @book.book_locale_statuses[0].difficulty %> ・ 
+  <%= t('.locale') %>: <%= @book.book_locale_statuses[0].locale.name %> ・ 
+  <%= t('.registration') %>: <%= @book.user[:name] if admin_user? %>
+</p>
+<br/><br/>
+<strong><%= t('.sentence_translations') %></strong>
+
+<% @translations.each do |t| %>
+  <div>
+    <%= link_to(t.user.name, user_path(t.user.id)) %><br/>
+    <%= t.content %><br/>
+    <%= link_to(t('.show'), translation_path(t.id)) %><br/><br/>
+  </div>
+<% end %>

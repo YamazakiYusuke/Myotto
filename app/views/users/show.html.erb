@@ -6,23 +6,29 @@
   (<%= @user.user_locale_statuses[1].wanted_level %>)
 </p>
 <p>
-  <%= link_to('フォロー', users_path(user_id: @user, which: 'following')) %>
-  <%= link_to('フォロワー', users_path(user_id: @user, which: 'followers')) %>
+  <%= link_to(t('.follow'), users_path(user_id: @user, which: 'following')) %>
+  <%= link_to(t('.follower'), users_path(user_id: @user, which: 'followers')) %>
 </p>
 <p>
   <%= render 'follow_form', user: @user unless @user.id == current_user.id %>
 </p>
 
 <br/>
-<strong>自己紹介</strong>
+<strong><%= t('.profile') %></strong>
 <p><%= @user.profile %></p>
-<%= link_to('プロフィール編集', edit_user_path(current_user.id)) %>
+<%= link_to(t('.edit_profile'), edit_user_path(current_user.id)) if @user.id == current_user.id %>
 <br/><br/>
 <% @translations.each do |t| %>
   <div>
     <%= link_to(t.sentence.book.title, book_path(t.sentence.book.id)) %><br/> 
-    原文: <%= t.sentence.content %><br/> 
-    翻訳: <%= t.content %><br/><br/>
+    <%= t('.original') %>: <br/>
+    <%= t.sentence.content %><br/> 
+    <%= t('.translation') %>: <br/>
+    <%= t.content %><br/>
+    <%= link_to(t('.show'), translation_path(t.id)) %>
+    <%= link_to(t('.edit'), edit_translation_path(t.id)) if @user.id == current_user.id %>
+    <%= link_to(t('.destroy'), translation_path(t.id), method: :delete, data: { confirm: t('.confirm') }) if @user.id == current_user.id %>
+    <br/><br/>
   </div>
 <% end %>
 <div><%= paginate @translations %></div>

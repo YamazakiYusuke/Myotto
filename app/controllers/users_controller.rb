@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to translations_path, notice: 'アカウントを作成しました！'
+      redirect_to translations_path, notice: t('.created_account')
     else
       render :new
     end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to translations_path, notice: 'アカウントを編集しました'
+      redirect_to translations_path, notice: t('.edited_account')
     else
       render :edit
     end
@@ -57,9 +57,9 @@ class UsersController < ApplicationController
                                   user_locale_statuses_attributes: [:locale_id, :is_native, :is_wanted, :wanted_level] )
   end
 
-  def authority_user_edit
+  def authority_user_edit_destroy
     unless @user.id == current_user.id
-      flash[:notice] = 'You can\'t edit this acount '
+      flash[:notice] = t('reject_edit')
       redirect_to user_path(@user.id)
     end
   end

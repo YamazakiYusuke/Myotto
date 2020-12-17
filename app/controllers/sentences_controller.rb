@@ -1,13 +1,19 @@
 class SentencesController < ApplicationController
   before_action :admin_user, only: [:edit, :update, :destroy]
-  before_action :set_sentence, only: [:edit, :update, :destroy]
+  before_action :set_sentence, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user, only: [:show]
+
+  def show
+    @book = @sentence.book
+    @translations = Translation.where(sentence_id: @sentence.id).includes(:user).order(id: :desc)
+  end
 
   def edit
   end
 
   def update
     if @sentence.update(sentence_params)
-      redirect_to book_path(@sentence.book_id), notice: 'センテンスを編集しました'
+      redirect_to book_path(@sentence.book_id), notice: t('.edited_sentence')
     else
       render :edit
     end
@@ -15,7 +21,7 @@ class SentencesController < ApplicationController
 
   def destroy
     @sentence.destroy
-    redirect_to book_path(@sentence.book_id), notice: 'センテンスを削除しました'
+    redirect_to book_path(@sentence.book_id), notice: t('.destroyed_sentence')
   end
 
   private

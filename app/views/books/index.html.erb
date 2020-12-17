@@ -1,24 +1,24 @@
-<h1><%= t('.all') %></h1>
+<h1><%= t('.all_book') %></h1>
 
 <%= search_form_for @search,url: books_path do |f| %>
-  <%= f.label :title_cont, "Title" %>
+  <%= f.label :title_cont, t('.title') %>
   <%= f.search_field :title_cont %>
-  <%= f.label :book_locale_statuses_locale_id, "locale(未完成)" %>
+  <%= f.label :book_locale_statuses_locale_id, t('.locale') %>
   <%= f.collection_select :book_locale_statuses_locale_id, Locale.all, :id, :name, include_blank: true %>
-  <%= f.submit "検索" %></div>
+  <%= f.submit t('.search') %></div>
 <% end %>
 
-<h3><%= link_to "Create New Book", new_book_path if admin_user? %></h3>
+<h3><%= link_to t('.create_book'), new_book_path if admin_user? %></h3>
 <br/>
 
 <table>
   <thead>
     <tr>
-      <th>タイトル</th>
-      <th>著者</th>
-      <th>刊行年</th>
-      <th>レベル</th>
-      <th>言語</th>
+      <th><%= t('.title') %></th>
+      <th><%= t('.author') %></th>
+      <th><%= t('.issued_date') %></th>
+      <th><%= t('.difficulty') %></th>
+      <th><%= t('.locale') %></th>
     </tr>
   </thead>
 
@@ -31,20 +31,20 @@
           <% if book.issued_date.present? %>
             <%= book.issued_date.strftime("%Y") %>
           <% else %>
-            <%= 'Unknow' %>
+            <%= t('.unknown') %>
           <% end %>
         </td>
         <td>
           <% if book.book_locale_statuses[0].difficulty.present? %>
             <%= book.book_locale_statuses[0].difficulty %> 
           <% else %>
-            <%= 'Unknow' %>
+            <%= t('.unknown') %>
           <% end %>
         </td>
         <td><%= book.book_locale_statuses[0].locale.name %></td>
-        <td><%= link_to('読む', book_path(book.id)) %></td>
-        <td><%= link_to('編集', edit_book_path(book.id)) if admin_user? %></td>
-        <td><%= link_to('消去', book_path(book.id), method: :delete, data: { confirm: '本を消去すると、紐づいているセンテンス、Userが投降した翻訳などがすべて消えます。それでも消去しますか？' }) if admin_user? %></td>
+        <td><%= link_to(t('.read'), book_path(book.id)) %></td>
+        <td><%= link_to(t('.edit'), edit_book_path(book.id)) if admin_user? %></td>
+        <td><%= link_to(t('.destroy'), book_path(book.id), method: :delete, data: { confirm: t('.are_you_sure') }) if admin_user? %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,14 +1,14 @@
-<h1>Log in</h1>
+<h1><%= t('.login') %></h1>
 <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
   <div>
-    <%= f.label :email %>
+    <%= f.label t('.email') %>
     <%= f.email_field :email %>
   </div>
   
   <div>
-    <%= f.label :password %>
+    <%= f.label t('.password') %>
     <%= f.password_field :password %>
   </div>
 
-  <%= f.submit "Log in" %>
+  <%= f.submit t('.login') %>
 <% end %>

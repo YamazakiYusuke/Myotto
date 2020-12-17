@@ -1,8 +1,8 @@
 <h2>
   <% if @which == 'following'%>
-    フォロー
+    <%= t('.follow') %>
   <% else %>
-    フォロワー
+    <%= t('.follower') %>
   <% end %>
 </h2>
 <% @users.each do |user| %>

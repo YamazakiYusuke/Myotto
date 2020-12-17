@@ -7,14 +7,162 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
-          
+  layouts:
+    application:
+      all_new_posts: みんなの翻訳
+      all_books: 本一覧
+      my_page: マイページ
+      logout: ログアウト
+      create_user: 新規登録
+      login: ログイン
   books:
     index:
       login_request: ログインが必要です
+      all_book: 本一覧
+      title: タイトル
+      locale: 言語
+      search: 検索
+      create_book: 新しく本を登録
+      author: 著者
+      issued_date:  刊行年
+      difficulty: 難しさ
+      read: 読む
+      edit: 編集
+      destroy: 削除
+      unknown: 不明
+      are_you_sure: "この本を削除すると、紐ずいているセンテンス、翻訳などがすべて削除されます。\nそれでも削除しますか？"
+    show:
+      title: タイトル
+      author: 著者
+      issued_date: 刊行日
+      unknown: 不明
+      difficulty: 難しさ
+      locale: 言語
+      registration: 登録者
+      translate: 翻訳する
+      show_translation: 翻訳を見る
+      edit: 編集
+      destroy: 削除
+      confirm: このセンテンスを削除すると、紐ずいている翻訳も削除されます。それでも削除しますか？
     new:
-      application:
-        admin_only: 管理権限がありません
+      admin_only: 管理権限がありません
+      new_book: 新しい本を登録
+    book_form:
+      send: 送信
+      title: タイトル
+      author: 著者
+      issued_date: 刊行日
+      difficulty: 難しさ
+      locale_id: 言語
+      content: 本文
+    create:
+      registered_book: 新しく本を追加しました
+    edit:
+      edit_book: 本の編集
+    update:
+      edited_book: 本を編集しました
+    destroy:
+      destroyed_book: 本を削除しました
+  sentences:
+    show:
+      title: タイトル
+      author: 著者
+      issued_date:  刊行年
+      difficulty: 難しさ
+      locale: 言語
+      registration: 登録者
+      show: 詳細
+      sentence_translations: 翻訳
 
+    update:
+      edited_sentence: センテンスを編集しました
+    edit:
+      edit_sentence: センテンスを編集
+      submit: 更新
+    destroy:
+      destroyed_sentence: センテンスを削除しました
+  sessions:
+    new:
+      login: ログイン
+      email: メールアドレス
+      password: パスワード
+    create:
+      logined_in: ログインしました
+      login_failed: ログインに失敗しました
+    destroy:
+      logout: ログアウトしました
+  translations:
+    index:
+      new_post: みんなの翻訳
+      contributor: 投稿者
+      original: 原文
+      translation: 翻訳
+      show: 詳細
+    show:
+      title: タイトル
+      author: 著者
+      original: 原文
+      translation: 翻訳
+      edit: 編集
+      destroy: 削除
+      confirm: 削除してよろしいですか？
+      comment_area: 添削・コメント
+      submit: 送信
+      correction_comment: 添削・コメント
+      comment_size: コメント
+    translation_form:
+      original: 原文
+      translation: 翻訳
+      submit: 送信
+    new:
+      new_translation: 翻訳作成
+    create:
+      new_posted: 翻訳を投稿しました
+    edit:
+      edit_translation: 翻訳を編集
+    update:
+      edited_post: 翻訳を編集しました
+    destroy:
+      destoryed_post: 翻訳を削除しました
+  user_translation_comments:
+    create: 
+      commented: コメントしました
+      file_comment: コメントできませんでした
+  users:
+    index:
+      follow: フォロー
+      follower: フォロワー
+    show:
+      follow: フォロー
+      follower: フォロワー
+      profile: プロフィール
+      edit_profile: プロフィールを編集
+      original: 原文
+      translation: 翻訳
+      edit: 編集
+      destroy: 削除
+      confirm: 本当に削除しますか？
+      show: 詳細
+    follow_form:
+      follow: フォロー
+      unfollow: フォロー解除
+    user_form:
+      name: ユーザー名
+      must: (必須)
+      level: 習熟度
+      profile: プロフィール
+      password: パスワード
+      password_confirmation: パスワード確認
+      submit: 送信
+    new:
+      sign_up: 新規登録
+    create:
+      created_account: アカウントを作成しました！
+    edit:
+      edit_account: アカウントを編集
+    update:
+      edited_account: アカウントを編集しました
+  reject_edit: このアカウントは、編集できません
 
   date:
     abbr_day_names:
