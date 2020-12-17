@@ -59,7 +59,7 @@ en:
       show_translation: See translations
       edit: Edit
       destroy: Destroy
-      confirm: Deleting this sentence also deletes the associated translation. Do you still want to delete it?
+      confirm: "Deleting this sentence also deletes the associated translation. Do you still want to delete it?"
     new:
       admin_only: You do not have administrative privileges.
       new_book: Register a new book
