@@ -1,12 +1,194 @@
 ---
 ru:
   activerecord:
+    models:
+      book: Книга
+    attributes:
+      book:
+        title: Титл
+      book_locale_statuses:
+        locale: Язык
+      sentence:
+        content: Предложение
+      translation:
+        content: Перевод
+      user:
+        name: Имя
+        email: И-мэйл
+        password: Пароль
+        profile: Профиль
+      user_locale_statuses:
+        locale: Native,Learning
     errors:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
         restrict_dependent_destroy:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
           has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+  layouts:
+    application:
+      all_new_posts: Переводы
+      all_books: Книги
+      my_page: Моя профиль
+      logout: Выйти
+      create_user: Создать аккаунт
+      login: Вход
+  books:
+    index:
+      login_request: Вам нужно войти
+      all_book: Книги
+      title: Титл
+      locale: Язык
+      search: Поиск
+      create_book: Записать новую книгу
+      author: Автор
+      issued_date:  Год издания
+      difficulty: Трудность
+      read: Читать
+      edit: Редактировать
+      destroy: Удалить
+      unknown: Неизвестно
+      are_you_sure: "При удалении эту книгу будут удалены все связанные предложения, переводы и т. Д. \nВы  еще хотите удалить ее?"
+    show:
+      title: Титл
+      author: Автор
+      issued_date: Год издания
+      unknown: Неизвестно
+      difficulty: Трудность
+      locale: Язык
+      registration: Зарегистрированное лицо
+      translate: Перевести
+      show_translation: Прочитать переводы
+      edit: Редактировать
+      destroy: Удалить
+      confirm: "Если удалить это предложение также удаляет связанный перевод. Вы еще хотите его удалить?"
+    new:
+      admin_only: У вас нет прав администратора.
+      new_book: Добавить кунигу
+    book_form:
+      send: Отправить
+      title: Титл
+      author: Автор
+      issued_date: Год издания
+      difficulty: Трудность
+      locale_id: Язык
+      content: Text
+      error: Проблема
+      reject_save: Не удалось сохранить.
+    create:
+      registered_book: Добавил ​​новую книгу.
+    edit:
+      edit_book: Редактирование книги
+    update:
+      edited_book: Редактировал книгу
+    destroy:
+      destroyed_book: Удалил книгу
+  sentences:
+    show:
+      title: Титл
+      author: Автор
+      issued_date: Год издания
+      difficulty: Трудность
+      locale: Язык
+      registration: Зарегистрированное лицо
+      show: Показать детали
+      sentence_translations: Перевод
+    update:
+      edited_sentence: Редактировал предложение
+    edit:
+      edit_sentence: Редактирование предложения
+      submit: возобновление
+      error: Проблема
+      reject_save: Не удалось сохранить.
+    destroy:
+      destroyed_sentence: Удалил предложение
+  sessions:
+    new:
+      login: Вход
+      email: И-мэйл
+      password: Пароль
+    create:
+      logined_in: Вошёл в систему
+      login_failed: Вам не удалось войти
+    destroy:
+      logout: Вышли из
+  translations:
+    index:
+      new_post: Переводы
+      contributor: Автор перевода
+      original: оригинал
+      translation: Перевод
+      show: Показать детали
+    show:
+      title: Титл
+      author: Автор
+      original: оригинал
+      translation: Перевод
+      edit: Редактирование
+      destroy: Удалить
+      confirm: Серьёзно удалить?
+      comment_area: Исправление / Kомментарий
+      submit: Отправить
+      correction_comment: Исправление / Kомментарий
+      comment_size: Kомментарий
+    translation_form:
+      original: оригинал
+      translation: Перевод
+      submit: Отправить
+      error: Проблема
+      reject_save: Не удалось сохранить.
+    new:
+      new_translation: Перевод
+    create:
+      new_posted: соста́вил новый перевод
+    edit:
+      edit_translation: Редактирование перевода
+    update:
+      edited_post: Редактировал перевод
+    destroy:
+      destoryed_post: Удалял перевод
+  user_translation_comments:
+    create: 
+      commented: прокомментировал
+      file_comment: Вам не удалось комменти́ровать
+  users:
+    index:
+      follow: Follows
+      follower: Followers
+    show:
+      follow: Follow
+      follower: Followers
+      profile: Профиль
+      edit_profile: Редактирование профиля
+      original: оригинал
+      translation: Перевод
+      edit: Редактирование
+      destroy: Удалить
+      confirm: Серьёзно удалить?
+      show: Показать детали
+    follow_form:
+      follow: Follow
+      unfollow: Unfollow
+    user_form:
+      name: Имя
+      must: (Нужно)
+      level: Уровень
+      profile: Профиль
+      password: Пароль
+      password_confirmation: Пароль(Ещё раз)
+      submit: Отправить
+      error: Проблема
+      reject_save: Не удалось сохранить.
+    new:
+      sign_up: Регистрация
+    create:
+      created_account: Вам удалось создать аккаунту!
+    edit:
+      edit_account: Редактироване аккаунта
+    update:
+      edited_account: Редактировал аккаунт
+  reject_edit: Вы не можете редактировать этот аккаунт
+  
   date:
     abbr_day_names:
     - Вс

@@ -1,9 +1,10 @@
 class TranslationsController < ApplicationController
   before_action :authenticate_user, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   before_action :set_translation, only: [:edit, :update, :destroy]
+  before_action :authority_user_edit_destroy, only: [:edit, :update, :destroy]
 
   def index  #要リファクタ 検索機能追加
-    @translations = Translation.all.includes(sentence: :book).includes(:user).page(params[:page]).per(10)
+    @translations = Translation.all.includes(sentence: :book).includes(:user).order(id: :desc).page(params[:page]).per(10)
     # user_locales =  UserLocaleStatus.where(is_wanted: true).where(locale_id: current_user.user_locale_statuses.find_by(is_native: true).locale_id).includes(user: :translations)
     # users = user_locales.map { |n| n.user }
     # @translations = users.map { |n| n.translations }
@@ -22,14 +23,10 @@ class TranslationsController < ApplicationController
 
   def create
     @translation = current_user.translations.new(translation_params)
-    if params[:back]
-      render :new
+    if @translation.save
+      redirect_to translation_path(@translation.id), notice: t('.new_posted')
     else
-      if @translation.save
-        redirect_to translation_path(@translation.id), notice: '翻訳を作成しました'
-      else
-        render :new
-      end
+      render :new
     end
   end
 
@@ -38,7 +35,7 @@ class TranslationsController < ApplicationController
 
   def update
     if @translation.update(translation_params)
-      redirect_to translation_path(@translation.id), notice: '翻訳を編集しました'
+      redirect_to translation_path(@translation.id), notice: t('.edited_post')
     else
       render :edit
     end
@@ -46,7 +43,7 @@ class TranslationsController < ApplicationController
 
   def destroy
     @translation.destroy
-    redirect_to translations_path, notice: '翻訳を削除しました'
+    redirect_to translations_path, notice: t('.destoryed_post')
   end
 
   private
@@ -56,5 +53,12 @@ class TranslationsController < ApplicationController
 
   def translation_params
     params.require(:translation).permit(:content, :sentence_id)
+  end
+
+  def authority_user_edit_destroy
+    unless @translation.user.id == current_user.id
+      flash[:notice] = t('reject_edit')
+      redirect_to translations_path
+    end
   end
 end

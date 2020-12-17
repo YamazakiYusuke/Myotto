@@ -1,6 +1,6 @@
 <% if user.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(user.errors.count, "error") %> prohibited this <%= user.name %> from being saved:</h2>
+    <h2><%= pluralize(user.errors.count, t('.error')) %> <%= t('.reject_save') %></h2>
     <ul>
     <% user.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -12,7 +12,7 @@
 <%= form_with(model: user, local: true) do |f| %>
 
   <div>
-    <%= f.label :name %>
+    <%= f.label t('.name') %>
     <%= f.text_field :name %>
   </div> 
   
@@ -20,13 +20,13 @@
   <%= f.fields_for :user_locale_statuses do |form| %>
 
     <div class="field">
-      <%= form.label "#{s}(Required field)" %> 
+      <%= form.label "#{s}#{t('.must')}" %> 
       <%= form.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
     </div> 
     
     <div class="field">
       <%  if s == 'Learnig' %>
-        <%= form.label "#{s} Level" %> 
+        <%= form.label "#{s}#{t('.level')}" %> 
         <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']], include_blank: true) %>
       <% end %>
     </div> 
@@ -43,26 +43,26 @@
   <div>
     <%= f.label :email %>
     <%= f.email_field :email %>
-  </div> 
+  </div>  
 
   <% if params[:action] == "edit" %>
     <div class="field">
-      <%= f.label :profile%>
+      <%= f.label t('.profile') %>
       <%= f.text_area :profile %>
     </div> 
   <% end %>
 
   <div>
-    <%= f.label :password %>
+    <%= f.label t('.password') %>
     <%= f.password_field :password %>
   </div> 
   
   <div>
-    <%= f.label :password_confirmation %>
+    <%= f.label t('.password_confirmation') %>
     <%= f.password_field :password_confirmation %>
   </div> 
 
   <div class="actions">
-    <%= f.submit "Submit" %>
+    <%= f.submit t('.submit') %>
   </div>
 <% end %>

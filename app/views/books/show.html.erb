@@ -1,30 +1,25 @@
-<h1>本のタイトル: <%= @book.title %></h1>
+<h1><%= t('.title') %>: <%= @book.title %></h1>
 <p>
-  著者: <%= @book.author %> ・ 
-  刊行: <% if @book.issued_date.nil? %>
-    Unknow
+  <%= t('.author') %>: <%= @book.author %> ・ 
+  <%= t('.issued_date') %>: <% if @book.issued_date.nil? %>
+    <%= t('.unknown') %>
   <% else %>
     <%= @book.issued_date.strftime("%Y") %>
   <% end %> ・ 
-  レベル: <%= @book.book_locale_statuses[0].difficulty %> ・ 
-  言語: <%= @book.book_locale_statuses[0].locale.name %> ・ 
-  本の登録者: <%= @book.user[:name] %>
+  <%= t('.difficulty') %>: <%= @book.book_locale_statuses[0].difficulty %> ・ 
+  <%= t('.locale') %>: <%= @book.book_locale_statuses[0].locale.name %> ・ 
+  <%= t('.registration') %>: <%= @book.user[:name] if admin_user? %>
 </p>
-
+<br/><br/>
 <table>
-  <thead>
-    <tr>
-      <th>センテンス</th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @sentences.each do |sentence| %>
       <tr>
         <td><%= sentence.content %></td>
-        <td><%= link_to('翻訳', new_translation_path(sentence_id: sentence.id)) %></td>
-        <td><%= link_to('編集', edit_book_sentence_path(@book.id, sentence.id)) if admin_user? %></td>
-        <td><%= link_to('消去', book_sentence_path(@book.id, sentence.id), method: :delete, data: { confirm: '消去しますか？' }) if admin_user? %></td>
+        <td><%= link_to(t('.translate'), new_translation_path(sentence_id: sentence.id)) %></td>
+        <td><%= link_to(t('.show_translation'), book_sentence_path(@book.id, sentence.id)) %></td>
+        <td><%= link_to(t('.edit'), edit_book_sentence_path(@book.id, sentence.id)) if admin_user? %></td>
+        <td><%= link_to(t('.destroy'), book_sentence_path(@book.id, sentence.id), method: :delete, data: { confirm: t('.confirm') }) if admin_user? %></td>
       </tr>
     <% end %>
   </tbody>

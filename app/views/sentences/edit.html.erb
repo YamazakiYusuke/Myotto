@@ -1,8 +1,8 @@
-<h1>センテンスの編集</h1>
+<h1><%= t('.edit_sentence') %></h1>
 <%= form_with(model: @sentence, url: {controller: 'sentences', action: 'update' }, local: true) do |form| %>
   <% if  @sentence.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize( @sentence.errors.count, "error") %> prohibited this  sentence from being saved:</h2>
+      <h2><%= pluralize( @sentence.errors.count, t('.error')) %><%= t('.reject_save') %></h2>
       <ul>
       <%  @sentence.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -16,6 +16,6 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit t('.submit') %>
   </div>
 <% end %>

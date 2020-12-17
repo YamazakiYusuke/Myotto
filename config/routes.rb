@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   resources :books do
-    resources :sentences
+    resources :sentences, only: [:show, :edit, :update, :destroy]
   end
 
   resources :translations do

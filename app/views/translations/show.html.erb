@@ -5,18 +5,18 @@
   <%= @translation.user.locales[1].name %>
   ( <%= @translation.user.user_locale_statuses[1].wanted_level %> )
 </span>
-<h3>タイトル: <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %></h3>
-<span>著者: <%= @translation.sentence.book.author %></span>
+<h3><%= t('.title') %> <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %></h3>
+<span><%= t('.author') %> <%= @translation.sentence.book.author %></span>
 <br/> 
 <br/> 
 <br/> 
-<strong>原文</strong>
+<strong><%= t('.original') %></strong>
 <p><%= @translation.sentence.content %></p>
-<strong>翻訳</strong>
+<strong><%= t('.translation') %></strong>
 <p><%= @translation.content %></p>
 <div>
-  <span><%= link_to 'Edit', edit_translation_path(@translation.id) if @translation.user_id == current_user.id %></span> 
-  <span><%= link_to 'Destroy', translation_path(@translation.id), method: :delete, data: { confirm: 'Are you sure?' } if @translation.user_id == current_user.id %></span>
+  <span><%= link_to t('.edit') , edit_translation_path(@translation.id) if @translation.user_id == current_user.id %></span> 
+  <span><%= link_to t('.destroy'), translation_path(@translation.id), method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id %></span>
 </div>
 <br/>
 
@@ -31,15 +31,15 @@
 
 <%= form_with(model: UserTranslationComment.new, url: translation_user_translation_comments_path(@translation.id), method: :post, local:true) do |f| %>
   <div>
-    <%= f.label('コメント入力欄') %>
+    <%= f.label(t('.comment_area')) %>
     <%= f.text_field :content %>
-  </div>
-    <%= f.submit('コメント') %>
     <%= f.hidden_field :translation_id, value: @translation.id %>
+    <%= f.submit(t('.submit')) %>
+  </div>
 <% end %>
-<br/>
 
-<h3>添削・コメント</h3>
+<h3><%= t('.correction_comment') %></h3>
+<span><%= @comments.size %> <%= t('.comment_size') %></span><br/>
 <% @comments.each do |comment| %>
   <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong><br/>
   <span><%= comment.content %></span><br/>

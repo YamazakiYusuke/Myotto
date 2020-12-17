@@ -6,9 +6,9 @@ class UserTranslationCommentsController < ApplicationController
     @comment = current_user.user_translation_comments.new(user_translation_comment_params)
 
     if @comment.save
-      redirect_to translation_path(@comment.translation_id), notice: 'コメントしました'
+      redirect_to translation_path(@comment.translation_id), notice: t('.commented')
     else
-      redirect_to translation_path(@comment.translation_id), notice: 'コメントできませんでした'
+      redirect_to translation_path(@comment.translation_id), notice: t('.file_comment')
     end
   end
   private

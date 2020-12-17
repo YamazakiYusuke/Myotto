@@ -1,12 +1,192 @@
 ---
 en:
   activerecord:
+    attributes:
+      book:
+        title: Title
+      book_locale_statuses:
+        locale: Language
+      sentence:
+        content: Sentence
+      translation:
+        content: Translation
+      user:
+        name: Name
+        email: Email
+        password: Password
+        profile: Profile
+      user_locale_statuses:
+        locale: Native,Learning
     errors:
       messages:
         record_invalid: 'Validation failed: %{errors}'
         restrict_dependent_destroy:
           has_one: Cannot delete record because a dependent %{record} exists
           has_many: Cannot delete record because dependent %{record} exist
+  layouts:
+    application:
+      all_new_posts: Translations
+      all_books: Books
+      my_page: My page
+      logout: Logout
+      create_user: Sign up
+      login: Login
+  books:
+    index:
+      login_request: You need login
+      all_book: All Books
+      title: Title
+      locale: Language
+      search: Search
+      create_book: Register a new book
+      author: Author
+      issued_date:  Issued date
+      difficulty: Difficulty
+      read: Read
+      edit: Edit
+      destroy: Destroy
+      unknown: Unknown
+      are_you_sure: "Deleting this book will delete all associated sentences, translations, etc. Do you still want to delete it?"
+    show:
+      title: Title
+      author: Author
+      issued_date: Issued date
+      unknown: Unknown
+      difficulty: Difficulty
+      locale: Language
+      registration: Registration
+      translate: Translate
+      show_translation: See translations
+      edit: Edit
+      destroy: Destroy
+      confirm: "Deleting this sentence also deletes the associated translation. Do you still want to delete it?"
+    new:
+      admin_only: You do not have administrative privileges.
+      new_book: Register a new book
+    book_form:
+      send: Submit
+      title: Title
+      author: Author
+      issued_date: Issued date
+      difficulty: Difficulty
+      locale_id: Language
+      content: Text
+      error: problem
+      reject_save: ' Failed to save'
+    create:
+      registered_book: You added a new book.
+    edit:
+      edit_book: Edit the book
+    update:
+      edited_book: You edited the book
+    destroy:
+      destroyed_book: You deleted the book
+  sentences:
+    show:
+      title: Title
+      author: Author
+      issued_date: Issued date
+      difficulty: Difficulty
+      locale: Language
+      registration: Registration
+      show: See detail
+      sentence_translations: Translation
+    update:
+      edited_sentence: You edited the sentence
+    edit:
+      edit_sentence: edit the sentence
+      submit: Update
+      error: problem
+      reject_save: ' Failed to save'
+    destroy:
+      destroyed_sentence: You deleted the sentence
+  sessions:
+    new:
+      login: Login
+      email: Email
+      password: Password
+    create:
+      logined_in: Login was successful
+      login_failed: You failed to login
+    destroy:
+      logout: You logged out
+  translations:
+    index:
+      new_post: Translations
+      contributor: Contributor
+      original: Original
+      translation: Translation
+      show: See detail
+    show:
+      title: Title
+      author: Author
+      original: Original
+      translation: Translation
+      edit: Edit
+      destroy: Destroy
+      confirm: Are you sure you want to delete?
+      comment_area: Corrections/Comments
+      submit: Comment
+      correction_comment: Corrections/Comments
+      comment_size: Comments
+    translation_form:
+      original: Original
+      translation: Translation
+      submit: Submit
+      error: problem
+      reject_save: ' Failed to save'
+    new:
+      new_translation: Create a translation
+    create:
+      new_posted: You posted a translation
+    edit:
+      edit_translation: Edit a translation
+    update:
+      edited_post: You edited a translation
+    destroy:
+      destoryed_post: You deleted a translation
+  user_translation_comments:
+    create: 
+      commented: Commented
+      file_comment: Could not comment
+  users:
+    index:
+      follow: Follows
+      follower: Followers
+    show:
+      follow: Follows
+      follower: Followers
+      profile: Profile
+      edit_profile: Edit profile
+      original: Original
+      translation: Translation
+      edit: Edit
+      destroy: Destroy
+      confirm: Do you really want to delete this?
+      show: See detail
+    follow_form:
+      follow: Follow
+      unfollow: Unfollow
+    user_form:
+      name: Name
+      must: (Required)
+      level: Level
+      profile: Profile
+      password: Password
+      password_confirmation: Password confirmation
+      submit: Submit
+      error: problem
+      reject_save: ' Failed to save'
+    new:
+      sign_up: Sign up
+    create:
+      created_account: You succeed create an account!
+    edit:
+      edit_account: Edit account
+    update:
+      edited_account: You edited account
+  reject_edit: You can't edit this account
+
   date:
     abbr_day_names:
     - Sun
