@@ -151,11 +151,11 @@ en:
       file_comment: Could not comment
   users:
     index:
-      follow: Follow
-      follower: Follower
+      follow: Follows
+      follower: Followers
     show:
-      follow: Follow
-      follower: Follower
+      follow: Follows
+      follower: Followers
       profile: Profile
       edit_profile: Edit profile
       original: Original
