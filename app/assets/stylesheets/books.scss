@@ -52,4 +52,12 @@ table{
   width: 50%;
   margin: 6rem auto 0 auto;
   font-size: 2rem;
+  border-collapse: separate;
+  border-spacing: 10px 10px;
 }
+
+// show
+main .yield_wrap .book_status{
+  text-align: center;
+}
+

@@ -10,12 +10,9 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.text_area(:content) %>
+  <div id="sentence_form">
+    <div><%= form.text_area(:content) %></div>
+    <div><%= form.submit t('.submit'), class: "btn btn-primary btn-lg" %></div>
   </div>
 
-  <div>
-    <%= form.submit t('.submit') %>
-  </div>
 <% end %>

@@ -23,9 +23,9 @@
 <span><%= @translation.user_translation_favorites.count %>LIKE</span>
 <% unless @translation.user_id == current_user.id %>
   <% if @favorite.present? %>
-    <%= link_to 'Remove LIKE', translation_user_translation_favorite_path(@translation.id, @favorite.id), method: :delete %>
+    <%= link_to 'Remove Like', translation_user_translation_favorite_path(@translation.id, @favorite.id), method: :delete %>
   <% else %>
-    <%= link_to 'LIKE!', translation_user_translation_favorites_path(translation_id: @translation.id), method: :post %>
+    <%= link_to 'Like!', translation_user_translation_favorites_path(translation_id: @translation.id), method: :post %>
   <% end %>
 <% end %>
 

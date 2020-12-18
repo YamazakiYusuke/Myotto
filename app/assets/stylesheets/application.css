@@ -14,17 +14,19 @@
  *= require_tree .
  *= require_self
  */
+
+
 html{
   font-size: 62.5%;
+  width: 870px;
 }
 body{
-  width: 870px;
-
+  width: 100%;
 }
 main{
   position: absolute;
   width: 100%;
-  min-height: 1200px;
+  min-height: 100%;
   background-color: rgba(146, 146, 146, 0.281);
 }
 
@@ -41,4 +43,18 @@ input:focus {
 	border: 1px solid #0a0a0ad3;
 	outline: none;
 	box-shadow: 0 0 5px 1px rgba(29, 248, 0, 0.062);
+}
+
+/* ページネーション */
+.pagination>li>a {          
+  border: none;     /*枠線をなくす*/
+  color: #696969;   /*文字の色を変える*/
+}
+
+.pagenation{
+  margin-top: 4rem;
+  margin-bottom: 300px;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
 }
