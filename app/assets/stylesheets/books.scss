@@ -4,14 +4,14 @@
 
 // _book_from
 .book_form{
-  margin: 3rem auto 0 auto;
+  margin: 6rem auto 0 auto;
   width: 60%;
+  font-size: 2rem;
 }
 
 .book_form form ul li {
-  margin-top: 3rem;
   list-style: none;
-  margin: 0 25%;
+  margin: 2rem 25%;
 }
 
 .book_form form ul li label{
@@ -36,14 +36,20 @@
 // book_index
 main .yield_wrap .book_index_search{
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 5rem;
+  font-size: 1.5rem;
 }
 
 main .yield_wrap .book_index_search form{
   text-align: center;
 }
 
+main .yield_wrap .book_index_search form label, input, select{
+  margin-right: 2rem;
+}
+
 table{
-  margin-top: 3rem;
-  margin: 0 auto;
+  width: 50%;
+  margin: 6rem auto 0 auto;
+  font-size: 2rem;
 }

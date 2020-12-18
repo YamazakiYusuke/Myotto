@@ -5,7 +5,7 @@
     <%= f.search_field :title_cont %>
     <%= f.label :book_locale_statuses_locale_id, t('.locale') %>
     <%= f.collection_select :book_locale_statuses_locale_id, Locale.all, :id, :name, include_blank: true %>
-    <%= f.submit t('.search') %></div>
+    <%= f.submit t('.search'), class: "btn btn-default" %></div>
   <% end %>
 </div>
 
@@ -44,9 +44,9 @@
           <% end %>
         </td>
         <td><%= book.book_locale_statuses[0].locale.name %></td>
-        <td><%= link_to(t('.read'), book_path(book.id)) %></td>
-        <td><%= link_to(t('.edit'), edit_book_path(book.id)) if admin_user? %></td>
-        <td><%= link_to(t('.destroy'), book_path(book.id), method: :delete, data: { confirm: t('.are_you_sure') }) if admin_user? %></td>
+        <td><%= link_to(t('.read'), book_path(book.id), class: "btn btn-default") %></td>
+        <td><%= link_to(t('.edit'), edit_book_path(book.id), class: "btn btn-default") if admin_user? %></td>
+        <td><%= link_to(t('.destroy'), book_path(book.id), method: :delete, data: { confirm: t('.are_you_sure') }, class: "btn btn-default") if admin_user? %></td>
       </tr>
     <% end %>
   </tbody>
