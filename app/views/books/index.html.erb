@@ -1,14 +1,16 @@
 <h1><%= t('.all_book') %></h1>
+<div class="book_index_search">
+  <%= search_form_for @search,url: books_path do |f| %>
+    <%= f.label :title_cont, t('.title') %>
+    <%= f.search_field :title_cont %>
+    <%= f.label :book_locale_statuses_locale_id, t('.locale') %>
+    <%= f.collection_select :book_locale_statuses_locale_id, Locale.all, :id, :name, include_blank: true %>
+    <%= f.submit t('.search') %></div>
+  <% end %>
+</div>
 
-<%= search_form_for @search,url: books_path do |f| %>
-  <%= f.label :title_cont, t('.title') %>
-  <%= f.search_field :title_cont %>
-  <%= f.label :book_locale_statuses_locale_id, t('.locale') %>
-  <%= f.collection_select :book_locale_statuses_locale_id, Locale.all, :id, :name, include_blank: true %>
-  <%= f.submit t('.search') %></div>
-<% end %>
 
-<h3><%= link_to t('.create_book'), new_book_path if admin_user? %></h3>
+<h3><%= link_to t('.create_book'), new_book_path, class: "btn btn-primary btn-lg" if admin_user? %></h3>
 <br/>
 
 <table>

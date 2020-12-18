@@ -14,3 +14,27 @@
  *= require_tree .
  *= require_self
  */
+body{
+  width: 870px;
+}
+main{
+  position: absolute;
+  width: 100%;
+  min-height: 800px;
+  background-color: rgba(146, 146, 146, 0.281);
+}
+
+main .yield_wrap{
+  margin-top: 80px;
+  position: relative;
+}
+
+h1 ,h2, h3{
+  text-align: center;
+}
+
+input:focus {
+	border: 1px solid #0a0a0ad3;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(29, 248, 0, 0.062);
+}

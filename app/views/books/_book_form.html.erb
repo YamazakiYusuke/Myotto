@@ -10,43 +10,45 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label t('.title') %>
-    <%= form.text_field(:title) %>
-  </div>
+  <ul>
+    <li>
+      <%= form.label t('.title') %>
+      <%= form.text_field(:title) %>
+    </li>
 
-  <div>
-    <%= form.label t('.author') %>
-    <%= form.text_field(:author) %>
-  </div>
+    <li>
+      <%= form.label t('.author') %>
+      <%= form.text_field(:author) %>
+    </li>
 
-  <div>
-    <%= form.label t('.issued_date') %>
-    <%= form.date_field(:issued_date) %>
-  </div>
+    <li>
+      <%= form.label t('.issued_date') %>
+      <%= form.date_field(:issued_date) %>
+    </li>
 
-  <%= form.fields_for :book_locale_statuses do |f| %>
-    <div>
-      <%= f.label t('.difficulty') %>
-      <%= f.select(:difficulty, [['Unknown', 'Unknown'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']], include_blank: true) %>
-    </div>
+    <%= form.fields_for :book_locale_statuses do |f| %>
+      <li>
+        <%= f.label t('.difficulty') %>
+        <%= f.select(:difficulty, [['Unknown', 'Unknown'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']], include_blank: true) %>
+      </li>
 
-    <div>
-      <%= f.label t('.locale_id') %>
-      <%= f.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
-    </div>
+      <li>
+        <%= f.label t('.locale_id') %>
+        <%= f.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
+      </li>
 
-    <%= f.hidden_field :is_main, value: 'true' %>
-  <% end %>
-
-  <div>
-    <% if params[:action] == "new" %>
-      <%= form.label t('.content') %>
-      <%= form.text_area :content %>
+      <%= f.hidden_field :is_main, value: 'true' %>
     <% end %>
-  </div>
 
-  <div>
-    <%= form.submit t('.send') %>
-  </div>
+    <li>
+      <% if params[:action] == "new" %>
+        <%= form.label t('.content') %>
+        <%= form.text_area :content %>
+      <% end %>
+    </li>
+
+    <li>
+      <%= form.submit t('.send'), class: "btn btn-success center-block book_submit" %>
+    </li>
+  </ul>
 <% end %>

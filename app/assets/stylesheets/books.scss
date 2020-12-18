@@ -1,3 +1,49 @@
 // Place all the styles related to the books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// _book_from
+.book_form{
+  margin: 3rem auto 0 auto;
+  width: 60%;
+}
+
+.book_form form ul li {
+  margin-top: 3rem;
+  list-style: none;
+  margin: 0 25%;
+}
+
+.book_form form ul li label{
+  margin-right: 10px;
+  width: 100%;
+  float: left;
+}
+
+.book_form form ul li input{
+  width: 100%;
+}
+
+.book_form form ul li textarea{
+  width: 100%;
+  height: 1000px;
+}
+
+.book_submit{
+  margin-top: 4rem;
+}
+
+// book_index
+main .yield_wrap .book_index_search{
+  width: 100%;
+  margin-top: 3rem;
+}
+
+main .yield_wrap .book_index_search form{
+  text-align: center;
+}
+
+table{
+  margin-top: 3rem;
+  margin: 0 auto;
+}
