@@ -1,0 +1,50 @@
+
+// user_from
+#user_form_container{
+  font-size: 1.7rem;
+  width: 100%;
+}
+#user_form_container ul li {
+  list-style: none;
+  margin-top: 0.8rem;
+}
+#user_form_container label {
+  margin-right: 10px;
+  width:150px;
+  float: left;
+}
+#user_form_container #under{
+  clear: both;
+}
+#user_form_container ul {
+  width: 500px;
+  margin: 0 auto;
+}
+#user_form_container textarea{
+  width: 70%;
+}
+#user_form_container .actions{
+  margin-top: 3rem;
+  text-align: center;
+}
+#user_form_container .new_form{
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  // -webkit-box-sizing: border-box;
+  // -moz-box-sizing: border-box;
+  // box-sizing: border-box;
+}
+
+
+// index
+#user_index_form{
+  text-align: center;
+  font-size: 2rem;
+}
+#user_index_form a{
+  display: inline-block;
+  margin-top: 5px;
+}
+// new

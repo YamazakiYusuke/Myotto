@@ -12,7 +12,7 @@
 }
 
 .new_post_box .field{
-  margin-top: 3rem;
+  margin-top:3rem;
 }
 
 .new_post_box .field textarea{
@@ -25,3 +25,73 @@
 }
 
 // index
+main .yield_wrap .index_container{
+  height: auto;
+  background-image: image-url('honey.png');
+  background-size:contain;
+}
+.index_container .index_post{
+  font-size: 1.8rem;
+  background-color: rgb(255, 255, 255);
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 8px gray;
+}
+#index_pagenate{
+  text-align: center;
+}
+#under{
+  clear: both;
+}
+
+// show
+.translation_show_container{
+  padding: 25px;
+  font-size: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 100px;
+}
+.translation_show_container #title_container #title{
+  font-size: 3rem;
+  border-bottom: medium solid #ff000081;
+}
+.translation_show_container #container{
+  margin-top: 60px;
+}
+.translation_show_container #container #main_container p{
+  margin-top: 1rem;
+}
+.translation_show_container #container #like_container{
+  margin-top: 3rem;
+}
+.translation_show_container #comment_container{
+  margin-top: 80px;
+}
+.translation_show_container #comment_container #send_container{
+  font-size: 1.5rem;
+  width: 95%;
+  margin: auto;
+}
+.translation_show_container #comment_container #send_container form div textarea{
+  width: 100%;
+  font-size: 1.9rem;
+}
+.translation_show_container #comment_container #comments_show_container{
+  font-size: 1.7rem;
+  margin-top: 3rem;
+  width: 70%;
+  margin: 3rem auto;
+}
+.translation_show_container #comment_container #comments_show_container #comment_count{
+  display: inline-block;
+  margin-bottom: 4rem;
+}
+.translation_show_container #comment_container #comments_show_container #comment{
+  display: inline-block;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  border-bottom: thin solid #00000062;
+  width: 100%;
+}

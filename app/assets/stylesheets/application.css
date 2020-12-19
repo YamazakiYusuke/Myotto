@@ -19,6 +19,8 @@
 html{
   font-size: 62.5%;
   width: 870px;
+  min-height: 600px;
+  font: italic "Fira Sans", serif;
 }
 body{
   width: 100%;
@@ -27,16 +29,23 @@ main{
   position: absolute;
   width: 100%;
   min-height: 100%;
-  background-color: rgba(27, 27, 27, 0.281);
+  background-color: rgba(245, 148, 21, 0.712);
 }
 
 main .yield_wrap{
+  width: 100%;
+  min-height: 100%;
   margin-top: 100px;
+  margin-bottom: 9rem;
   position: relative;
+  height: auto;
 }
 
 h1 ,h2, h3{
   text-align: center;
+  margin-bottom: 6rem;
+  font: sans-serif;
+  font-weight: 600;
 }
 
 input:focus {
@@ -58,3 +67,4 @@ input:focus {
   text-align: center;
   font-size: 2rem;
 }
+
