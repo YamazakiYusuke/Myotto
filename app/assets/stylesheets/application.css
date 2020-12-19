@@ -10,6 +10,61 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bootstrap/dist/css/bootstrap.min
  *= require_tree .
  *= require_self
  */
+
+
+html{
+  font-size: 62.5%;
+  width: 870px;
+  min-height: 600px;
+  font: italic "Fira Sans", serif;
+}
+body{
+  width: 100%;
+}
+main{
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  background-color: rgba(245, 148, 21, 0.712);
+}
+
+main .yield_wrap{
+  width: 100%;
+  min-height: 100%;
+  margin-top: 100px;
+  margin-bottom: 9rem;
+  position: relative;
+  height: auto;
+}
+
+h1 ,h2, h3{
+  text-align: center;
+  margin-bottom: 6rem;
+  font: sans-serif;
+  font-weight: 600;
+}
+
+input:focus {
+	border: 1px solid #0a0a0ad3;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(29, 248, 0, 0.062);
+}
+
+/* ページネーション */
+.pagination>li>a {          
+  border: none;     /*枠線をなくす*/
+  color: #696969;   /*文字の色を変える*/
+}
+
+.pagenation{
+  margin-top: 4rem;
+  margin-bottom: 300px;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+

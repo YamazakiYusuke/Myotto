@@ -1,46 +1,60 @@
-<br/>
-<strong><%= link_to(@translation.user.name, user_path(@translation.user.id)) %></strong>
-<span>
-  <%= @translation.user.locales[0].name %>→
-  <%= @translation.user.locales[1].name %>
-  ( <%= @translation.user.user_locale_statuses[1].wanted_level %> )
-</span>
-<h3><%= t('.title') %> <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %></h3>
-<span><%= t('.author') %> <%= @translation.sentence.book.author %></span>
-<br/> 
-<br/> 
-<br/> 
-<strong><%= t('.original') %></strong>
-<p><%= @translation.sentence.content %></p>
-<strong><%= t('.translation') %></strong>
-<p><%= @translation.content %></p>
-<div>
-  <span><%= link_to t('.edit') , edit_translation_path(@translation.id) if @translation.user_id == current_user.id %></span> 
-  <span><%= link_to t('.destroy'), translation_path(@translation.id), method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id %></span>
-</div>
-<br/>
-
-<span><%= @translation.user_translation_favorites.count %>LIKE</span>
-<% unless @translation.user_id == current_user.id %>
-  <% if @favorite.present? %>
-    <%= link_to 'Remove LIKE', translation_user_translation_favorite_path(@translation.id, @favorite.id), method: :delete %>
-  <% else %>
-    <%= link_to 'LIKE!', translation_user_translation_favorites_path(translation_id: @translation.id), method: :post %>
-  <% end %>
-<% end %>
-
-<%= form_with(model: UserTranslationComment.new, url: translation_user_translation_comments_path(@translation.id), method: :post, local:true) do |f| %>
-  <div>
-    <%= f.label(t('.comment_area')) %>
-    <%= f.text_field :content %>
-    <%= f.hidden_field :translation_id, value: @translation.id %>
-    <%= f.submit(t('.submit')) %>
+<div class="translation_show_container col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+  <%# タイトル %>
+  <div id="title_container">
+    <strong><%= link_to(@translation.user.name, user_path(@translation.user.id)) %></strong>
+    <span>
+      <%= @translation.user.locales[0].name %>→
+      <%= @translation.user.locales[1].name %>
+      ( <%= @translation.user.user_locale_statuses[1].wanted_level %> )
+    </span>
+    <br/>
+    <span id="title"><%= t('.title') %> <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %></span><br/>
+    <span><%= t('.author') %> <%= @translation.sentence.book.author %></span>
   </div>
-<% end %>
 
-<h3><%= t('.correction_comment') %></h3>
-<span><%= @comments.size %> <%= t('.comment_size') %></span><br/>
-<% @comments.each do |comment| %>
-  <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong><br/>
-  <span><%= comment.content %></span><br/>
-<% end %>
+  <%# メイン %>
+  <div id="container">
+    <div id="main_container">
+      <strong><%= t('.original') %></strong>
+      <p><%= @translation.sentence.content %></p>
+      <strong><%= t('.translation') %></strong>
+      <p><%= @translation.content %></p>
+    </div>
+    <div id='like_container'>
+      <span><%= @translation.user_translation_favorites.count %>LIKE</span>
+      <% unless @translation.user_id == current_user.id %>
+        <% if @favorite.present? %>
+          <%= link_to 'Remove Like', translation_user_translation_favorite_path(@translation.id, @favorite.id), method: :delete %>
+        <% else %>
+          <%= link_to 'Like!', translation_user_translation_favorites_path(translation_id: @translation.id), method: :post %>
+        <% end %>
+      <% end %>
+    </div>
+    <div id='edit_container'>
+      <span><%= link_to t('.edit') , edit_translation_path(@translation.id) if @translation.user_id == current_user.id %></span> 
+      <span><%= link_to t('.destroy'), translation_path(@translation.id), method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id %></span>
+    </div>
+  </div>
+
+  <%# コメント %>
+  <div id='comment_container'>
+    <div id="send_container">
+      <%= form_with(model: UserTranslationComment.new, url: translation_user_translation_comments_path(@translation.id), method: :post, local:true) do |f| %>
+          <div>
+            <%= f.label(t('.comment_area')) %><br/>
+            <%= f.text_area :content, rows: "4" %><br/>
+            <%= f.hidden_field :translation_id, value: @translation.id %>
+            <%= f.submit(t('.submit'), class: "btn btn-default pull-right") %>
+          </div>
+        <% end %>
+    </div>
+    <div id="comments_show_container">
+      <h3><%= t('.correction_comment') %></h3>
+      <span id="comment_count"><%= @comments.size %> <%= t('.comment_size') %></span><br/>
+      <% @comments.each do |comment| %>
+        <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong><br/>
+        <span id='comment'><%= comment.content %></span><br/>
+      <% end %>
+    </div>
+  </div>
+</div>

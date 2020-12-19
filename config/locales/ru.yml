@@ -107,6 +107,7 @@ ru:
       login: Вход
       email: И-мэйл
       password: Пароль
+      create_user: Создать аккаунт
     create:
       logined_in: Вошёл в систему
       login_failed: Вам не удалось войти

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, only: [:index, :show, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :authority_user_edit, only: [:edit, :update]
+  before_action :authority_user_edit_destroy, only: [:edit, :update]
 
   def index
     if params[:which] == 'following'
