@@ -27,7 +27,7 @@ main{
   position: absolute;
   width: 100%;
   min-height: 100%;
-  background-color: rgba(146, 146, 146, 0.281);
+  background-color: rgba(27, 27, 27, 0.281);
 }
 
 main .yield_wrap{

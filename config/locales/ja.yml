@@ -107,6 +107,7 @@ ja:
       login: ログイン
       email: メールアドレス
       password: パスワード
+      create_user: 新規登録
     create:
       logined_in: ログインしました
       login_failed: ログインに失敗しました

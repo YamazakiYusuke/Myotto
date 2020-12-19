@@ -105,6 +105,7 @@ en:
       login: Login
       email: Email
       password: Password
+      create_user: Sign up
     create:
       logined_in: Login was successful
       login_failed: You failed to login

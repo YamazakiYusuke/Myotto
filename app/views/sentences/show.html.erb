@@ -28,8 +28,8 @@
 <div id="sentence_div">
   <% @translations.each do |t| %>
     <div class="sentence_box">
-      <%= link_to(t.user.name, user_path(t.user.id)) %><br/>
-      <%= t.content %><br/>
+      <%= link_to(t.user.name, user_path(t.user.id)) %><br/><br/>
+      <%= t.content %><br/><br/>
       <%= t.user_translation_favorites.count %>Like
       <%= link_to(t('.show'), translation_path(t.id)) %><br/><br/>
     </div>

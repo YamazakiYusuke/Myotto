@@ -1,11 +1,13 @@
 <h1><%= t('.new_post') %></h1>
+<div class=>
 
+</div>
 <% @translations.each do |translation| %>
-  <span><%= t('.contributor') %>: <strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br/> 
-    <span><%= t('.original') %>: <%= translation.sentence.content %></span><br/> 
-    <span><%= t('.translation') %>: <%= translation.content %></span><br/> 
-    <span><%= link_to t('.show'), translation_path(translation.id) %></span>
-    <br/><br/>  
+<span><%= t('.contributor') %>: <strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br/> 
+  <span><%= t('.original') %>: <%= translation.sentence.content %></span><br/> 
+  <span><%= t('.translation') %>: <%= translation.content %></span><br/> 
+  <span><%= link_to t('.show'), translation_path(translation.id) %></span>
+  <br/><br/>  
 <% end %>
 <br>
 <div><%= paginate @translations %></div>

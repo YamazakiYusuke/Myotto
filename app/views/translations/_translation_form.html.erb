@@ -10,18 +10,18 @@
     </div>
   <% end %>
   <div class="new_post_box">
-    <%= t('.original') %> :<br/>
+    <strong><%= t('.original') %></strong> :<br/>
     <span><%= @translation.sentence.content %></span>
     <div class="field">
       <%= form.label t('.translation') %> :<br/>
-      <%= form.text_area :content %>
+      <%= form.text_area :content, class: "form-control", id: "exampleFormControlTextarea1", rows: "4" %>
     </div>
     <div class="field">
       <%= form.hidden_field :sentence_id, valuse: translation.sentence_id %>
     </div>
     <br/> 
     <div class="actions">
-      <%= form.submit t('.submit') %>
+      <%= form.submit t('.submit'), class: "btn btn-primary btn-lg" %>
     </div>
   </div>
 <% end %>
