@@ -33,7 +33,10 @@
   margin-top: 4rem;
 }
 
-// book_index
+// book_index 
+main .yield_wrap #book_index_container{
+  border-radius: 7px;
+}
 main .yield_wrap .book_index_search{
   width: 100%;
   margin-top: 5rem;
@@ -60,4 +63,9 @@ table{
 main .yield_wrap .book_status{
   text-align: center;
 }
-
+main .yield_wrap #sentence_box{
+  width: 80%;
+  background-color: rgb(218, 218, 218);
+  padding: 20px;
+  border-radius: 14px;
+}
