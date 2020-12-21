@@ -1,4 +1,4 @@
-locales = ['en', 'jp', 'ru']
+locales = ['en', 'ja', 'ru']
 
 locales.each do |n|
   Locale.create!(

@@ -4,7 +4,7 @@ class TranslationsController < ApplicationController
   before_action :authority_user_edit_destroy, only: [:edit, :update, :destroy]
 
   def index  #要リファクタ 検索機能追加
-    @translations = Translation.all.includes(sentence: :book).includes(:user).includes(:user_translation_favorites).order(id: :desc).page(params[:page]).per(20)
+    @translations = Translation.all.includes(sentence: :book).includes(:user).includes(:user_translation_favorites).includes(:user_translation_comments).order(id: :desc).page(params[:page]).per(20)
     # user_locales =  UserLocaleStatus.where(is_wanted: true).where(locale_id: current_user.user_locale_statuses.find_by(is_native: true).locale_id).includes(user: :translations)
     # users = user_locales.map { |n| n.user }
     # @translations = users.map { |n| n.translations }
