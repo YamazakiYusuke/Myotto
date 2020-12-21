@@ -28,9 +28,9 @@
 <div id="sentence_div">
   <% @translations.each do |t| %>
     <div class="sentence_box">
-      <%= link_to(t.user.name, user_path(t.user.id)) %><br/><br/>
+      <span class="glyphicon glyphicon-user"></span>&nbsp;<%= link_to(t.user.name, user_path(t.user.id)) %><br/><br/>
       <%= t.content %><br/><br/>
-      <%= t.user_translation_favorites.count %>Like
+      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= t.user_translation_favorites.count %>&nbsp;
       <%= link_to(t('.show'), translation_path(t.id)) %><br/><br/>
     </div>
   <% end %>

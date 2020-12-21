@@ -23,7 +23,7 @@
   <div id='translation_box'>
     <% @translations.each do |t| %>
       <div>
-        <span><%= link_to(t.sentence.book.title, book_path(t.sentence.book.id)) %></span><br/> 
+        <span><p class="glyphicon glyphicon-book"></p>&nbsp;<%= link_to(t.sentence.book.title, book_path(t.sentence.book.id)) %></span><br/> 
         <span><%= t('.original') %></span>: <br/>
         <span><%= t.sentence.content %></span><br/> 
         <span><%= t('.translation') %></span>: <br/>

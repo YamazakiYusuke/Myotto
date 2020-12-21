@@ -1,10 +1,10 @@
 FactoryBot.define do
-  factory :user do
-    name { "Yokoi" }
-    email { "yokoi@gmail.com" }
-    profile { "Hello!Myname is Yokoi!" }
+  factory :admin do
+    name { "Admin" }
+    email { "adminyokoi@gmail.com" }
+    profile { "Hello!Myname is Admin!" }
     password { "hogehoge" }
     password_confirmation { "hogehoge" }
-    admin { 'false' }
+    admin { 'true' }
   end
 end
