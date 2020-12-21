@@ -19,6 +19,7 @@
 #user_form_container ul {
   width: 300px;
   margin: 0 auto;
+  padding-left: 0;
 }
 #user_form_container textarea{
   width: 70%;
@@ -48,6 +49,13 @@
   margin-top: 5px;
 }
 // new
+#introduction{
+  position: absolute;
+  margin: 10rem 0 0 6rem;
+  width: 500px;
+  color: white;
+  font: italic 1.5em "Fira Sans", serif;
+}
 
 // show
 #profile_container{
