@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to translations_path, notice: t('.edited_account')
+      redirect_to user_path(@user.id), notice: t('.edited_account')
     else
       render :edit
     end
