@@ -3,11 +3,15 @@ class TranslationsController < ApplicationController
   before_action :set_translation, only: [:edit, :update, :destroy]
   before_action :authority_user_edit_destroy, only: [:edit, :update, :destroy]
 
-  def index  #要リファクタ 検索機能追加
-    @translations = Translation.all.includes(sentence: :book).includes(:user).includes(:user_translation_favorites).includes(:user_translation_comments).order(id: :desc).page(params[:page]).per(20)
-    # user_locales =  UserLocaleStatus.where(is_wanted: true).where(locale_id: current_user.user_locale_statuses.find_by(is_native: true).locale_id).includes(user: :translations)
-    # users = user_locales.map { |n| n.user }
-    # @translations = users.map { |n| n.translations }
+  def index  #N + 1問題  
+    user_native_id = current_user.user_locale_statuses.find_by(is_native: true).locale_id
+    user_wanted_id = current_user.user_locale_statuses.find_by(is_wanted: true).locale_id  ## <=これも稼働させる
+
+    user_locales =  UserLocaleStatus.where(is_wanted: true).where(locale_id: user_native_id).includes(user: :translations)
+    users = user_locales.map { |n| n.user }
+    translations = users.flat_map { |n| n.translations }
+    translations_sorted = translations.sort_by!{|t|t[:id]}.reverse
+    @translations = Kaminari.paginate_array(translations_sorted).page(params[:page]).per(20)
   end
 
   def show
