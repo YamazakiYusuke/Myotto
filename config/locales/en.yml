@@ -118,6 +118,9 @@ en:
       original: Original
       translation: Translation
       show: See detail
+      sentence: Original sentence
+      search: Search
+      search_by_translation: Search translation content
     show:
       title: Title
       author: Author

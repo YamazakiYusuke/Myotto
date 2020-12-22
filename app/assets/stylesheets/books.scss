@@ -37,6 +37,11 @@
 main .yield_wrap #book_index_container{
   border-radius: 7px;
 }
+#table{
+  background-color: white;
+  border-radius: 14px;
+  padding: 15px;
+}
 main .yield_wrap .book_index_search{
   width: 100%;
   margin-top: 5rem;
@@ -52,8 +57,8 @@ main .yield_wrap .book_index_search form label, input, select{
 }
 
 table{
-  width: 50%;
-  margin: 6rem auto 0 auto;
+  width: 100%;
+  margin: 0 auto 0 auto;
   font-size: 2rem;
   border-collapse: separate;
   border-spacing: 10px 10px;

@@ -1,4 +1,10 @@
 <h1 id="top_title"><%= t('.new_post') %></h1>
+<%= form_with(model:Translation.new, url: translations_path, method: :get, local: true, class: 'translation_search') do |f| %>
+  <div class="text-center ">
+    <%= f.text_field :search_translation, size: "40", placeholder: t('.search_by_translation') %>
+    <%= f.submit t('.search') %>
+  </div>
+<% end %>
 <div class='index_container'>
   <% @translations.each do |translation| %>
     <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 index_post">
