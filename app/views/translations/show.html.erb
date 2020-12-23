@@ -42,7 +42,7 @@
       <%= form_with(model: UserTranslationComment.new, url: translation_user_translation_comments_path(@translation.id), method: :post, local:true) do |f| %>
         <div>
           <%= f.label(t('.comment_area')) %><br/>
-          <%= f.text_area :content, rows: "4",  %><br/>
+          <%= f.text_area :content, rows: "4" %><br/>
           <%= f.hidden_field :translation_id, value: @translation.id %>
           <%= f.submit(t('.submit'), class: "btn btn-default pull-right") %>
         </div>

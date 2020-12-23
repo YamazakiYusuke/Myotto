@@ -52,100 +52,100 @@ RSpec.describe 'Users', type: :system do
       click_on 'commit'
     end
 
-    describe '管理者' do
-      before do
-        user = User.last
-        user.update!(admin: true, password: 'hogehoge', password_confirmation: 'hogehoge' )
-        visit new_book_path
-      end
-      it '新しい本を作成' do
-        fill_in 'book[title]', with: '羅生門'
-        fill_in 'book[author]', with: '芥川龍之介'
-        select 'Intermediate', from: 'book[book_locale_statuses_attributes][0][difficulty]'
-        select 'ja', from: 'book[book_locale_statuses_attributes][0][locale_id]'
-        fill_in 'book[content]', with: 'ある日の暮方の事である。'
-        click_on 'commit'
-        expect(page).to have_content '羅生門'
-      end
-      describe '本を作成' do
-        before do
-          fill_in 'book[title]', with: '羅生門'
-          fill_in 'book[author]', with: '芥川龍之介'
-          select 'Intermediate', from: 'book[book_locale_statuses_attributes][0][difficulty]'
-          select 'ja', from: 'book[book_locale_statuses_attributes][0][locale_id]'
-          fill_in 'book[content]', with: 'ある日の暮方の事である。'
-          click_on 'commit'
-        end
-        describe '本を' do
-          it '編集できる' do
-            click_on '編集'
-            fill_in 'book[title]' ,with: '羅生門編集後'
-            click_on 'commit'
-            expect(page).to have_content '羅生門編集後'
-          end
-          it '削除できる' do
-            click_on '削除'
-            page.driver.browser.switch_to.alert.accept
-            expect(page).not_to have_content '羅生門'
-          end
-          describe 'センテンスを' do
-            before do 
-              click_on '読む'
-            end
-            it '編集できる' do
-              click_on '編集'
-              fill_in 'sentence[content]', with: 'センテンスを編集しました'
-              click_on 'commit'
-              expect(page).to have_content 'センテンスを編集しました'
-            end
-            it '削除できる' do
-              click_on '削除'
-              page.driver.browser.switch_to.alert.accept
-              expect(page).not_to have_content 'ある日の暮方の事である。'
-            end
-          end
-        end
-      end
-    end
-    describe 'ログイン ログアウト' do
-      it 'ログアウト' do
-        click_on 'ログアウト'
-        expect(page).to have_content 'ログイン'
-      end
-      it 'ログイン' do
-        click_on 'ログアウト'
-        fill_in 'session[email]', with: 'yusuke@gmail.com'
-        fill_in 'session[password]', with: 'hogehoge'
-        click_on 'commit'
-        expect(page).to have_content 'みんなの翻訳'
-      end
-    end
-    describe 'User#show' do
-      it 'マイページの表示' do
-        click_on 'マイページ'
-        expect(page).to have_content 'ゆうすけ'
-        expect(page).to have_content 'プロフィールを編集'
-      end
-      it '他人のuser#showを表示' do
-        visit user_path(User.find_by(name: 'よこい').id)
-        expect(page).to have_content 'よこい'
-        expect(page).not_to have_content 'プロフィールを編集'
-        expect(page).to have_content 'フォロー'
-      end
-    end 
-    describe 'マイページ' do
-      before do
-        click_on 'マイページ'
-      end
-      it 'プロフィールを編集' do
-        click_on 'プロフィールを編集'
-        fill_in 'user_name', with: '友輔'
-        fill_in 'user_password', with: 'hogehoge'
-        fill_in 'user_password_confirmation', with: 'hogehoge'
-        click_on 'commit'
-        expect(page).to have_content '友輔'
-      end
-    end
+    # describe '管理者' do
+    #   before do
+    #     user = User.last
+    #     user.update!(admin: true, password: 'hogehoge', password_confirmation: 'hogehoge' )
+    #     visit new_book_path
+    #   end
+    #   it '新しい本を作成' do
+    #     fill_in 'book[title]', with: '羅生門'
+    #     fill_in 'book[author]', with: '芥川龍之介'
+    #     select 'Intermediate', from: 'book[book_locale_statuses_attributes][0][difficulty]'
+    #     select 'ja', from: 'book[book_locale_statuses_attributes][0][locale_id]'
+    #     fill_in 'book[content]', with: 'ある日の暮方の事である。'
+    #     click_on 'commit'
+    #     expect(page).to have_content '羅生門'
+    #   end
+    #   describe '本を作成' do
+    #     before do
+    #       fill_in 'book[title]', with: '羅生門'
+    #       fill_in 'book[author]', with: '芥川龍之介'
+    #       select 'Intermediate', from: 'book[book_locale_statuses_attributes][0][difficulty]'
+    #       select 'ja', from: 'book[book_locale_statuses_attributes][0][locale_id]'
+    #       fill_in 'book[content]', with: 'ある日の暮方の事である。'
+    #       click_on 'commit'
+    #     end
+    #     describe '本を' do
+    #       it '編集できる' do
+    #         click_on '編集'
+    #         fill_in 'book[title]' ,with: '羅生門編集後'
+    #         click_on 'commit'
+    #         expect(page).to have_content '羅生門編集後'
+    #       end
+    #       it '削除できる' do
+    #         click_on '削除'
+    #         page.driver.browser.switch_to.alert.accept
+    #         expect(page).not_to have_content '羅生門'
+    #       end
+    #       describe 'センテンスを' do
+    #         before do 
+    #           click_on '読む'
+    #         end
+    #         it '編集できる' do
+    #           click_on '編集'
+    #           fill_in 'sentence[content]', with: 'センテンスを編集しました'
+    #           click_on 'commit'
+    #           expect(page).to have_content 'センテンスを編集しました'
+    #         end
+    #         it '削除できる' do
+    #           click_on '削除'
+    #           page.driver.browser.switch_to.alert.accept
+    #           expect(page).not_to have_content 'ある日の暮方の事である。'
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
+    # describe 'ログイン ログアウト' do
+    #   it 'ログアウト' do
+    #     click_on 'ログアウト'
+    #     expect(page).to have_content 'ログイン'
+    #   end
+    #   it 'ログイン' do
+    #     click_on 'ログアウト'
+    #     fill_in 'session[email]', with: 'yusuke@gmail.com'
+    #     fill_in 'session[password]', with: 'hogehoge'
+    #     click_on 'commit'
+    #     expect(page).to have_content 'みんなの翻訳'
+    #   end
+    # end
+    # describe 'User#show' do
+    #   it 'マイページの表示' do
+    #     click_on 'マイページ'
+    #     expect(page).to have_content 'ゆうすけ'
+    #     expect(page).to have_content 'プロフィールを編集'
+    #   end
+    #   it '他人のuser#showを表示' do
+    #     visit user_path(User.find_by(name: 'よこい').id)
+    #     expect(page).to have_content 'よこい'
+    #     expect(page).not_to have_content 'プロフィールを編集'
+    #     expect(page).to have_content 'フォロー'
+    #   end
+    # end 
+    # describe 'マイページ' do
+    #   before do
+    #     click_on 'マイページ'
+    #   end
+    #   it 'プロフィールを編集' do
+    #     click_on 'プロフィールを編集'
+    #     fill_in 'user_name', with: '友輔'
+    #     fill_in 'user_password', with: 'hogehoge'
+    #     fill_in 'user_password_confirmation', with: 'hogehoge'
+    #     click_on 'commit'
+    #     expect(page).to have_content '友輔'
+    #   end
+    # end
     describe '本の作成されたフィールド' do 
       describe '翻訳' do
         before do
