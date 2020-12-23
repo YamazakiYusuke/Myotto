@@ -40,7 +40,7 @@ main .yield_wrap #book_index_container{
 #table{
   background-color: white;
   border-radius: 14px;
-  padding: 15px;
+  padding: 40px;
 }
 main .yield_wrap .book_index_search{
   width: 100%;
@@ -60,7 +60,6 @@ table{
   width: 100%;
   margin: 0 auto 0 auto;
   font-size: 2rem;
-  border-collapse: separate;
   border-spacing: 10px 10px;
 }
 
@@ -70,6 +69,9 @@ main .yield_wrap .book_status{
 }
 main .yield_wrap #sentence_box{
   background-color: rgb(218, 218, 218);
-  padding: 20px;
   border-radius: 14px;
+}
+main .yield_wrap #sentence_box tbody{
+  display: block;
+  padding: 30px;
 }
