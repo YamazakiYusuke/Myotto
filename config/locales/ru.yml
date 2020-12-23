@@ -120,6 +120,9 @@ ru:
       original: оригинал
       translation: Перевод
       show: Показать детали
+      sentence: Оригинальное предложение
+      search: Поиск
+      search_by_translation: Поиск по содержанию перевода
     show:
       title: Титл
       author: Автор

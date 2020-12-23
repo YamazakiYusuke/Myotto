@@ -6,4 +6,6 @@ class Translation < ApplicationRecord
 
   validates :content, :user_id, :sentence_id, presence: true
   validates :content,    length: { in: 1..1000 } 
+
+  scope :translation_scope, -> (sentence) { where('content like?', "%#{sentence}%") }
 end

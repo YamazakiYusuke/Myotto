@@ -40,6 +40,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user.id), notice: t('.edited_account')
     else
       render :edit
+      binding.pry
     end
   end
 

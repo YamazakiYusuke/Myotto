@@ -1,37 +1,39 @@
-<h1><%= t('.title') %>: <%= @book.title %></h1>
-<p  class="book_status">
-  <%= t('.author') %>: <%= @book.author %> ・ 
-  <%= t('.issued_date') %>: 
-  <% if @book.issued_date.nil? %>
-    <%= t('.unknown') %>
-  <% else %>
-    <%= @book.issued_date.strftime("%Y") %>
-  <% end %> ・ 
-  <%= t('.difficulty') %>: 
-  <% if @book.book_locale_statuses[0].difficulty.nil? %>
-    <%= t('.unknown') %>
-  <% else %>
-    <%= @book.book_locale_statuses[0].difficulty %> 
-  <% end %> ・ 
-  <%= t('.locale') %>: <%= @book.book_locale_statuses[0].locale.name %> ・ 
-  <% if admin_user? %> ・ 
-    <%= t('.registration') %>: <%= @book.user[:name] %>
-  <% end %>
-</p>
-<br/><br/>
-<div id="original">
-  <strong>原文</strong>
-  <h4><%= @sentence.content %></h4>
-</div>
-<br/><br/>
+<div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8" >
+  <h1><%= link_to((@book.title), book_path(@book.id)) %></h1>
+  <p  class="book_status">
+    <%= t('.author') %>: <%= @book.author %> ・ 
+    <%= t('.issued_date') %>: 
+    <% if @book.issued_date.nil? %>
+      <%= t('.unknown') %>
+    <% else %>
+      <%= @book.issued_date.strftime("%Y") %>
+    <% end %> ・ 
+    <%= t('.difficulty') %>: 
+    <% if @book.book_locale_statuses[0].difficulty.nil? %>
+      <%= t('.unknown') %>
+    <% else %>
+      <%= @book.book_locale_statuses[0].difficulty %> 
+    <% end %> ・ 
+    <%= t('.locale') %>: <%= @book.book_locale_statuses[0].locale.name %> ・ 
+    <% if admin_user? %> ・ 
+      <%= t('.registration') %>: <%= @book.user[:name] %>
+    <% end %>
+  </p>
+  <br/><br/>
+  <div id="original">
+    <strong>原文</strong>
+    <h4><%= @sentence.content %></h4>
+  </div>
+  <br/><br/>
 
-<div id="sentence_div">
-  <% @translations.each do |t| %>
-    <div class="sentence_box">
-      <span class="glyphicon glyphicon-user"></span>&nbsp;<%= link_to(t.user.name, user_path(t.user.id)) %><br/><br/>
-      <%= t.content %><br/><br/>
-      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= t.user_translation_favorites.count %>&nbsp;
-      <%= link_to(t('.show'), translation_path(t.id)) %><br/><br/>
-    </div>
-  <% end %>
+  <div id="sentence_div">
+    <% @translations.each do |t| %>
+      <div class="sentence_box">
+        <span class="glyphicon glyphicon-user"></span>&nbsp;<%= link_to(t.user.name, user_path(t.user.id)) %><br/><br/>
+        <%= t.content %><br/><br/>
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= t.user_translation_favorites.count %>&nbsp;
+        <%= link_to(t('.show'), translation_path(t.id)) %><br/><br/>
+      </div>
+    <% end %>
+  </div>
 </div>

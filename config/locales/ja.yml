@@ -120,6 +120,9 @@ ja:
       original: 原文
       translation: 翻訳
       show: 詳細
+      sentence: 原文センテンス
+      search: 検索
+      search_by_translation: 翻訳内容を検索
     show:
       title: タイトル
       author: 著者

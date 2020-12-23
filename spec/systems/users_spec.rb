@@ -11,7 +11,6 @@ RSpec.describe 'Users', type: :system do
       )
     end
   end
-
   describe 'アカウント作成', type: :system do
     it 'アカウントを作成' do
       visit new_user_path
@@ -26,7 +25,6 @@ RSpec.describe 'Users', type: :system do
       expect(page).to have_content 'みんなの翻訳'
     end
   end
-
   describe 'ログイン後の操作' do
     before do 
       visit new_user_path
@@ -151,7 +149,6 @@ RSpec.describe 'Users', type: :system do
         before do
           user = User.last
           user.update!(admin: true, password: 'hogehoge', password_confirmation: 'hogehoge' )
-          visit books_path
           visit new_book_path
           fill_in 'book[title]', with: '羅生門'
           fill_in 'book[author]', with: '芥川龍之介'

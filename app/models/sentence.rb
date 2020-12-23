@@ -5,6 +5,8 @@ class Sentence < ApplicationRecord
   validates :book_id, presence: true
   validates :content,  length: { in: 0..1000 } 
 
+  # scope :sentence_scope, -> (sentence) { where('content like?', "%#{sentence}%") }
+
   def self.make_sentences_from_book(locale , book_id , content)
     # "" or 「」の中で切らないようにする。
     # 段落の頭だけスペース
