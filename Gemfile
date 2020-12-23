@@ -63,4 +63,4 @@ gem 'faker'
 gem 'rails-i18n', '~> 5.1' 
 
 gem 'jquery-rails'
-# gem 'bootstrap-sass'ターミナルでyarn add bootstrap@3
+gem 'bootstrap-sass'
