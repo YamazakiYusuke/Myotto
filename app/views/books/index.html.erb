@@ -2,8 +2,7 @@
   <h1><%= t('.all_book') %></h1>
   <div class="book_index_search">
     <%= search_form_for @search,url: books_path do |f| %>
-      <%= f.label :title_cont, t('.title') %>
-      <%= f.search_field :title_cont %>
+      <%= f.search_field :title_cont, placeholder: t('.title') %>
       <% if false %>
         <%= f.label :book_locale_statuses_locale_id, t('.locale') %>
         <%= f.collection_select :book_locale_statuses_locale_id, Locale.all, :id, :name, include_blank: true %>

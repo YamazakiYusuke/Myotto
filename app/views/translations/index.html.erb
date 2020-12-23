@@ -2,12 +2,12 @@
 <%= form_with(model:Translation.new, url: translations_path, method: :get, local: true, class: 'translation_search') do |f| %>
   <div class="text-center ">
     <%= f.text_field :search_translation, size: "40", placeholder: t('.search_by_translation') %>
-    <%= f.submit t('.search') %>
+    <%= f.submit t('.search'), class: "btn btn-default" %>
   </div>
 <% end %>
 <div class='index_container'>
   <% @translations.each do |translation| %>
-    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 index_post">
+    <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6 index_post">
       <span><span class="glyphicon glyphicon-user"></span>&nbsp; <strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br/> 
       <span><%= t('.original') %>: <%= translation.sentence.content %></span><br/> 
       <span><%= t('.translation') %>: <%= translation.content %></span><br/> 

@@ -1,37 +1,40 @@
-<h1><%= @book.title %></h1>
-<p class="book_status">
-  <%= t('.author') %>: <%= @book.author %> ・ 
-  <%= t('.issued_date') %>: 
-  <% if @book.issued_date.nil? %>
-    <%= t('.unknown') %>
-  <% else %>
-    <%= @book.issued_date.strftime("%Y") %>
-  <% end %> ・ 
-  <%= t('.difficulty') %>: 
-  <% if @book.book_locale_statuses[0].difficulty.nil? %>
-    <%= t('.unknown') %>
-  <% else %>
-    <%= @book.book_locale_statuses[0].difficulty %>
-  <% end %> ・ 
-  <%= t('.locale') %>: <%= @book.book_locale_statuses[0].locale.name %> 
-  <% if admin_user? %> ・ 
-    <%= t('.registration') %>: <%= @book.user[:name] %>
-  <% end %>
-</p>
-<br/><br/>
-<table id="sentence_box">
-  <tbody>
-    <% @sentences.each do |sentence| %>
-      <tr>
-        <td><%= sentence.content %></td>
-        <td>
-          <%= link_to(t('.translate'), new_translation_path(sentence_id: sentence.id), class: "btn btn-link") %>
-          <%= link_to(t('.show_translation'), book_sentence_path(@book.id, sentence.id), class: "btn btn-link") %>
-          <%= link_to(t('.edit'), edit_book_sentence_path(@book.id, sentence.id), class: "btn btn-link") if admin_user? %>
-          <%= link_to(t('.destroy'), book_sentence_path(@book.id, sentence.id), method: :delete, data: { confirm: t('.confirm') }, class: "btn btn-link") if admin_user? %>
-        </td>
-      </tr>
+<div class='col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8'>
+  <h1><%= @book.title %></h1>
+  <p class="book_status">
+    <%= t('.author') %>: <%= @book.author %> ・ 
+    <%= t('.issued_date') %>: 
+    <% if @book.issued_date.nil? %>
+      <%= t('.unknown') %>
+    <% else %>
+      <%= @book.issued_date.strftime("%Y") %>
+    <% end %> ・ 
+    <%= t('.difficulty') %>: 
+    <% if @book.book_locale_statuses[0].difficulty.nil? %>
+      <%= t('.unknown') %>
+    <% else %>
+      <%= @book.book_locale_statuses[0].difficulty %>
+    <% end %> ・ 
+    <%= t('.locale') %>: <%= @book.book_locale_statuses[0].locale.name %> 
+    <% if admin_user? %> ・ 
+      <%= t('.registration') %>: <%= @book.user[:name] %>
     <% end %>
-  </tbody>
-</table>
-<div class="pagenation"><%= paginate @sentences %></div>
+  </p>
+  <br/><br/>
+  <table id="sentence_box">
+    <tbody>
+      <% @sentences.each do |sentence| %>
+        <tr>
+          <td><%= sentence.content %></td>
+          <td>
+            <%= link_to(t('.translate'), new_translation_path(sentence_id: sentence.id), class: "btn btn-link") %>
+            <%= link_to(t('.show_translation'), book_sentence_path(@book.id, sentence.id), class: "btn btn-link") %>
+            <%= link_to(t('.edit'), edit_book_sentence_path(@book.id, sentence.id), class: "btn btn-link") if admin_user? %>
+            <%= link_to(t('.destroy'), book_sentence_path(@book.id, sentence.id), method: :delete, data: { confirm: t('.confirm') }, class: "btn btn-link") if admin_user? %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="pagenation"><%= paginate @sentences %></div>
+</div>
+  
