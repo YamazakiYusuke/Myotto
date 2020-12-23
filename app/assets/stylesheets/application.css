@@ -25,7 +25,7 @@ html{
 body{
   width: 100%;
   min-height: 100%;
-  background-color: rgba(199, 113, 0, 0.781);
+  background-color: rgba(199, 113, 0, 0.781) !important;
 }
 main{
   position: absolute;
@@ -69,7 +69,7 @@ input:focus {
 /* ページネーション */
 .pagination>li>a {          
   border: none;     /*枠線をなくす*/
-  color: #696969;   /*文字の色を変える*/
+  color: #b96300;   /*文字の色を変える*/
 }
 
 .pagenation{

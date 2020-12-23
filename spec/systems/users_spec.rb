@@ -117,6 +117,13 @@ RSpec.describe 'Users', type: :system do
         click_on 'commit'
         expect(page).to have_content 'みんなの翻訳'
       end
+      it '誤ったパスワードログイン' do
+        click_on 'ログアウト'
+        fill_in 'session[email]', with: 'yusuke@gmail.com'
+        fill_in 'session[password]', with: 'hogohogo'
+        click_on 'commit'
+        expect(page).not_to have_content 'みんなの翻訳'
+      end
     end
     describe 'User#show' do
       it 'マイページの表示' do
@@ -181,6 +188,12 @@ RSpec.describe 'Users', type: :system do
             click_on '削除'
             page.driver.browser.switch_to.alert.accept
             expect(page).not_to have_content 'テスト翻訳'
+          end
+          it 'センテンスごとの翻訳を確認する' do
+            visit books_path
+            click_on '読む'
+            click_on '翻訳を見る'
+            expect(page).to have_content 'テスト翻訳'
           end
         end
         describe '他のユーザー' do
