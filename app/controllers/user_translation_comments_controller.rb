@@ -14,7 +14,6 @@ class UserTranslationCommentsController < ApplicationController
   def edit
     @comment = @translation.user_translation_comments.find(params[:id])
     respond_to do |format|
-      binding.pry
       flash.now[:notice] = 'コメントの編集中'
       format.js { render :edit }
     end
@@ -46,5 +45,11 @@ class UserTranslationCommentsController < ApplicationController
   end
   def set_translation
     @translation = Translation.find(params[:translation_id])
+  end
+  def own_comment?
+    unless current_user.id == @comment.user_id
+      flash.now[:notice] = 'この操作はできません'
+      format.js { render :index }
+    end
   end
 end

@@ -33,6 +33,10 @@ ru:
       logout: Выйти
       create_user: Создать аккаунт
       login: Вход
+  user_translation_comments:
+    index:
+      edit: Редактировать
+      destroy: Удалить
   books:
     index:
       login_request: Вам нужно войти

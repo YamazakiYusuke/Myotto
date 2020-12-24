@@ -33,6 +33,10 @@ ja:
       logout: ログアウト
       create_user: 新規登録
       login: ログイン
+  user_translation_comments:
+    index:
+      edit: 編集
+      destroy: 削除
   books:
     index:
       login_request: ログインが必要です

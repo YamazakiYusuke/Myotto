@@ -72,7 +72,7 @@ class TranslationsController < ApplicationController
   end
 
   def authority_user_edit_destroy
-    unless @translation.user.id == current_user.id
+    unless @translation.user.id == current_user.id || current_user.admin == true
       flash[:notice] = t('reject_edit')
       redirect_to translations_path
     end

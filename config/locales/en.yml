@@ -31,6 +31,10 @@ en:
       logout: Logout
       create_user: Sign up
       login: Login
+  user_translation_comments:
+    index:
+      edit: Edit
+      destroy: Destroy
   books:
     index:
       login_request: You need login

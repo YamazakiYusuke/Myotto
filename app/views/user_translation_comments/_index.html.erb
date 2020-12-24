@@ -1,10 +1,16 @@
 <ul>
   <% comments.each do |comment| %>
     <% if comment.id.present? %>
-      <li>
-        <p><%= comment.content %></p>
-        <p><%= link_to "コメント編集", edit_translation_user_translation_comment_path(translation.id, comment.id), remote: true %></p>
-        <p><%= link_to "コメント削除", translation_user_translation_comment_path( translation.id, comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} %></p>
+      <li id="comments_show_container">
+        <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong>
+        <p id=<%= "this_comment_#{comment.id}"%>><%= comment.content %></p>
+        <% if comment.user_id == current_user.id %>
+          <p>
+            <%= link_to t('.edit'), edit_translation_user_translation_comment_path(translation, comment), remote: true %>&nbsp;
+            <%= link_to t('.destroy'), translation_user_translation_comment_path( translation.id, comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} %>
+          </p>
+          <div id='comment'></div>
+        <% end %>
       </li>
     <% end %>
   <% end %>

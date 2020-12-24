@@ -31,8 +31,8 @@
       <% end %>
     </div>
     <div id='edit_container'>
-      <span><%= link_to t('.edit') , edit_translation_path(@translation.id) if @translation.user_id == current_user.id %></span> 
-      <span><%= link_to t('.destroy'), translation_path(@translation.id), method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id %></span>
+      <span><%= link_to t('.edit') , edit_translation_path(@translation.id) if @translation.user_id == current_user.id || current_user.admin == true %></span> 
+      <span><%= link_to t('.destroy'), translation_path(@translation.id), method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id || current_user.admin == true %></span>
     </div>
   </div>
 
@@ -43,7 +43,7 @@
         <%= render partial: 'user_translation_comments/form', locals: { comment: @comment, translation: @translation } %>
       </div>
     </div>
-    <div class="comments_show_container", id="user_translation_comments_area">
+    <div class="comments_show_container" id="user_translation_comments_area">
       <%= render partial: 'user_translation_comments/index', locals: { comments: @comments, translation: @translation } %>
     </div>
   </div>

@@ -10,11 +10,12 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.label "添削 / コメント" %>
+    <span id="comment_count"><%= @comments.size %> <%= t('translations.show.comment_size') %></span><br/>
+    <%= form.label t('translations.show.comment_area') %>
     <%= form.text_area :content %>
     <%= form.hidden_field :translation_id, value: translation.id %>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit t('translations.show.submit', class: "btn btn-default pull-right")%>
   </div>
 <% end %>
