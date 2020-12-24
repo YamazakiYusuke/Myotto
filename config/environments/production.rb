@@ -1,6 +1,8 @@
 Rails.application.configure do
   config.cache_classes = true
 
+  config.force_ssl = false #追記
+
   config.eager_load = true
 
   config.consider_all_requests_local       = false
@@ -34,6 +36,6 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
-
+  
   config.active_record.dump_schema_after_migration = false
 end
