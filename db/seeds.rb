@@ -78,7 +78,7 @@ Book.create!(
   user_id: 1
 )
 Book.last.book_locale_statuses.create!(
-  locale_id: 2
+  locale_id: 2,
   is_main: true
 )
 
@@ -125,7 +125,7 @@ Book.create!(
   user_id: 1
 )
 Book.last.book_locale_statuses.create!(
-  locale_id: 1
+  locale_id: 1,
   is_main: true
 )
 
@@ -143,7 +143,7 @@ Book.create!(
   user_id: 1
 )
 Book.last.book_locale_statuses.create!(
-  locale_id: 3
+  locale_id: 3,
   is_main: true
 )
 
