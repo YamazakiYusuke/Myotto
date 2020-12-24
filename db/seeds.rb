@@ -14,16 +14,34 @@ User.create!(
   profile: '日本人です。I am japanese. Я японец.',
   admin: true
 )
-
+User.last.user_locale_statuses.create!(
+  locale_id: 2,
+  is_native: true
+)
 User.last.user_locale_statuses.create!(
   locale_id: 3,
   is_wanted: true,
   wanted_level: 'Intermediate'
 )
+
+
+User.create!(
+  name: 'Gest',
+  email: 'gest@gmail.com',
+  password: 'hogehoge',
+  profile: '私はゲストです',
+  admin: true
+)
 User.last.user_locale_statuses.create!(
   locale_id: 2,
   is_native: true
 )
+User.last.user_locale_statuses.create!(
+  locale_id: 1,
+  is_wanted: true,
+  wanted_level: 'Intermediate'
+)
+
 
 Book.create!(
   title: '羅生門',

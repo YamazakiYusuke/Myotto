@@ -24,6 +24,7 @@ class TranslationsController < ApplicationController
   def show
     @translation = Translation.includes(:user, :sentence).find(params[:id])
     @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(created_at: :desc)
+    @comment = @translation.user_translation_comments.build
     @favorite = current_user.user_translation_favorites.find_by(translation_id: @translation.id)
   end
 
@@ -34,10 +35,14 @@ class TranslationsController < ApplicationController
 
   def create
     @translation = current_user.translations.new(translation_params)
-    if @translation.save
-      redirect_to translation_path(@translation.id), notice: t('.new_posted')
-    else
-      render :new
+    respond_to do |format|
+      if @translation.save
+        format.html { redirect_to translation_path(@translation.id), notice: t('.new_posted') }
+        format.js { render :index }
+      else
+        format.html { render :new }
+        format.js { render :index }
+      end
     end
   end
 
@@ -67,7 +72,7 @@ class TranslationsController < ApplicationController
   end
 
   def authority_user_edit_destroy
-    unless @translation.user.id == current_user.id
+    unless @translation.user.id == current_user.id || current_user.admin == true
       flash[:notice] = t('reject_edit')
       redirect_to translations_path
     end

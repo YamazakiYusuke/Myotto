@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :translations do
-    resources :user_translation_comments, only: [:create]
+    resources :user_translation_comments
     resources :user_translation_favorites, only: [:create, :destroy]
   end
 

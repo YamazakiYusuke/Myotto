@@ -73,26 +73,27 @@ main .yield_wrap .index_container{
 .translation_show_container #comment_container{
   margin-top: 80px;
 }
-.translation_show_container #comment_container #send_container{
+.translation_show_container #comment_container .send_container{
   font-size: 1.5rem;
   width: 95%;
   margin: auto;
 }
-.translation_show_container #comment_container #send_container form div textarea{
+.translation_show_container #comment_container .send_container form div textarea{
   width: 100%;
   font-size: 1.9rem;
 }
-.translation_show_container #comment_container #comments_show_container{
+.translation_show_container #comment_container .comments_show_container{
   font-size: 1.7rem;
   margin-top: 3rem;
+  padding: 0;
   width: 70%;
   margin: 3rem auto;
 }
-.translation_show_container #comment_container #comments_show_container #comment_count{
+.translation_show_container #comment_container .comments_show_container #comment_count{
   display: inline-block;
   margin-bottom: 4rem;
 }
-.translation_show_container #comment_container #comments_show_container #comment{
+.translation_show_container #comment_container .comments_show_container #comment{
   display: inline-block;
   margin-top: 0.3rem;
   margin-bottom: 1rem;

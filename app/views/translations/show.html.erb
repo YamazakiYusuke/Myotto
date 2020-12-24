@@ -31,30 +31,20 @@
       <% end %>
     </div>
     <div id='edit_container'>
-      <span><%= link_to t('.edit') , edit_translation_path(@translation.id) if @translation.user_id == current_user.id %></span> 
-      <span><%= link_to t('.destroy'), translation_path(@translation.id), method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id %></span>
+      <span><%= link_to t('.edit') , edit_translation_path(@translation.id) if @translation.user_id == current_user.id || current_user.admin == true %></span> 
+      <span><%= link_to t('.destroy'), translation_path(@translation.id), method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id || current_user.admin == true %></span>
     </div>
   </div>
 
   <%# コメント %>
   <div id='comment_container'>
-    <div id="send_container">
-      <%= form_with(model: UserTranslationComment.new, url: translation_user_translation_comments_path(@translation.id), method: :post, local:true) do |f| %>
-        <div>
-          <%= f.label(t('.comment_area')) %><br/>
-          <%= f.text_area :content, rows: "4" %><br/>
-          <%= f.hidden_field :translation_id, value: @translation.id %>
-          <%= f.submit(t('.submit'), class: "btn btn-default pull-right") %>
-        </div>
-      <% end %>
+    <div class="send_container">
+      <div>
+        <%= render partial: 'user_translation_comments/form', locals: { comment: @comment, translation: @translation } %>
+      </div>
     </div>
-    <div id="comments_show_container">
-      <h3><%= t('.correction_comment') %></h3>
-      <span id="comment_count"><%= @comments.size %> <%= t('.comment_size') %></span><br/>
-      <% @comments.each do |comment| %>
-        <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong><br/>
-        <span id='comment'><%= comment.content %></span><br/>
-      <% end %>
+    <div class="comments_show_container" id="user_translation_comments_area">
+      <%= render partial: 'user_translation_comments/index', locals: { comments: @comments, translation: @translation } %>
     </div>
   </div>
 </div>

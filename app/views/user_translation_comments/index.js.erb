@@ -1,0 +1,2 @@
+$("#user_translation_comments_area").html("<%= j(render 'user_translation_comments/index', { comments: @comment.translation.user_translation_comments, translation: @comment.translation }) %>")
+$("textarea").val('')
