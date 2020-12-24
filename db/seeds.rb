@@ -79,7 +79,7 @@ Book.create!(
 )
 Book.last.book_locale_statuses.create!(
   locale_id: 2,
-  is_main: true
+  is_main: true,
   difficulty: ['Unknown', 'Beginner', 'Intermediate','Advanced'].sample
 )
 
@@ -127,7 +127,8 @@ Book.create!(
 )
 Book.last.book_locale_statuses.create!(
   locale_id: 1,
-  is_main: true
+  is_main: true,
+  difficulty: ['Unknown', 'Beginner', 'Intermediate','Advanced'].sample
 )
 
 content = "В колыбельной песне, сказке, прибаутке, былине художественное слово является нам раньше всего, о нем и чуть ли не самая первая память. Есть и память, заключенная в нем самом, причем память самая долгая и самая всеобщая. Как всегда, хорошая память указует вперед, образует дорогу. Надо знать и дорогу, и направление. «Дорогато есть, я стою на твердой полосе; да что толку?» Необычайно меткое это усмотрение Пушкина в «Капитанской дочке». Человек, который у него так говорил, вроде бы знал народ, был сам совершенно народен; Петруше он со значением рассказал и известную сказку о разнице между горячей живой кровью своих жертв и чьимто питанием мертвечиной (орел и ворон). Однако вопрос об истинном направлении он лично оставил открытым, и для народа не меньше, чем для себя.
@@ -145,7 +146,8 @@ Book.create!(
 )
 Book.last.book_locale_statuses.create!(
   locale_id: 3,
-  is_main: true
+  is_main: true,
+  difficulty: ['Unknown', 'Beginner', 'Intermediate','Advanced'].sample
 )
 
 100.times do |n|
