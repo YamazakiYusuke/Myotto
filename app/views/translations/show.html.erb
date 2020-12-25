@@ -15,7 +15,8 @@
   <%# メイン %>
   <div id="container">
     <div id="main_container">
-      <strong><%= t('.original') %></strong>
+      
+      <strong><%= link_to(t('.original'), book_sentence_path(@translation.sentence.book.id, @translation.sentence.id)) %></strong>
       <p><%= @translation.sentence.content %></p>
       <strong><%= t('.translation') %></strong>
       <p><%= @translation.content %></p>
