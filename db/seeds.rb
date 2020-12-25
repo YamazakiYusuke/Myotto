@@ -180,16 +180,15 @@ Sentence.make_sentences_from_book(3, Book.last.id, content )
   )
 end
 
-user_ids = User.all.map { |n| n.id }
 
-user_ids.all.each do |n|
+User.all.each do |n|
   UserLocaleStatus.create!(
-    user_id: n,
+    user_id: n.id,
     locale_id: [1, 2, 3].sample,
     is_native: true
   )
   UserLocaleStatus.create!(
-    user_id: n,
+    user_id: n.id,
     locale_id: [1, 2, 3].sample,
     is_wanted: true,
     wanted_level: ['Beginner','Elementary','Intermediate','Advanced','Proficient'].sample
@@ -197,6 +196,7 @@ user_ids.all.each do |n|
 end
 
 
+user_ids = User.all.map { |n| n.id }
 
 locales_ids = Locale.all.map { |n| n.id }
 
