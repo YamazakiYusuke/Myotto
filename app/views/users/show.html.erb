@@ -17,7 +17,7 @@
   <div id='profile_box'>
     <strong><%= t('.profile') %></strong>
     <p><%= @user.profile %></p>
-    <%= link_to(t('.edit_profile'), edit_user_path(current_user.id), class: "btn btn-info btn-rounded" ) if @user.id == current_user.id %>
+    <%= link_to(t('.edit_profile'), edit_user_path(current_user.id), class: "btn btn-info btn-rounded" ) if @user.id == current_user.id || current_user.admin == ture %>
   </div>
   <br/><br/>
   <div id='translation_box'>

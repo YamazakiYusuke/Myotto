@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def authority_user_edit_destroy
-    unless @user.id == current_user.id
+    unless @user.id == current_user.id || current_user.admin == true
       flash[:notice] = t('reject_edit')
       redirect_to user_path(@user.id)
     end
