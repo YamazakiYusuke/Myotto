@@ -12,8 +12,4 @@ Rails.application.routes.draw do
     resources :user_translation_comments
     resources :user_translation_favorites, only: [:create, :destroy]
   end
-
-  # if Rails.env.development?
-  #   mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  # end
 end
