@@ -166,7 +166,7 @@ content = "В колыбельной песне, сказке, прибаутк�
 Sentence.make_sentences_from_book(3, Book.last.id, content )
 
 
-10.times do |n|
+100.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
   password = 'hogehoge'
@@ -204,7 +204,7 @@ book_ids = Book.all.map { |n| n.id }
 
 sentence_ids = Sentence.all.map { |n| n.id }
 
-1000.times do |n|
+3000.times do |n|
   Translation.create!(
     content: "テスト翻訳#{n}",
     user_id: user_ids.sample,
