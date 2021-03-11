@@ -1,0 +1,30 @@
+current directory: /home/vagrant/workspace/dive_into_code/3graduation_app/Myotto/vendor/bundle/ruby/2.6.0/gems/unicorn-5.8.0/ext/unicorn_http
+/usr/local/rbenv/versions/2.6.5/bin/ruby -I /usr/local/rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20210311-6496-1u33usa.rb extconf.rb
+checking for SIZEOF_OFF_T in ruby.h... yes
+checking for SIZEOF_SIZE_T in ruby.h... yes
+checking for SIZEOF_LONG in ruby.h... yes
+checking for rb_str_set_len() in ruby.h... yes
+checking for rb_hash_clear() in ruby.h... yes
+checking for gmtime_r() in time.h... yes
+checking if String#-@ (str_uminus) dedupes... yes
+checking if Hash#[]= (rb_hash_aset) dedupes... yes
+creating Makefile
+
+current directory: /home/vagrant/workspace/dive_into_code/3graduation_app/Myotto/vendor/bundle/ruby/2.6.0/gems/unicorn-5.8.0/ext/unicorn_http
+make "DESTDIR=" clean
+make: Warning: File 'Makefile' has modification time 1.6 s in the future
+make: warning:  Clock skew detected.  Your build may be incomplete.
+
+current directory: /home/vagrant/workspace/dive_into_code/3graduation_app/Myotto/vendor/bundle/ruby/2.6.0/gems/unicorn-5.8.0/ext/unicorn_http
+make "DESTDIR="
+make: Warning: File 'Makefile' has modification time 1.6 s in the future
+compiling httpdate.c
+compiling unicorn_http.c
+linking shared-object unicorn_http.so
+make: warning:  Clock skew detected.  Your build may be incomplete.
+
+current directory: /home/vagrant/workspace/dive_into_code/3graduation_app/Myotto/vendor/bundle/ruby/2.6.0/gems/unicorn-5.8.0/ext/unicorn_http
+make "DESTDIR=" install
+make: Warning: File 'unicorn_http.so' has modification time 1.6 s in the future
+/usr/bin/install -c -m 0755 unicorn_http.so ./.gem.20210311-6496-n9hk2v
+make: warning:  Clock skew detected.  Your build may be incomplete.
