@@ -1,43 +1,41 @@
-<div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8" id="profile_container">
-  <div id='user_name_box'>
-    <p>
-      <%= @user.name %>
-      <%= @user.locales[0].name %>→
-      <%= @user.locales[1].name %>
-      (<%= @user.user_locale_statuses[1].wanted_level %>)
-    </p>
-  </div>
-  <div id='follow_box'>
-    <%= link_to(t('.follow'), users_path(user_id: @user, which: 'following'), class: "btn btn-link" ) %>
-    <%= link_to(t('.follower'), users_path(user_id: @user, which: 'followers'), class: "btn btn-link") %>
-    <br/><br/>
-    <%= render 'follow_form', user: @user unless @user.id == current_user.id %>
-  </div>
-  <br/>
-  <div id='profile_box'>
-    <strong><%= t('.profile') %></strong>
-    <p><%= @user.profile %></p>
-    <%= link_to(t('.edit_profile'), edit_user_path(current_user.id), class: "btn btn-info btn-rounded" ) if @user.id == current_user.id || current_user.admin == true %>
-  </div>
-  <br/><br/>
-  <div id='translation_box'>
-    <% @translations.each do |t| %>
-      <div>
-        <span><p class="glyphicon glyphicon-book"></p>&nbsp;<%= link_to(t.sentence.book.title, book_path(t.sentence.book.id)) %></span><br/> 
-        <span><%= link_to(t('.original'), book_sentence_path(t.sentence.book.id, t.sentence.id)) %></span>: <br/>
-        <span><%= t.sentence.content %></span><br/> 
-        <span><%= t('.translation') %></span>: <br/>
-        <span><%= t.content %></span><br/>
-        <span>
-          <%= t.user_translation_favorites.size %>Like!
-          <%= link_to(t('.show'), translation_path(t.id)) %>
-          <%= link_to(t('.edit'), edit_translation_path(t.id)) if @user.id == current_user.id %>
-          <%= link_to(t('.destroy'), translation_path(t.id), method: :delete, data: { confirm: t('.confirm') }) if @user.id == current_user.id %>
-        </span>
-        <br/><br/>
-      </div>
-    <% end %>
-    <span id="under"></span>
-    <span id='page'><%= paginate @translations %></span>
-  </div>
+<div id='user_name_box'>
+  <p>
+    <%= @user.name %>
+    <%= @user.locales[0].name %>→
+    <%= @user.locales[1].name %>
+    (<%= @user.user_locale_statuses[1].wanted_level %>)
+  </p>
 </div>
+<div id='follow_box'>
+  <%= link_to(t('.follow'), users_path(user_id: @user, which: 'following'), class: "btn btn-link" ) %>
+  <%= link_to(t('.follower'), users_path(user_id: @user, which: 'followers'), class: "btn btn-link") %>
+  <br/><br/>
+  <%= render 'follow_form', user: @user unless @user.id == current_user.id %>
+</div>
+<br/>
+<div id='profile_box'>
+  <strong><%= t('.profile') %></strong>
+  <p><%= @user.profile %></p>
+  <%= link_to(t('.edit_profile'), edit_user_path(current_user.id), class: "btn btn-info btn-rounded" ) if @user.id == current_user.id || current_user.admin == true %>
+</div>
+
+<div id='translation_box'>
+  <% @translations.each do |t| %>
+    <div class="col-xs-12 col-sm-10 col-md-6 base-box">
+      <span><p class="glyphicon glyphicon-book"></p>&nbsp;<%= link_to(t.sentence.book.title, book_path(t.sentence.book.id)) %></span><br/> 
+      <span><%= link_to(t('.original'), book_sentence_path(t.sentence.book.id, t.sentence.id)) %></span>: <br/>
+      <span><%= t.sentence.content %></span><br/> 
+      <span><%= t('.translation') %></span>: <br/>
+      <span><%= t.content %></span><br/>
+      <span>
+        <%= t.user_translation_favorites.size %>Like!
+        <%= link_to(t('.show'), translation_path(t.id)) %>
+        <%= link_to(t('.edit'), edit_translation_path(t.id)) if @user.id == current_user.id %>
+        <%= link_to(t('.destroy'), translation_path(t.id), method: :delete, data: { confirm: t('.confirm') }) if @user.id == current_user.id %>
+      </span>
+    </div>
+  <% end %>
+  <div class="cf">
+  <div id='pagenation'><%= paginate @translations %></div>
+</div>
+
