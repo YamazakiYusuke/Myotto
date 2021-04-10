@@ -1,5 +1,7 @@
+/* ==================================== 
+    user_from
+=====================================*/
 
-// user_from
 #user_form_container{
   font-size: 1.7rem;
   width: 100%;
@@ -38,8 +40,10 @@
   // box-sizing: border-box;
 }
 
+/* ==================================== 
+    index
+=====================================*/
 
-// index
 #user_index_form{
   text-align: center;
   font-size: 2rem;
@@ -48,7 +52,10 @@
   display: inline-block;
   margin-top: 5px;
 }
-// new
+
+/* ==================================== 
+    new
+=====================================*/
 #introduction{
   position: absolute;
   margin: 10rem 0 0 6rem;
@@ -57,7 +64,10 @@
   font: italic 1.5em "Fira Sans", serif;
 }
 
-// show
+/* ==================================== 
+    show
+=====================================*/
+
 #profile_container{
   font-size: 2rem;
   background-color: white;

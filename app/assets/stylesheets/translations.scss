@@ -1,8 +1,10 @@
 // Place all the styles related to the translations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-// translation_form
+ 
+/* ==================================== 
+    translation_form
+=====================================*/
 
 .new_post_box{
   width: 60%;
@@ -24,7 +26,10 @@
   text-align: center;
 }
 
-// index
+/* ==================================== 
+    index
+=====================================*/
+
 .translation_search{
   margin-top: 2rem;
   font-size: 1.6rem;
@@ -49,7 +54,10 @@ main .yield_wrap .index_container{
   clear: both;
 }
 
-// show
+/* ==================================== 
+    show
+=====================================*/
+
 .translation_show_container{
   padding: 25px;
   font-size: 2rem;

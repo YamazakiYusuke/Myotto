@@ -2,7 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// _book_from
+/* ==================================== 
+    _book_from
+=====================================*/
+
 .book_form{
   margin: 6rem auto 0 auto;
   font-size: 2rem;
@@ -32,7 +35,10 @@
   margin-top: 4rem;
 }
 
-// book_index 
+/* ==================================== 
+    book_index 
+=====================================*/
+
 main .yield_wrap #book_index_container{
   border-radius: 7px;
 }
@@ -62,7 +68,10 @@ table{
   border-spacing: 10px 10px;
 }
 
-// show
+/* ==================================== 
+    show 
+=====================================*/
+
 main .yield_wrap .book_status{
   text-align: center;
 }

@@ -5,7 +5,9 @@
     <%= f.submit t('.search'), class: "btn btn-default" %>
   </div>
 <% end %>
+
 <div class='index_container'>
+　<h3> <%= link_to '早速翻訳を投稿しよう！', books_path %></h3>
   <% @translations.each do |translation| %>
     <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6 index_post">
       <span><span class="glyphicon glyphicon-user"></span>&nbsp; <strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br/> 
