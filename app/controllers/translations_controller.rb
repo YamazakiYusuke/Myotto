@@ -3,7 +3,7 @@ class TranslationsController < ApplicationController
   before_action :set_translation, only: [:edit, :update, :destroy]
   before_action :authority_user_edit_destroy, only: [:edit, :update, :destroy]
 
-  def index  #N + 1問題 
+  def index  #N + 1問題 #作り直す
     if params[:translation].present?
       if params[:translation][:search_translation].present?
         @translations = Translation.translation_scope(params[:translation][:search_translation]).includes(:user, :sentence, :user_translation_favorites, :user_translation_comments)
@@ -35,14 +35,10 @@ class TranslationsController < ApplicationController
 
   def create
     @translation = current_user.translations.new(translation_params)
-    respond_to do |format|
-      if @translation.save
-        format.html { redirect_to translation_path(@translation.id), notice: t('.new_posted') }
-        format.js { render :index }
-      else
-        format.html { render :new }
-        format.js { render :index }
-      end
+    if @translation.save
+      redirect_to translation_path(@translation.id), notice: "You posted a new trancelation"
+    else
+      render :new
     end
   end
 
@@ -51,7 +47,7 @@ class TranslationsController < ApplicationController
 
   def update
     if @translation.update(translation_params)
-      redirect_to translation_path(@translation.id), notice: t('.edited_post')
+      redirect_to translation_path(@translation.id), notice: "You edited a new trancelation"
     else
       render :edit
     end
@@ -59,7 +55,7 @@ class TranslationsController < ApplicationController
 
   def destroy
     @translation.destroy
-    redirect_to translations_path, notice: t('.destoryed_post')
+    redirect_to translations_path, notice: "You destoryed a new trancelation"
   end
 
   private
@@ -73,7 +69,7 @@ class TranslationsController < ApplicationController
 
   def authority_user_edit_destroy
     unless @translation.user.id == current_user.id || current_user.admin == true
-      flash[:notice] = t('reject_edit')
+      flash[:notice] = "You can't edit this post"
       redirect_to translations_path
     end
   end

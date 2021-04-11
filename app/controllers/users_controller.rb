@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :authority_user_edit_destroy, only: [:edit, :update]
 
-  def index
+  def index #ここよくない 一つのページでどちらも見れるようにまとめる
     if params[:which] == 'following'
       @users = User.find(params[:user_id]).following
       @which = 'following'
@@ -19,14 +19,14 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    2.times { @user.user_locale_statuses.build } if @user.user_locale_statuses.size == 0
+    2.times { @user.user_locale_statuses.build }
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to translations_path, notice: t('.created_account')
+      redirect_to translations_path, notice: "You success to create new account! Wellcome!!"
     else
       render :new
     end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user.id), notice: t('.edited_account')
+      redirect_to user_path(@user.id), notice: "You edited a account "
     else
       render :edit
     end

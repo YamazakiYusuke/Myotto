@@ -7,14 +7,13 @@ class UserTranslationCommentsController < ApplicationController
       if @comment.save
         format.js { render :index }
       else
-        format.html { redirect_to translation_path(@translation), notice: '投稿できませんでした...' }
+        format.html { redirect_to translation_path(@translation), notice: "You can't comment" }
       end
     end
   end
   def edit
     @comment = @translation.user_translation_comments.find(params[:id])
     respond_to do |format|
-      flash.now[:notice] = 'コメントの編集中'
       format.js { render :edit }
     end
   end
@@ -23,10 +22,10 @@ class UserTranslationCommentsController < ApplicationController
     @comment[:user_id] = current_user.id
     respond_to do |format|
       if @comment.update(comment_params)
-        flash.now[:notice] = 'コメントが編集されました'
+        flash.now[:notice] = "You deleted a comment"
         format.js { render :index }
       else
-        flash.now[:notice] = 'コメントの編集に失敗しました'
+        flash.now[:notice] = "You failed to edit a comment"
         format.js { render :edit_error }
       end
     end
@@ -35,7 +34,7 @@ class UserTranslationCommentsController < ApplicationController
     @comment = UserTranslationComment.find(params[:id])
     @comment.destroy
     respond_to do |format|
-      flash.now[:notice] = 'コメントが削除されました'
+      flash.now[:notice] = "You deleted a comment"
       format.js { render :index }
     end
   end
@@ -48,7 +47,7 @@ class UserTranslationCommentsController < ApplicationController
   end
   def own_comment?
     unless current_user.id == @comment.user_id
-      flash.now[:notice] = 'この操作はできません'
+      flash.now[:notice] = "Unaccessible"
       format.js { render :index }
     end
   end

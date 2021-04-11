@@ -1,8 +1,4 @@
-<div class="container">
-  <h1 class="text-center login-title"><%= t('.sign_up') %></h1>
-  <div class="col-sm-6 col-md-4 account-wall ">
-    <%= image_tag 'default.png', class: "profile-img" %>
-    <%= render 'user_form', user: @user %>
-  </div>
-</div>
+<h1><%= t('.sign_up') %></h1>
+<%= image_tag 'default.png', class: "profile-img" %>
+<%= render 'user_form', user: @user %>
 
