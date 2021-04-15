@@ -14,7 +14,7 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
-    @book.book_locale_statuses.build if @book.book_locale_statuses.size == 0
+    @book.book_locale_statuses.build
   end
 
   def create 

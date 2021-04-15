@@ -25,8 +25,9 @@
       <% @sentences.each do |sentence| %>
         <tr>
           <td><%= sentence.content %></td>
+          <p id=<%= "this_sentence_#{sentence.id}" %>></p>
           <td>
-            <%= link_to(t('.translate'), new_translation_path(sentence_id: sentence.id), class: "btn btn-link") %>
+            <%= link_to(t('.translate'), new_translation_path(sentence_id: sentence.id), class: "btn btn-link", remote: true) %>
             <%= link_to(t('.show_translation'), book_sentence_path(@book.id, sentence.id), class: "btn btn-link") %>
             <%= link_to(t('.edit'), edit_book_sentence_path(@book.id, sentence.id), class: "btn btn-link") if admin_user? %>
             <%= link_to(t('.destroy'), book_sentence_path(@book.id, sentence.id), method: :delete, data: { confirm: t('.confirm') }, class: "btn btn-link") if admin_user? %>

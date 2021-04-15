@@ -23,14 +23,17 @@ class TranslationsController < ApplicationController
 
   def show
     @translation = Translation.includes(:user, :sentence).find(params[:id])
-    @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(created_at: :desc)
+    @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(:id)
     @comment = @translation.user_translation_comments.build
     @favorite = current_user.user_translation_favorites.find_by(translation_id: @translation.id)
   end
 
   def new
-    @translation = Translation.new
-    @translation[:sentence_id] = params[:sentence_id]
+    @sentence = Sentence.find(params[:sentence_id])
+    @translation = @sentence.translations.build
+    respond_to do |format|
+      format.js { render :new }
+    end
   end
 
   def create
