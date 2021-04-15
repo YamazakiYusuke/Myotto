@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
 
   create_table "books", force: :cascade do |t|
     t.string "title", null: false
+    t.string "image"
     t.string "author"
     t.datetime "issued_date"
     t.bigint "user_id"

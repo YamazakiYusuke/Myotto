@@ -15,6 +15,7 @@ class InitialSchema < ActiveRecord::Migration[5.2]
 
     create_table :books do |t|
       t.string :title, null: false
+      t.string :image
       t.string :author
       t.datetime :issued_date
       t.references :user, foreign_key: true

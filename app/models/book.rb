@@ -7,6 +7,8 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :sentences, allow_destroy: true
   accepts_nested_attributes_for :book_locale_statuses, allow_destroy: true
 
+  mount_uploader :image, BookImageUploader
+  
   validates :title, presence: true
   validates :title,    length: { in: 1..500 }  
   validates :author,    length: { in: 1..100 }
