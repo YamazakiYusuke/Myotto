@@ -18,7 +18,8 @@ class User < ApplicationRecord
   # has_many :recipients, through: :passive_relationships, source: :follower
   # has_many :rooms, dependent: :destroy
 ################
-  # mount_uploader :icon, ImageUploader 
+
+  mount_uploader :icon, AvatarUploader
 
   validates :name, presence: true, length: { maximum: 100 }
   validates :email, presence: true, length: { maximum: 255 },

@@ -1,6 +1,6 @@
 <h1 id="top_title"><%= t('.new_post') %></h1>
 <%= form_with(model:Translation.new, url: translations_path, method: :get, local: true, class: 'translation_search') do |f| %>
-  <div class="text-center ">
+  <div class="text-center">
     <%= f.text_field :search_translation, size: "40", placeholder: t('.search_by_translation') %>
     <%= f.submit t('.search'), class: "btn btn-default" %>
   </div>
@@ -11,7 +11,10 @@
   <% @translations.each do |translation| %>
     <div class="row">
       <div class="col-xs-12col-sm-10 col-md-6 base-box">
-        <span><span class="glyphicon glyphicon-user"></span>&nbsp; <strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br/> 
+        <span>
+          <%= image_tag translation.user.icon.url %>
+        </span>
+        <span><strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br/> 
         <span><%= t('.original') %>: <%= translation.sentence.content %></span><br/> 
         <span><%= t('.translation') %>: <%= translation.content %></span><br/> 
         <span><%= translation.user_translation_favorites.size %>&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></span>
