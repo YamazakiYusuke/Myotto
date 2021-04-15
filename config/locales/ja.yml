@@ -193,6 +193,7 @@ ja:
       created_account: アカウントを作成しました！
     edit:
       edit_account: アカウントを編集
+      error: エラー
     update:
       edited_account: アカウントを編集しました
   reject_edit: このアカウントは、編集できません

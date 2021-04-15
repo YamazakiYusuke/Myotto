@@ -4,7 +4,7 @@
 <%# 入力エラー表示 %>
 <% if @user.errors.any? %>
   <li id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, t('.error')) %> <%= t('.reject_save') %></h2>
+    <h2><%= pluralize(@user.errors.count, "error") %> Reject save</h2>
     <ul>
     <% @user.errors.full_messages.each do |message| %>
       <li><%= message %></li>

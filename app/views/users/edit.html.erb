@@ -1,8 +1,9 @@
 <h1><%= t('.edit_account') %></h1>
 
+<%# 入力エラー表示 %>
 <% if @user.errors.any? %>
   <li id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, t('.error')) %> <%= t('.reject_save') %></h2>
+    <h2><%= pluralize(@user.errors.count, "error") %> Reject save</h2>
     <ul>
     <% @user.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -11,6 +12,8 @@
   </li>
 <% end %>
 
+
+<%# 入力フォーム %>
 <%= form_with(model: @user, local: true) do |f| %>
   <ul>
     <li>
@@ -29,7 +32,6 @@
       <%= f.text_area :profile, rows: "4" %>
     </li> 
 
-    <%# ここ作る %>
     <li class="field">
       <%= f.label "Icon" %>
       <%= f.file_field :icon %>

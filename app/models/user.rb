@@ -19,7 +19,7 @@ class User < ApplicationRecord
   # has_many :rooms, dependent: :destroy
 ################
 
-  mount_uploader :icon, AvatarUploader
+  mount_uploader :icon, IconUploader
 
   validates :name, presence: true, length: { maximum: 100 }
   validates :email, presence: true, length: { maximum: 255 },
