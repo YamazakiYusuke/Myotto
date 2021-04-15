@@ -1,4 +1,67 @@
 <h1><%= t('.sign_up') %></h1>
 <%= image_tag 'default.png', class: "profile-img" %>
-<%= render 'user_form', user: @user %>
+
+<%# 入力エラー表示 %>
+<% if @user.errors.any? %>
+  <li id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, t('.error')) %> <%= t('.reject_save') %></h2>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </li>
+<% end %>
+
+<%# 入力フォーム %>
+<%= form_with(model: @user, local: true) do |f| %>
+  <ul>
+    <li>
+      <%= f.label "Name" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </li> 
+
+    <%= f.fields_for :user_locale_statuses do |form| %>
+      <li class="field">
+        <%= form.label "Navive" %> 
+        <%= form.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true, class: "selectpicker") %>
+      </li>
+
+      <li class="field">
+        <%= form.label "Level" %> 
+        <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']], include_blank: true, class: "selectpicker") %>
+      </li> 
+      <%= form.hidden_field :is_native, value: 'true' %>
+    <% end %>
+
+    <%= f.fields_for :user_locale_statuses do |form| %>
+      <li class="field">
+        <%= form.label "Learning" %> 
+        <%= form.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true, class: "selectpicker") %>
+      </li>
+      
+      <li class="field">
+        <%= form.label "Level" %> 
+        <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']], include_blank: true, class: "selectpicker") %>
+      </li> 
+      <%= form.hidden_field :is_wanted, value: 'true' %>
+    <% end %>
+
+    <li>
+      <%= f.label "mail" %>
+      <%= f.email_field :email, class: "form-control" %>
+    </li>  
+
+    <li>
+      <%= f.label "password"%>
+      <%= f.password_field :password, class: "form-control" %>
+    </li>
+    
+    <li>
+      <%= f.label "password confirmation" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </li> 
+    <li class="actions"><%= f.submit "Submit", class: "btn btn-default btn-lg" %></li>
+  </ul>
+<% end %>
 

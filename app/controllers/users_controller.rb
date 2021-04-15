@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    2.times { @user.user_locale_statuses.build }
+    @user.user_locale_statuses.build
   end
 
   def create
