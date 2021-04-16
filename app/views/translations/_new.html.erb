@@ -13,8 +13,10 @@
   <% end %>
 
   <div class="field">
-    <%= form.label "翻訳フォーム" %>
-    <%= form.text_area :content, id: "translation_content_#{sentence.id}" %>
+    <p><%= @sentence.content %></p>
+    <p><%= form.label "翻訳フォーム" %></p>
+    <p><%= form.text_area :content, id: "translation_content_#{sentence.id}" %></p>
+    <%= form.hidden_field :sentence_id, value: @sentence.id  %>
   </div>
   <div class="actions">
     <%= form.submit %>

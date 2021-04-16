@@ -24,7 +24,7 @@ class UserTranslationCommentsController < ApplicationController
     @comment = @translation.user_translation_comments.find(params[:id])
     respond_to do |format|
       if @comment.update(comment_params)
-        flash.now[:notice] = "You deleted a comment"
+        flash.now[:notice] = "You edit a comment"
         format.js { render :index }
       else
         flash.now[:notice] = "You failed to edit a comment"

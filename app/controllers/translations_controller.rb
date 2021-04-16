@@ -37,9 +37,20 @@ class TranslationsController < ApplicationController
   end
 
   def create
+    binding.pry
     @translation = current_user.translations.new(translation_params)
+    respond_to do |format|
+      if @translation.save(translation_params)
+        flash.now[:notice] = "You posted a new trancelation"
+        format.js { render template: "books/sentence"}
+      else
+        flash.now[:notice] = "You failed to edit a translation"
+        format.js { render :create_error }
+      end
+    end
+
     if @translation.save
-      redirect_to translation_path(@translation.id), notice: "You posted a new trancelation"
+      redirect_to translation_path(@translation.id)
     else
       render :new
     end
