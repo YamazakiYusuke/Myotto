@@ -62,5 +62,5 @@ gem 'faker'
 
 gem 'rails-i18n', '~> 5.1' 
 
-gem 'bootstrap', '~> 5.0.0.beta2'
+gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'

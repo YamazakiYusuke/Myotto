@@ -8,6 +8,5 @@
 <div id="user_index_form">
   <% @users.each do |user| %>
     <%= link_to(user.name, user_path(user.id)) %>
-    <br>
   <% end %>
 </div>

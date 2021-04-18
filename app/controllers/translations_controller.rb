@@ -37,12 +37,13 @@ class TranslationsController < ApplicationController
   end
 
   def create
-    binding.pry
+    @book =  Sentence.find(params[:translation][:sentence_id]).book
+    @sentences =  Sentence.find(params[:translation][:sentence_id]).book.sentences
     @translation = current_user.translations.new(translation_params)
     respond_to do |format|
       if @translation.save(translation_params)
         flash.now[:notice] = "You posted a new trancelation"
-        format.js { render template: "books/sentence"}
+        format.js { render template: "../views/books/_sentence.html.erb"}
       else
         flash.now[:notice] = "You failed to edit a translation"
         format.js { render :create_error }

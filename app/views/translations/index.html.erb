@@ -1,29 +1,28 @@
-<h1 id="top_title"><%= t('.new_post') %></h1>
-<%= form_with(model:Translation.new, url: translations_path, method: :get, local: true, class: 'translation_search') do |f| %>
-  <div class="text-center">
-    <%= f.text_field :search_translation, size: "40", placeholder: t('.search_by_translation') %>
-    <%= f.submit t('.search'), class: "btn btn-default" %>
-  </div>
+<h1 class="text-center my-5"><%= t('.new_post') %></h1>
+<%= form_with(model:Translation.new, url: translations_path, method: :get, local: true, class: 'text-center') do |f| %>
+  <%= f.text_field :search_translation, size: "40", placeholder: t('.search_by_translation') %>
+  <%= f.submit t('.search'), class: "btn" %>
 <% end %>
 
-<div class='index_container'>
-　<h3><%= link_to '早速翻訳を投稿しよう！', books_path %></h3>
+<h3 class="my-5 text-center"><%= link_to '早速翻訳を投稿しよう！', books_path %></h3>
+
+<div class="container offset-md-2 col-md-8">
   <% @translations.each do |translation| %>
-    <div class="row">
-      <div class="col-xs-12col-sm-10 col-md-6 base-box">
-        <span>
-          <%= image_tag translation.user.icon.url %>
-        </span>
-        <span><strong><%= link_to(translation.user.name, user_path(translation.user.id)) %></strong></span><br/> 
-        <span><%= t('.original') %>: <%= translation.sentence.content %></span><br/> 
-        <span><%= t('.translation') %>: <%= translation.content %></span><br/> 
-        <span><%= translation.user_translation_favorites.size %>&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></span>
-        <span><%= translation.user_translation_comments.size %>&nbsp;<span class="glyphicon glyphicon-comment"></span></span>
-        <span><%= link_to t('.show'), translation_path(translation.id) %></span>
+    <div class="card bg-light p-4 h3 mb-4">
+      <div class="card-body">
+        <p class="card-title"><%= image_tag translation.user.icon.url %><span class="ml-4"><%= link_to(translation.user.name, user_path(translation.user.id)) %></span></p>
+        <p class="card-text font-weight-bold mt-5"><%= t('.original') %>:</p>
+        <p class="card-text"><%= translation.sentence.content %></p>
+        <p class="card-text font-weight-bold"><%= t('.translation') %>:</p>
+        <p class="card-text"><%= translation.content %></p>
+        <p class="mt-5">
+          <%= translation.user_translation_favorites.size %><span class="glyphicon glyphicon-thumbs-up ml-2" aria-hidden="true"></span>
+          <%= translation.user_translation_comments.size %><span class="glyphicon glyphicon-comment ml-2"></span>
+          <span class="ml-3"><%= link_to t('.show'), translation_path(translation.id) %></span> 
+        </p>
       </div>
     </div>
   <% end %>
-  <div class="cf"></div>
 </div>
-<br>
-<div id="pagenaton"><%= paginate @translations %></div>
+
+<div><%= paginate @translations %></div>

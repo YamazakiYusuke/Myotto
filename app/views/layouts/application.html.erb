@@ -11,37 +11,42 @@
   </head>
 
   <body>
+    <%#=======================
+        header
+    =========================%>
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-          <%= link_to translations_path, class:"navbar-brand" do%>
-            <%= image_tag "bee", :size => '55x55' %>
-            Myotto
-          <% end %>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <% if logged_in?  %>
-                <li><%= link_to t('.all_new_posts'), translations_path, class: "nav-link active" %></li>
-                <li><%= link_to t('.all_books'), books_path, class: "nav-link active" %></li>
-                <li><%= link_to t('.my_page'), user_path(current_user.id), class: "nav-link active" %></li>
-                <li><%= link_to t('.logout'), session_path(current_user.id), method: :delete, class: "nav-link active" %></li>
-              <% else %>
-                <li><%= link_to t('.create_user'), new_user_path, class: "nav-link active" %></li>
-                <li><%= link_to t('.login'), new_session_path, class: "nav-link active" %></li>
-              <% end %>
-            </ul>
-          </div>
+        <%= link_to translations_path, class:"navbar-brand" do%>
+          <%= image_tag "bee", :size => '55x55' %>
+          Myotto
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav h2">
+            <% if logged_in?  %>
+              <li class="ml-4"><%= link_to t('.all_new_posts'), translations_path, class: "nav-link text-light" %></li>
+              <li class="ml-4"><%= link_to t('.all_books'), books_path, class: "nav-link text-light" %></li>
+              <li class="ml-4"><%= link_to t('.my_page'), user_path(current_user.id), class: "nav-link text-light" %></li>
+              <li class="ml-4"><%= link_to t('.logout'), session_path(current_user.id), method: :delete, class: "nav-link text-light" %></li>
+            <% else %>
+              <li class="ml-4"><%= link_to t('.create_user'), new_user_path, class: "nav-link text-light" %></li>
+              <li class="ml-4"><%= link_to t('.login'), new_session_path, class: "nav-link text-light" %></li>
+            <% end %>
+          </ul>
         </div>
       </nav>
     </header>
+
+    <%#=======================
+        main
+    =========================%>
     <main>
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "#{key} alert alert-primary") %>
       <% end %>
-      <div class="yield_wrap"> 
+      <div class="container"> 
         <%= yield %>
       </div>
     </main>

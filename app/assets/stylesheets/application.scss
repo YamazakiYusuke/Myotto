@@ -10,90 +10,16 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require_tree .
+ *= require_self
  */
 @import "bootstrap";
-@import "./books.scss";
-@import "./sentences.scss";
-@import "./sessions.scss";
-@import "./translations.scss";
-@import "./users.scss";
 
-/*=======================
-    基本設定
-========================*/
-@charset "utf-8";
-* {
-	margin:0;
-	padding:0;
+/*=========================
+    ページネーション
+=========================*/
+.pagination {
+  justify-content: center;
 }
-body {
-  color: #333333;
-	background:#FFF url(../img/bg.gif) no-repeat left top;
-	font-family:Verdana, "ＭＳ Ｐゴシック", sans-serif;
-  font-size: 1.4em;
-}
-html {
-	overflow-y:scroll;
-  font-size: 62.5%;
-}
-h1,h2,h3,h4,h5,h6 {
-  font-size: 100%;
-}
-p,li,dt,dl {
-	line-height:1.6;
-}
-p {
-	margin:0 0 1em 0;
-}
-li {
-	list-style-type:none;
-}
-img {
-	border:0;
-}
-address {
-	font-style:normal;
-}
-.cf {
-	clear:both;
-}
-
-
-/*=======================
-    header
-========================*/
-
-header {
-  font-size: 1.5rem;
-}
-
-header nav div.container-fluid a {
-  font-size: 2rem;
-}
-
-
-
-/*=======================
-    pagenation
-========================*/
-
-div.pagenate{
-  text-align: center;
-}
-
-/*=======================
-    投稿ボックスの基礎
-========================*/
-
-.base-box{
-  font-size: 1.8rem;
-  background-color: rgb(255, 255, 255);
-  padding: 15px;
-  margin-top: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 8px gray;
-}
-
-
 
 
