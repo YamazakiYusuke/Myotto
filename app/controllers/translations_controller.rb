@@ -7,7 +7,7 @@ class TranslationsController < ApplicationController
     if params[:translation].present?
       if params[:translation][:search_translation].present?
         @translations = Translation.translation_scope(params[:translation][:search_translation]).includes(:user, :sentence, :user_translation_favorites, :user_translation_comments)
-                                                                          .order(created_at: :desc).page(params[:page]).per(20)
+                                                                          .order(id: :desc).page(params[:page]).per(20)
       end
     else
       user_native_id = current_user.user_locale_statuses.find_by(is_native: true).locale_id

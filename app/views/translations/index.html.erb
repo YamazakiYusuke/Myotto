@@ -6,11 +6,11 @@
 
 <h3 class="my-5 text-center"><%= link_to '早速翻訳を投稿しよう！', books_path %></h3>
 
-<div class="container offset-md-2 col-md-8">
+<div class="container offset-md-2 col-md-8  offset-lg-3 col-lg-6">
   <% @translations.each do |translation| %>
     <div class="card bg-light p-4 h3 mb-4">
       <div class="card-body">
-        <p class="card-title"><%= image_tag translation.user.icon.url %><span class="ml-4"><%= link_to(translation.user.name, user_path(translation.user.id)) %></span></p>
+        <p class="card-title "><%= image_tag translation.user.icon.url, class:'img-thumbnail', width:"50px" %><span class="ml-4"><%= link_to(translation.user.name, user_path(translation.user.id)) %></span></p>
         <p class="card-text font-weight-bold mt-5"><%= t('.original') %>:</p>
         <p class="card-text"><%= translation.sentence.content %></p>
         <p class="card-text font-weight-bold"><%= t('.translation') %>:</p>

@@ -15,16 +15,16 @@
         header
     =========================%>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
         <%= link_to translations_path, class:"navbar-brand" do%>
-          <%= image_tag "bee", :size => '55x55' %>
+          <%= image_tag "bee", :size => '40x40' %>
           Myotto
         <% end %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav h2">
+          <ul class="navbar-nav h3">
             <% if logged_in?  %>
               <li class="ml-4"><%= link_to t('.all_new_posts'), translations_path, class: "nav-link text-light" %></li>
               <li class="ml-4"><%= link_to t('.all_books'), books_path, class: "nav-link text-light" %></li>
@@ -44,7 +44,7 @@
     =========================%>
     <main>
       <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "#{key} alert alert-primary") %>
+        <%= content_tag(:div, value, class: "#{key} alert alert-primary text-center h2") %>
       <% end %>
       <div class="container"> 
         <%= yield %>

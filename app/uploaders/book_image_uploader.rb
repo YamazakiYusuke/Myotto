@@ -9,13 +9,9 @@ class BookImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
-  process resize_to_fit: [107, 150]
-
-  version :thumb do
-    process resize_to_fill: [120, 120]
-  end
+  process resize_to_fit: [512, 512]
 
   def default_url(*args)
-    "book_default.jpg"
+    "book_default.png"
   end
 end

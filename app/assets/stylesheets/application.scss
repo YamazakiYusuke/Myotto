@@ -16,10 +16,14 @@
 @import "bootstrap";
 
 /*=========================
-    ページネーション
+    基本設定
 =========================*/
 .pagination {
   justify-content: center;
+}
+
+input {
+  font-size: 120% !important;
 }
 
 
