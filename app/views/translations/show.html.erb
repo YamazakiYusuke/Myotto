@@ -1,37 +1,46 @@
-<strong><span class="glyphicon glyphicon-user"></span><%= link_to(@translation.user.name, user_path(@translation.user.id)) %></strong>
+<%# メイン投稿翻訳カード %>
+<div class="card bg-light mt-5 p-3 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
+  <div class="card-body h3">
+    <h5 class="card-title">
+      <%= image_tag @translation.user.icon.url, class:'img-thumbnail', width:"50px" %>
+      <%= link_to(@translation.user.name, user_path(@translation.user.id), class:"ml-3 h3") %></strong>
+      <%= @translation.user.locales[0].name %>→
+      <%= @translation.user.locales[1].name %>
+      ( <%= @translation.user.user_locale_statuses[1].wanted_level %> )
+    </h5>
+    <h6 class="card-subtitle mb-2 text-muted h4">
+      <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %>
+      <%= t('.author') %> <%= @translation.sentence.book.author %>
+    </h6>
+    <p class="card-text">
+      <strong><%= link_to(t('.original'), book_sentence_path(@translation.sentence.book.id, @translation.sentence.id)) %></strong>
+      <p><%= @translation.sentence.content %></p>
+    </p>
+    <p class="card-text">
+      <strong><%= t('.translation') %></strong>
+      <p><%= @translation.content %></p>
+    </p>
+    <p class="card-text">
+      <%= @translation.created_at.to_s(:datetime_jp) %>
+      <%= @translation.user_translation_favorites.count %><span class="glyphicon glyphicon-thumbs-up ml-2" aria-hidden="true"></span>
+      <%= @comments.size %><span class="glyphicon glyphicon-comment ml-2"></span>
+    </p>
+    <% unless @translation.user_id == current_user.id %>
+      <% if @favorite.present? %>
+        <%= link_to 'Remove Like', translation_user_translation_favorite_path(@translation.id, @favorite.id), class:"card-link", method: :delete %>
+      <% else %>
+        <%= link_to 'Like!', translation_user_translation_favorites_path(translation_id: @translation.id), class:"card-link", method: :post %>
+      <% end %>
+    <% end %>
 
-<%= @translation.user.locales[0].name %>→
-<%= @translation.user.locales[1].name %>
-( <%= @translation.user.user_locale_statuses[1].wanted_level %> )
-
-<span id="title"><%= t('.title') %> <%= link_to(@translation.sentence.book.title, book_path(@translation.sentence.book.id)) %>
-<%= t('.author') %> <%= @translation.sentence.book.author %>
-
-  <%# メイン %>
-<strong><%= link_to(t('.original'), book_sentence_path(@translation.sentence.book.id, @translation.sentence.id)) %></strong>
-<p><%= @translation.sentence.content %></p>
-<strong><%= t('.translation') %></strong>
-<p><%= @translation.content %></p>
-
-<%= @translation.created_at.to_s(:datetime_jp) %>
-
-<%= @translation.user_translation_favorites.count %>LIKE
-<% unless @translation.user_id == current_user.id %>
-  <% if @favorite.present? %>
-    <%= link_to 'Remove Like', translation_user_translation_favorite_path(@translation.id, @favorite.id), method: :delete %>
-  <% else %>
-    <%= link_to 'Like!', translation_user_translation_favorites_path(translation_id: @translation.id), method: :post %>
-  <% end %>
-<% end %>
-
-<%= link_to t('.edit') , edit_translation_path(@translation.id) if @translation.user_id == current_user.id || current_user.admin == true %> 
-<%= link_to t('.destroy'), translation_path(@translation.id), method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id || current_user.admin == true %>
+    <%= link_to t('.edit') , edit_translation_path(@translation.id), class:"card-link" if @translation.user_id == current_user.id || current_user.admin == true %> 
+    <%= link_to t('.destroy'), translation_path(@translation.id), class:"card-link", method: :delete, data: { confirm: t('.confirm') } if @translation.user_id == current_user.id || current_user.admin == true %>
+  </div>
+</div>
 
   <%# コメント %>
 <div class="send_container">
-  <div>
-    <%= render partial: 'user_translation_comments/form', locals: { comment: @comment, translation: @translation } %>
-  </div>
+  <%= render partial: 'user_translation_comments/form', locals: { comment: @comment, translation: @translation } %>
 </div>
 <div class="comments_show_container" id="user_translation_comments_area">
   <%= render partial: 'user_translation_comments/index', locals: { comments: @comments, translation: @translation } %>

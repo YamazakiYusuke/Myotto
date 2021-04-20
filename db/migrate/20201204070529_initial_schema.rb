@@ -68,9 +68,14 @@ class InitialSchema < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.references :sentence, foreign_key: true
       t.text :content
+      t.string :book_locale, null: false
+      t.string :user_locale, null: false
 
       t.timestamps
     end
+
+    add_index :translations, :book_locale
+    add_index :translations, :user_locale
 
     create_table :user_translation_favorites do |t|
       t.references :translation, foreign_key: true

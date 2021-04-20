@@ -14,8 +14,7 @@
 </div>
 
 <div class="text-center mb-5">
-  <%= link_to("フォロー一覧", users_path(user_id: @user, which: 'following'), class: "btn btn-outline-info btn-lg" ) %>
-  <%= link_to("フォロワー一覧", users_path(user_id: @user, which: 'followers'), class: "btn btn-outline-info btn-lg ml-5") %>
+  <%= link_to("フォロー/フォロワー一覧", users_path(user_id: @user), class: "btn btn-outline-info btn-lg" ) %>
   <%= render 'follow_form', user: @user unless @user.id == current_user.id %>
 </div>
 
@@ -24,10 +23,13 @@
     <div class="card bg-light p-4 h3 mb-4">
       <div class="card-body">
         <p class="card-title"><p class="glyphicon glyphicon-book"></p><%= link_to(t.sentence.book.title, book_path(t.sentence.book.id), class:'ml-3 h2') %></p>
-        <p class="card-text font-weight-bold mt-5"><%= link_to(t('.original'), book_sentence_path(t.sentence.book.id, t.sentence.id)) %>:</p>
-        <p class="card-text"><%= t.sentence.content %></p>
-        <p class="card-text font-weight-bold mt-5"><%= t('.translation') %>:</p>
-        <p class="card-text"><%= t.content %></p>
+        <div style="transform: rotate(0);">
+          <p class="card-text font-weight-bold mt-5"><%= link_to(t('.original'), book_sentence_path(t.sentence.book.id, t.sentence.id)) %>:</p>
+          <p class="card-text"><%= t.sentence.content %></p>
+          <p class="card-text font-weight-bold mt-5"><%= t('.translation') %>:</p>
+          <p class="card-text"><%= t.content %></p>
+          <%= link_to("", translation_path(t.id), class:'stretched-link') %>
+        </div>
         <p class="mt-5">
           <%= t.user_translation_favorites.size %><span class="glyphicon glyphicon-thumbs-up ml-2" aria-hidden="true"></span>
           <%= t.user_translation_comments.size %><span class="glyphicon glyphicon-comment ml-2"></span>

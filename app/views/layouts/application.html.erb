@@ -43,9 +43,11 @@
         main
     =========================%>
     <main>
-      <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "#{key} alert alert-primary text-center h2") %>
-      <% end %>
+      <div class="notifications">
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key} h2") %>
+        <% end %>
+      </div>
       <div class="container"> 
         <%= yield %>
       </div>

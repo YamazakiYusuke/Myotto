@@ -3,27 +3,21 @@ class TranslationsController < ApplicationController
   before_action :set_translation, only: [:edit, :update, :destroy]
   before_action :authority_user_edit_destroy, only: [:edit, :update, :destroy]
 
-  def index  #N + 1問題 #作り直す
+  def index
     if params[:translation].present?
       if params[:translation][:search_translation].present?
-        @translations = Translation.translation_scope(params[:translation][:search_translation]).includes(:user, :sentence, :user_translation_favorites, :user_translation_comments)
-                                                                          .order(id: :desc).page(params[:page]).per(20)
+        @translations = Translation.translation_scope(params[:translation][:search_translation]).includes([:user, :sentence, :user_translation_favorites, :user_translation_comments]).order(id: :desc).page(params[:page]).per(20)
       end
     else
-      user_native_id = current_user.user_locale_statuses.find_by(is_native: true).locale_id
-      user_wanted_id = current_user.user_locale_statuses.find_by(is_wanted: true).locale_id  ## <=これも稼働させる
-
-      user_locales =  UserLocaleStatus.where(is_wanted: true).where(locale_id: user_native_id).includes(user: :translations)
-      users = user_locales.map { |n| n.user }
-      translations = users.flat_map { |n| n.translations }
-      translations_sorted = translations.sort_by!{|t|t[:id]}.reverse
-      @translations = Kaminari.paginate_array(translations_sorted).page(params[:page]).per(20)
+      user_native_locale = current_user.user_locale_statuses.find_by(is_native: true).locale.name
+      user_wanted_locale = current_user.user_locale_statuses.find_by(is_wanted: true).locale.name
+      @translations = Translation.where(book_locale: user_native_locale, user_locale: user_wanted_locale).or(Translation.where(book_locale: user_wanted_locale, user_locale: user_native_locale)).includes([:user, :sentence, :user_translation_favorites, :user_translation_comments]).order(id: :desc).page(params[:page]).per(20)
     end
   end
 
   def show
     @translation = Translation.includes(:user, :sentence).find(params[:id])
-    @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(:id)
+    @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(id: :desc)
     @comment = @translation.user_translation_comments.build
     @favorite = current_user.user_translation_favorites.find_by(translation_id: @translation.id)
   end
@@ -40,12 +34,14 @@ class TranslationsController < ApplicationController
     @book =  Sentence.find(params[:translation][:sentence_id]).book
     @sentences =  Sentence.find(params[:translation][:sentence_id]).book.sentences
     @translation = current_user.translations.new(translation_params)
+    @translation[:book_locale] = @book.book_locale_statuses[0].locale.name
+    @translation[:user_locale] = choice_user_locale
     respond_to do |format|
       if @translation.save(translation_params)
         flash.now[:notice] = "You posted a new trancelation"
         format.js { render template: "../views/books/_sentence.html.erb"}
       else
-        flash.now[:notice] = "You failed to edit a translation"
+        flash.now[:alert] = "You failed to edit a translation"
         format.js { render :create_error }
       end
     end
@@ -70,7 +66,7 @@ class TranslationsController < ApplicationController
 
   def destroy
     @translation.destroy
-    redirect_to translations_path, notice: "You destoryed a new trancelation"
+    redirect_to translations_path, alert: "You destoryed a trancelation"
   end
 
   private
@@ -84,8 +80,16 @@ class TranslationsController < ApplicationController
 
   def authority_user_edit_destroy
     unless @translation.user.id == current_user.id || current_user.admin == true
-      flash[:notice] = "You can't edit this post"
+      flash[:alert] = "You can't edit this post"
       redirect_to translations_path
+    end
+  end
+
+  def choice_user_locale
+    if @book.book_locale_statuses[0][:locale_id] == current_user.user_locale_statuses.find_by(is_wanted: true)[:locale_id]
+      current_user.user_locale_statuses.find_by(is_native: true).locale.name
+    else
+      current_user.user_locale_statuses.find_by(is_wanted: true).locale.name
     end
   end
 end

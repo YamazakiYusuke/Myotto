@@ -1,24 +1,25 @@
-<div class='col-xs-12 col-sm-10 col-md-8'>
+<div class="offset-md-2 col-md-8 mt-5">
   <h1><%= @book.title %></h1>
-  <p class="book_status">
-    <%= t('.author') %>: <%= @book.author %> ・ 
+  <p class="book_status my-5">
+    <%= t('.author') %>: <%= @book.author %> ・
     <%= t('.issued_date') %>: 
     <% if @book.issued_date.nil? %>
       <%= t('.unknown') %>
     <% else %>
       <%= @book.issued_date.strftime("%Y") %>
-    <% end %> ・ 
+    <% end %> ・
     <%= t('.difficulty') %>: 
     <% if @book.book_locale_statuses[0].difficulty.nil? %>
       <%= t('.unknown') %>
     <% else %>
       <%= @book.book_locale_statuses[0].difficulty %>
-    <% end %> ・ 
+    <% end %> ・
     <%= t('.locale') %>: <%= @book.book_locale_statuses[0].locale.name %> 
     <% if admin_user? %> ・ 
       <%= t('.registration') %>: <%= @book.user[:name] %>
     <% end %>
   </p>
+
   <%= render partial: 'books/sentence', locals: { book: @book, sentences: @sentences } %>
   <div class="pagenation"><%= paginate @sentences %></div>
 </div>

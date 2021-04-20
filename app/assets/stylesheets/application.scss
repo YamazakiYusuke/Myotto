@@ -26,4 +26,17 @@ input {
   font-size: 120% !important;
 }
 
+.notifications {
+  color: $white;
+  text-align: center;  
+
+  .notice {
+    background-color: #00BFFF;
+  }
+
+  .alert {
+    background-color: #FF6347;
+  }
+}
+
 

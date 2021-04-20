@@ -1,12 +1,28 @@
-<h2>
-  <% if @which == 'following'%>
-    <%= t('.follow') %>
-  <% else %>
-    <%= t('.follower') %>
-  <% end %>
-</h2>
-<div id="user_index_form">
-  <% @users.each do |user| %>
-    <%= link_to(user.name, user_path(user.id)) %>
-  <% end %>
+<div class="row offset-md-2 col-md-8">
+  <div class="col">
+    <h1><%= t('.follow') %></h1>
+    <% @followings.each do |user| %>
+      <div class="my-3" style="transform: rotate(0);">
+        <%= image_tag user.icon.url, class: "rounded", width: '40px' %>
+        <%= link_to(user.name, user_path(user.id),class:"stretched-link") %>
+        <%= user.locales[0].name %>>→
+        <%= user.locales[1].name %>
+        (<%= user.user_locale_statuses[1].wanted_level %>)
+      </div>
+      
+    <% end %>
+  </div>
+
+  <div class="col">
+    <h1><%= t('.follower') %></h1>
+    <% @followers.each do |user| %>
+      <div class="my-5" style="transform: rotate(0);">
+        <%= image_tag user.icon.url, class: "rounded", width: '40px' %>
+        <%= link_to(user.name, user_path(user.id),class:"stretched-link") %>
+        <%= user.locales[0].name %>→
+        <%= user.locales[1].name %>
+        (<%= user.user_locale_statuses[1].wanted_level %>)
+      </div>
+    <% end %>
+  </div>
 </div>

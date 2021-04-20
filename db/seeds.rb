@@ -205,10 +205,15 @@ book_ids = Book.all.map { |n| n.id }
 sentence_ids = Sentence.all.map { |n| n.id }
 
 3000.times do |n|
+  user = User.find(user_ids.sample)
+  sentence_id = sentence_ids.sample
+  book = Sentence.find(sentence_id).book
   Translation.create!(
     content: "テスト翻訳#{n}",
-    user_id: user_ids.sample,
-    sentence_id: sentence_ids.sample,
+    user_id: user.id,
+    sentence_id: sentence_id,
+    book_locale: book.book_locale_statuses[0].locale.name,
+    user_locale: user.user_locale_statuses.find_by(is_wanted: true).locale.name,
   )
 end
 

@@ -3,18 +3,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :authority_user_edit_destroy, only: [:edit, :update]
 
-  def index #ここよくない 一つのページでどちらも見れるようにまとめる
-    if params[:which] == 'following'
-      @users = User.find(params[:user_id]).following
-      @which = 'following'
-    else params[:which] == 'followers'
-      @users = User.find(params[:user_id]).followers
-      @which = 'followers'
-    end
+  def index
+    @followings = User.find(params[:user_id]).following.includes(user_locale_statuses: :locale)
+    @followers = User.find(params[:user_id]).followers.includes(user_locale_statuses: :locale)
   end
 
   def show
-    @translations = Translation.where(user_id: params[:id]).includes(sentence: :book).includes(:user_translation_favorites,:user_translation_comments).order(id: :desc).page(params[:page]).per(10)
+    @translations = Translation.where(user_id: params[:id]).includes(sentence: :book).includes([:user_translation_favorites,:user_translation_comments]).order(id: :desc).page(params[:page]).per(10)
   end
 
   def new

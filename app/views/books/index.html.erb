@@ -16,9 +16,7 @@
 
 <h2 class="my-5 text-center"><%= link_to t('.create_book'), new_book_path, class: "btn btn-primary btn-lg" if admin_user? %></h2>
 
-
-
-<div class="row row-cols-1 row-cols-md-3">
+<div class="row row-cols-1 row-cols-md-3 mb-5">
   <% @books.each do |book| %>
     <div class="col mb-4">
       <div class="card">
