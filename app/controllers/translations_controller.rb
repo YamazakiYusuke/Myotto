@@ -26,30 +26,25 @@ class TranslationsController < ApplicationController
     @sentence = Sentence.find(params[:sentence_id])
     @translation = @sentence.translations.build
     respond_to do |format|
-      format.js { render :new }
+      format.js
     end
   end
 
   def create
-    @book =  Sentence.find(params[:translation][:sentence_id]).book
-    @sentences =  Sentence.find(params[:translation][:sentence_id]).book.sentences
+    @sentence = Sentence.find(params[:translation][:sentence_id])
+    book =  @sentence.book
+    @sentences =  book.sentences.includes(:book).order(id: "ASC").page(params[:page]).per(40)
     @translation = current_user.translations.new(translation_params)
-    @translation[:book_locale] = @book.book_locale_statuses[0].locale.name
-    @translation[:user_locale] = choice_user_locale
+    @translation[:book_locale] = book.book_locale_statuses[0].locale.name
+    @translation[:user_locale] = choice_user_locale(book)
     respond_to do |format|
       if @translation.save(translation_params)
-        flash.now[:notice] = "You posted a new trancelation"
-        format.js { render template: "../views/books/_sentence.html.erb"}
+        format.js { flash.now[:notice] = "You posted a new trancelation" }
+        format.js { render :create }
+        format.html { redirect_to book_path(book.id)}
       else
-        flash.now[:alert] = "You failed to edit a translation"
         format.js { render :create_error }
       end
-    end
-
-    if @translation.save
-      redirect_to translation_path(@translation.id)
-    else
-      render :new
     end
   end
 
@@ -85,8 +80,8 @@ class TranslationsController < ApplicationController
     end
   end
 
-  def choice_user_locale
-    if @book.book_locale_statuses[0][:locale_id] == current_user.user_locale_statuses.find_by(is_wanted: true)[:locale_id]
+  def choice_user_locale(book)
+    if book.book_locale_statuses[0][:locale_id] == current_user.user_locale_statuses.find_by(is_wanted: true)[:locale_id]
       current_user.user_locale_statuses.find_by(is_native: true).locale.name
     else
       current_user.user_locale_statuses.find_by(is_wanted: true).locale.name

@@ -19,7 +19,10 @@
       <%= t('.registration') %>: <%= @book.user[:name] %>
     <% end %>
   </p>
-
-  <%= render partial: 'books/sentence', locals: { book: @book, sentences: @sentences } %>
+  <div class="sentence">
+    <%= render @sentences %>
+  </div>
+  
   <div class="pagenation"><%= paginate @sentences %></div>
 </div>
+

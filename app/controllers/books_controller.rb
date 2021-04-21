@@ -9,7 +9,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @sentences = @book.sentences.order(id: "ASC").page(params[:page]).per(40)
+    @sentences = @book.sentences.includes(:book).order(id: "ASC").page(params[:page]).per(40)
   end
 
   def new
