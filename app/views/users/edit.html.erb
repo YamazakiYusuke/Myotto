@@ -1,2 +1,53 @@
-<h2><%= t('.edit_account') %></h2>
-<%= render 'user_form', user: @user %>
+<h1><%= t('.edit_account') %></h1>
+
+<%# 入力エラー表示 %>
+<% if @user.errors.any? %>
+  <li id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> Reject save</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </li>
+<% end %>
+
+
+<%# 入力フォーム %>
+<%= form_with(model: @user, local: true) do |f| %>
+  <ul>
+    <li>
+      <%= f.label "Name" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </li>  
+
+
+    <li>
+      <%= f.label "mail" %>
+      <%= f.email_field :email, class: "form-control" %>
+    </li>   
+    
+    <li class="field">
+      <%= f.label "Profile" %>
+      <%= f.text_area :profile, rows: "4" %>
+    </li> 
+
+    <li class="field">
+      <%= f.label "Icon" %>
+      <%= f.file_field :icon %>
+    </li>
+
+    <%# 母国語学習言語が増殖する問題を解決して復活させる %>
+
+    <li>
+      <%= f.label "password"%>
+      <%= f.password_field :password, class: "form-control" %>
+    </li>
+    
+    <li>
+      <%= f.label "password confirmation" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </li> 
+    <li class="actions"><%= f.submit "Submit", class: "btn btn-default btn-lg" %></li>
+  </ul>
+<% end %>

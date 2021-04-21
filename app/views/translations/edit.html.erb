@@ -1,2 +1,32 @@
 <h1><%= t('.edit_translation') %></h1>
-<%= render 'translation_form', translation: @translation %>
+
+<%= form_with(model: translation, local:true ) do |form| %>
+
+  <%# 入力エラー表示 %>
+  <% if translation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(translation.errors.count, t('.error')) %> <%= t('.reject_save') %></h2>
+      <ul>
+      <% translation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="new_post_box">
+    <strong><%= t('.original') %></strong> :
+    <span><%= @translation.sentence.content %></span>
+    <div class="field">
+      <%= form.label t('.translation') %> :<br/>
+      <%= form.text_area :content, class: "form-control", id: "exampleFormControlTextarea1", rows: "4" %>
+    </div>
+    <div class="field">
+      <%= form.hidden_field :sentence_id, valuse: translation.sentence_id %>
+    </div>
+    <br/> 
+    <div class="actions">
+      <%= form.submit t('.submit'), class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+<% end %>

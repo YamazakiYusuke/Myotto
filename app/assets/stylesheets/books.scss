@@ -2,75 +2,83 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// _book_from
-.book_form{
-  margin: 6rem auto 0 auto;
-  font-size: 2rem;
-}
+/*======================
+    本のimage
+======================*/
 
-.book_form form ul li {
-  list-style: none;
-  margin: 2rem 25%;
-}
-
-.book_form form ul li label{
-  margin-right: 10px;
+.hovereffect {
   width: 100%;
+  height: 100%;
   float: left;
-}
-
-.book_form form ul li input{
-  width: 100%;
-}
-
-.book_form form ul li textarea{
-  width: 100%;
-  height: 1000px;
-}
-
-.book_submit{
-  margin-top: 4rem;
-}
-
-// book_index 
-main .yield_wrap #book_index_container{
-  border-radius: 7px;
-}
-#table{
-  background-color: white;
-  border-radius: 14px;
-  padding: 40px;
-}
-main .yield_wrap .book_index_search{
-  width: 100%;
-  margin-top: 5rem;
-  font-size: 1.5rem;
-}
-
-main .yield_wrap .book_index_search form{
+  overflow: hidden;
+  position: relative;
   text-align: center;
+  cursor: default;
 }
 
-main .yield_wrap .book_index_search form label, input, select{
-  margin-right: 2rem;
-}
-
-table{
+.hovereffect .overlay {
   width: 100%;
-  margin: 0 auto 0 auto;
-  font-size: 2rem;
-  border-spacing: 10px 10px;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
 }
 
-// show
-main .yield_wrap .book_status{
-  text-align: center;
-}
-main .yield_wrap #sentence_box{
-  background-color: rgb(218, 218, 218);
-  border-radius: 14px;
-}
-main .yield_wrap #sentence_box tbody{
+.hovereffect img {
   display: block;
-  padding: 30px;
+  position: relative;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+}
+
+.hovereffect:hover img {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+  filter: grayscale(1) blur(3px);
+  -webkit-filter: grayscale(1) blur(3px);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.hovereffect h2 {
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hovereffect a.info {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 14px;
+  border: 1px solid #fff;
+  margin: 50px 0 0 0;
+  background-color: transparent;
+}
+
+.hovereffect a.info:hover {
+  box-shadow: 0 0 5px #fff;
+}
+
+.hovereffect a.info, .hovereffect h2 {
+  -webkit-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.hovereffect:hover a.info, .hovereffect:hover h2 {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }

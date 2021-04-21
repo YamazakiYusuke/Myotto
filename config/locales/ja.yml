@@ -1,5 +1,10 @@
 ---
 ja:
+  views:
+    pagination:
+      previous: "« 前ページ"
+      next: "次ページ »"
+      truncate: "..."
   activerecord:
     models:
       book: 本
@@ -193,6 +198,7 @@ ja:
       created_account: アカウントを作成しました！
     edit:
       edit_account: アカウントを編集
+      error: エラー
     update:
       edited_account: アカウントを編集しました
   reject_edit: このアカウントは、編集できません

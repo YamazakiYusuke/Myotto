@@ -1,17 +1,21 @@
-<ul>
-  <% comments.each do |comment| %>
-    <% if comment.id.present? %>
-      <li id="comments_show_container">
-        <strong><%= link_to(comment.user.name, user_path(comment.user.id)) %></strong>
-        <p id=<%= "this_comment_#{comment.id}"%>><%= comment.content %></p>
+<% comments.each do |comment| %>
+  <div class="card bg-light p-3 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
+    <div class="card-body">
+      <% if comment.id.present? %>
+        <h5 class="card-title">
+          <%= image_tag comment.user.icon.url, class:'img-thumbnail', width:"40px" %>
+          <%= link_to(comment.user.name, user_path(comment.user.id), class:"ml-3") %>
+          <%= comment.user.locales[0].name %>→
+          <%= comment.user.locales[1].name %>
+          ( <%= comment.user.user_locale_statuses[1].wanted_level %> )
+        </h5>
+        <p class="card-text" id=<%= "this_comment_#{comment.id}"%>><%= comment.content %></p>
         <% if comment.user_id == current_user.id %>
-          <p>
-            <%= link_to t('.edit'), edit_translation_user_translation_comment_path(translation, comment), remote: true %>&nbsp;
-            <%= link_to t('.destroy'), translation_user_translation_comment_path( translation.id, comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} %>
-          </p>
-          <div id='comment'></div>
+          <%= link_to t('.edit'), edit_translation_user_translation_comment_path(translation, comment), class:"card-link", remote: true %>
+          <%= link_to t('.destroy'), translation_user_translation_comment_path( translation.id, comment.id), class:"card-link", method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} %>
         <% end %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+        <div id='comment'></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

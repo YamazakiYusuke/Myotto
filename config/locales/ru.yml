@@ -1,5 +1,10 @@
 ---
 ru:
+  views:
+    pagination:
+      previous: "« Предыдущая "
+      next: "Следующая »"
+      truncate: "..."
   activerecord:
     models:
       book: Книга

@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
 
   create_table "books", force: :cascade do |t|
     t.string "title", null: false
+    t.string "image"
     t.string "author"
     t.datetime "issued_date"
     t.bigint "user_id"
@@ -85,10 +86,14 @@ ActiveRecord::Schema.define(version: 2020_12_04_070529) do
     t.bigint "user_id"
     t.bigint "sentence_id"
     t.text "content"
+    t.string "book_locale", null: false
+    t.string "user_locale", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_locale"], name: "index_translations_on_book_locale"
     t.index ["sentence_id"], name: "index_translations_on_sentence_id"
     t.index ["user_id"], name: "index_translations_on_user_id"
+    t.index ["user_locale"], name: "index_translations_on_user_locale"
   end
 
   create_table "user_book_favorites", force: :cascade do |t|

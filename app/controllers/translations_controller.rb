@@ -3,45 +3,47 @@ class TranslationsController < ApplicationController
   before_action :set_translation, only: [:edit, :update, :destroy]
   before_action :authority_user_edit_destroy, only: [:edit, :update, :destroy]
 
-  def index  #N + 1問題 
+  def index
     if params[:translation].present?
       if params[:translation][:search_translation].present?
-        @translations = Translation.translation_scope(params[:translation][:search_translation]).includes(:user, :sentence, :user_translation_favorites, :user_translation_comments)
-                                                                          .order(created_at: :desc).page(params[:page]).per(20)
+        @translations = Translation.translation_scope(params[:translation][:search_translation]).includes([:user, :sentence, :user_translation_favorites, :user_translation_comments]).order(id: :desc).page(params[:page]).per(20)
       end
     else
-      user_native_id = current_user.user_locale_statuses.find_by(is_native: true).locale_id
-      user_wanted_id = current_user.user_locale_statuses.find_by(is_wanted: true).locale_id  ## <=これも稼働させる
-
-      user_locales =  UserLocaleStatus.where(is_wanted: true).where(locale_id: user_native_id).includes(user: :translations)
-      users = user_locales.map { |n| n.user }
-      translations = users.flat_map { |n| n.translations }
-      translations_sorted = translations.sort_by!{|t|t[:id]}.reverse
-      @translations = Kaminari.paginate_array(translations_sorted).page(params[:page]).per(20)
+      user_native_locale = current_user.user_locale_statuses.find_by(is_native: true).locale.name
+      user_wanted_locale = current_user.user_locale_statuses.find_by(is_wanted: true).locale.name
+      @translations = Translation.where(book_locale: user_native_locale, user_locale: user_wanted_locale).or(Translation.where(book_locale: user_wanted_locale, user_locale: user_native_locale)).includes([:user, :sentence, :user_translation_favorites, :user_translation_comments]).order(id: :desc).page(params[:page]).per(20)
     end
   end
 
   def show
     @translation = Translation.includes(:user, :sentence).find(params[:id])
-    @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(created_at: :desc)
+    @comments = UserTranslationComment.where(translation_id: @translation.id).includes(:user).order(id: :desc)
     @comment = @translation.user_translation_comments.build
     @favorite = current_user.user_translation_favorites.find_by(translation_id: @translation.id)
   end
 
   def new
-    @translation = Translation.new
-    @translation[:sentence_id] = params[:sentence_id]
+    @sentence = Sentence.find(params[:sentence_id])
+    @translation = @sentence.translations.build
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
+    @sentence = Sentence.find(params[:translation][:sentence_id])
+    book =  @sentence.book
+    @sentences =  book.sentences.includes(:book).order(id: "ASC").page(params[:page]).per(40)
     @translation = current_user.translations.new(translation_params)
+    @translation[:book_locale] = book.book_locale_statuses[0].locale.name
+    @translation[:user_locale] = choice_user_locale(book)
     respond_to do |format|
-      if @translation.save
-        format.html { redirect_to translation_path(@translation.id), notice: t('.new_posted') }
-        format.js { render :index }
+      if @translation.save(translation_params)
+        format.js { flash.now[:notice] = "You posted a new trancelation" }
+        format.js { render :create }
+        format.html { redirect_to book_path(book.id)}
       else
-        format.html { render :new }
-        format.js { render :index }
+        format.js { render :create_error }
       end
     end
   end
@@ -51,7 +53,7 @@ class TranslationsController < ApplicationController
 
   def update
     if @translation.update(translation_params)
-      redirect_to translation_path(@translation.id), notice: t('.edited_post')
+      redirect_to translation_path(@translation.id), notice: "You edited a new trancelation"
     else
       render :edit
     end
@@ -59,7 +61,7 @@ class TranslationsController < ApplicationController
 
   def destroy
     @translation.destroy
-    redirect_to translations_path, notice: t('.destoryed_post')
+    redirect_to translations_path, alert: "You destoryed a trancelation"
   end
 
   private
@@ -73,8 +75,16 @@ class TranslationsController < ApplicationController
 
   def authority_user_edit_destroy
     unless @translation.user.id == current_user.id || current_user.admin == true
-      flash[:notice] = t('reject_edit')
+      flash[:alert] = "You can't edit this post"
       redirect_to translations_path
+    end
+  end
+
+  def choice_user_locale(book)
+    if book.book_locale_statuses[0][:locale_id] == current_user.user_locale_statuses.find_by(is_wanted: true)[:locale_id]
+      current_user.user_locale_statuses.find_by(is_native: true).locale.name
+    else
+      current_user.user_locale_statuses.find_by(is_wanted: true).locale.name
     end
   end
 end

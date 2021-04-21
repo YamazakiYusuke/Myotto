@@ -1,21 +1,12 @@
 <%= form_with(model: [translation, comment]) do |form| %>
-  <% if comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-      <ul>
-      <% comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%# 入力フォーム %>
+  <div class="card bg-light form-group mb-5 p-3 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
+    <div class="card-body">
+      <h5 class="card-title"><%= form.label t('translations.show.comment_area') %></h5>
+      <p class="card-text">
+        <%= form.text_area :content, class:"form-control col-12" %>
+        <%= form.submit t('translations.show.submit'), class: "btn btn-primary offset-9 col-3 mt-1" %>
+      </p>
     </div>
-  <% end %>
-  <div class="field">
-    <span id="comment_count"><%= @comments.size %> <%= t('translations.show.comment_size') %></span><br/>
-    <%= form.label t('translations.show.comment_area') %>
-    <%= form.text_area :content %>
-    <%= form.hidden_field :translation_id, value: translation.id %>
-  </div>
-  <div class="actions">
-    <%= form.submit t('translations.show.submit', class: "btn btn-default pull-right")%>
   </div>
 <% end %>

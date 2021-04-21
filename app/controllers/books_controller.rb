@@ -9,19 +9,19 @@ class BooksController < ApplicationController
   end
 
   def show
-    @sentences = @book.sentences.order(id: "ASC").page(params[:page]).per(40)
+    @sentences = @book.sentences.includes(:book).order(id: "ASC").page(params[:page]).per(40)
   end
 
   def new
     @book = Book.new
-    @book.book_locale_statuses.build if @book.book_locale_statuses.size == 0
+    @book.book_locale_statuses.build
   end
 
   def create 
     @book =  current_user.books.new(book_params)
     if @book.save
       Sentence.make_sentences_from_book(@book.book_locale_statuses[0].locale_id, @book.id, params[:book][:content])
-      redirect_to books_path, notice: t('.registered_book')
+      redirect_to books_path, notice: "You registered a new book"
     else
       render :new
     end
@@ -32,7 +32,7 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to books_path, notice: t('.edited_book')
+      redirect_to books_path, notice: "You edited a book"
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_url, notice: t('.destroyed_book')
+    redirect_to books_url, notice: "Youdeleted a book"
   end
 
   private
@@ -49,6 +49,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :issued_date, book_locale_statuses_attributes: [:locale_id, :book_id, :is_main, :difficulty])
+    params.require(:book).permit(:title, :image, :author, :issued_date, book_locale_statuses_attributes: [:locale_id, :book_id, :is_main, :difficulty])
   end
 end

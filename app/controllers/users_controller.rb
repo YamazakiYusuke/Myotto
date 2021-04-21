@@ -4,29 +4,24 @@ class UsersController < ApplicationController
   before_action :authority_user_edit_destroy, only: [:edit, :update]
 
   def index
-    if params[:which] == 'following'
-      @users = User.find(params[:user_id]).following
-      @which = 'following'
-    else params[:which] == 'followers'
-      @users = User.find(params[:user_id]).followers
-      @which = 'followers'
-    end
+    @followings = User.find(params[:user_id]).following.includes(user_locale_statuses: :locale)
+    @followers = User.find(params[:user_id]).followers.includes(user_locale_statuses: :locale)
   end
 
   def show
-    @translations = Translation.where(user_id: params[:id]).includes(sentence: :book).includes(:user_translation_favorites).order(id: :desc).page(params[:page]).per(10)
+    @translations = Translation.where(user_id: params[:id]).includes(sentence: :book).includes([:user_translation_favorites,:user_translation_comments]).order(id: :desc).page(params[:page]).per(10)
   end
 
   def new
     @user = User.new
-    2.times { @user.user_locale_statuses.build } if @user.user_locale_statuses.size == 0
+    @user.user_locale_statuses.build
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to translations_path, notice: t('.created_account')
+      redirect_to translations_path, notice: "You success to create new account! Wellcome!!"
     else
       render :new
     end
@@ -37,7 +32,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user.id), notice: t('.edited_account')
+      redirect_to user_path(@user.id), notice: "You edited a account "
     else
       render :edit
     end

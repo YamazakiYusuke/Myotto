@@ -1,0 +1,9 @@
+<%= form_with(model: translation) do |form| %>
+  <div class="form-group">
+    <div class="js-message-errors"></div>
+    <%= form.text_area :content, id: "translation_content_#{sentence.id}", class: "form-control form-control-lg", rows:"3" %>
+    <%= form.hidden_field :sentence_id, value: sentence.id  %>
+
+    <%= form.submit "翻訳を投稿", class:"btn btn-primary offset-8 col-4 mt-2"%>
+  </div>
+<% end %>

@@ -5,7 +5,7 @@ class SentencesController < ApplicationController
 
   def show
     @book = @sentence.book
-    @translations = Translation.where(sentence_id: @sentence.id).includes(:user).includes(:user_translation_favorites).order(id: :desc)
+    @translations = Translation.where(sentence_id: @sentence.id).includes(:user).includes([:user_translation_favorites,:user_translation_comments]).order(id: :desc)
   end
 
   def edit

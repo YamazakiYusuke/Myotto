@@ -4,14 +4,14 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     unless logged_in?
-      flash[:notice] = t('.login_request')
+      flash[:alert] = "You need login"
       redirect_to new_session_path
     end
   end
 
   def admin_user
     unless current_user.admin
-      flash[:notice] = t('.admin_only')
+      flash[:alert] = "You can't access this page"
       redirect_to books_path
     end
   end
