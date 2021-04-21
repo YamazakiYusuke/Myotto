@@ -20,7 +20,7 @@ class BooksController < ApplicationController
   def create 
     @book =  current_user.books.new(book_params)
     if @book.save
-      Sentence.make_sentences_from_book(@book.book_locale_statuses[0].locale_id, @book.id, params[:book][:content])
+      Sentence.make_sentences_from_book(@book.id, params[:book][:content])
       redirect_to books_path, notice: "You registered a new book"
     else
       render :new

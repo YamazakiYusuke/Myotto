@@ -5,16 +5,9 @@ class Sentence < ApplicationRecord
   validates :book_id, presence: true
   validates :content,  length: { in: 0..1000 } 
 
-  # scope :sentence_scope, -> (sentence) { where('content like?', "%#{sentence}%") }
-    # "" or 「」の中で切らないようにする。
-    # 段落の頭だけスペース
-    # あまりに短い文を結合
-  def self.make_sentences_from_book(locale , book_id , content)
-    if locale == 1 || locale == 3
-      spliter = /\.|\?|!/
-    else
-      spliter = /\。|\？|!/
-    end
+  def self.make_sentences_from_book(book_id, content)
+    spliter = /\。|\？|\!|\.|\?|!/
+    
     split_chars = content.split("").select{ |s| s.match(spliter) }
     sentences = content.split(spliter).zip(split_chars).map{|s| s.join }
     sentences.each do |s|

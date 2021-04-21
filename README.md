@@ -35,18 +35,20 @@ Rails 5.2.4.4
   - プロフィールの編集機能（投稿者のみ）
   - フォロー機能
   - フォロー・フォロワー一覧表示
-  - DM機能(投稿者以外）
   - Userの今までの翻訳一覧表示
   
 - 本の一覧機能
 - 本の詳細機能（センテンス一覧）
+  - センテンスごとの翻訳
   - センテンスの編集機能(管理者のみ)
 - 本の登録機能(管理者のみ)
 - 本の編集機能(管理者のみ)
 - 本の削除機能(管理者のみ)
 
-- 本の追加リクエスト(メール)
 - ユーザーフォロー機能
+
+追加予定
+- 本の追加リクエスト(メール)
 - DM機能
 
 ## カタログ設計
@@ -64,14 +66,10 @@ https://drive.google.com/file/d/1Tn1uPXLUx6qPa3GbSBbVBDtCZ7ViNrlF/view?usp=shari
 ## 画面ワイヤーフレーム
 https://drive.google.com/file/d/1tOMtV767uYTzz35J5mwLdMHmQetP4NwG/view?usp=sharing
 
-## 使用予定Gem
-* carrierwave
-* mini_magick
-* ransack
-
-## 課題要件
-- 就業Termから２つ以上の技術
-  - コメント機能
-  - フォロー機能
-- カリキュラム外から１つ以上の技術
-  - gem ransack(本の検索機能に使用)
+## 使用Gem
+* gem 'carrierwave', '~> 2.0'
+* gem 'mimemagic', '0.3.7'
+* gem 'ransack'
+* gem 'bootstrap', '~> 4.4.1'
+* gem 'kaminari
+* gem 'faker'
