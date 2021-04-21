@@ -14,16 +14,18 @@ User.create!(
   profile: '日本人です。I am japanese. Я японец.',
   admin: true
 )
+
 User.last.user_locale_statuses.create!(
+  
   locale_id: 2,
   is_native: true
 )
+
 User.last.user_locale_statuses.create!(
   locale_id: 3,
   is_wanted: true,
   wanted_level: 'Intermediate'
 )
-
 
 User.create!(
   name: 'Gest',
@@ -32,16 +34,17 @@ User.create!(
   profile: '私はゲストです',
   admin: true
 )
+
 User.last.user_locale_statuses.create!(
   locale_id: 2,
   is_native: true
 )
+
 User.last.user_locale_statuses.create!(
   locale_id: 1,
   is_wanted: true,
   wanted_level: 'Intermediate'
 )
-
 
 Book.create!(
   title: '羅生門',
@@ -49,6 +52,7 @@ Book.create!(
   issued_date: issued_date,
   user_id: 1
 )
+
 BookLocaleStatus.create!(
   book_id: 1,
   locale_id: 2,
@@ -108,6 +112,7 @@ BookLocaleStatus.create!(
   is_main: true,
   difficulty: ['Unknown', 'Beginner', 'Intermediate','Advanced'].sample
 )
+
 content = "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, “and what is the use of a book,” thought Alice “without pictures or conversations?”
 
 So she was considering in her own mind (as well as she could, for the hot day made her feel very sleepy and stupid), whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly a White Rabbit with pink eyes ran close by her.
@@ -150,6 +155,7 @@ Book.create!(
   issued_date: issued_date,
   user_id: 1
 )
+
 BookLocaleStatus.create!(
   book_id: 3,
   locale_id: 3,
@@ -204,7 +210,7 @@ book_ids = Book.all.map { |n| n.id }
 
 sentence_ids = Sentence.all.map { |n| n.id }
 
-3000.times do |n|
+1000.times do |n|
   user = User.find(user_ids.sample)
   sentence_id = sentence_ids.sample
   book = Sentence.find(sentence_id).book
