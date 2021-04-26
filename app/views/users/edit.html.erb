@@ -1,53 +1,54 @@
-<h1><%= t('.edit_account') %></h1>
-
 <%# 入力エラー表示 %>
 <% if @user.errors.any? %>
-  <li id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> Reject save</h2>
-    <ul>
+  <div class="mt-5 offset-md-2 col-md-8">
     <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+      <p class="alert alert-danger"><%= message %></p>
     <% end %>
-    </ul>
-  </li>
+  </div>
 <% end %>
 
 
 <%# 入力フォーム %>
-<%= form_with(model: @user, local: true) do |f| %>
-  <ul>
-    <li>
-      <%= f.label "Name" %>
-      <%= f.text_field :name, class: "form-control" %>
-    </li>  
+<div class="signup-form mt-5 offset-lg-4 col-lg-4">
+  <%= form_with(model: @user, local: true) do |f| %>
+    <h2><%= t('.edit_account') %></h2>
+    <hr>
 
+    <div class="form-group">
+      <%= f.label "Name", for:'name' %>
+      <%= f.text_field :name, class: "form-control", id: "name" %>
+    </div>  
 
-    <li>
-      <%= f.label "mail" %>
-      <%= f.email_field :email, class: "form-control" %>
-    </li>   
+    <div class="form-group">
+      <%= f.label "Email", for:'email' %>
+      <%= f.email_field :email, class: "form-control", id: "email" %>
+    </div>   
     
-    <li class="field">
-      <%= f.label "Profile" %>
-      <%= f.text_area :profile, rows: "4" %>
-    </li> 
+    <div class="form-group">
+      <%= f.label "Profile", for:'profile' %>
+      <%= f.text_area :profile, rows: "4", id: "profile",class:"col-12" %>
+    </div> 
 
-    <li class="field">
-      <%= f.label "Icon" %>
-      <%= f.file_field :icon %>
-    </li>
+    <div class="form-group">
+      <%= f.label "Icon", for:'icon' %>
+      <%= f.file_field :icon, id:"icon" %>
+    </div>
 
     <%# 母国語学習言語が増殖する問題を解決して復活させる %>
 
-    <li>
-      <%= f.label "password"%>
+    <div class="form-group">
+      <%= f.label "new_password"%>
       <%= f.password_field :password, class: "form-control" %>
-    </li>
+    </div>
     
-    <li>
-      <%= f.label "password confirmation" %>
+    <div class="form-group">
+      <%= f.label "Confirm new password" %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
-    </li> 
-    <li class="actions"><%= f.submit "Submit", class: "btn btn-default btn-lg" %></li>
-  </ul>
-<% end %>
+    </div> 
+
+    <div class="form-group">
+      <%= f.submit "Submit", class: "btn btn-primary btn-block btn-lg" %>
+    </div>
+
+  <% end %>
+</div>

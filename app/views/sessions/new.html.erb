@@ -1,15 +1,19 @@
 <div class="my-5 offset-md-3 col-md-6 offset-lg-4 col-lg-4">
   <div class="sessions_form">
     <%= image_tag 'default.png', class: "img-fluid profile-img rounded shadow-sm mx-auto d-block", width:"300px" %>
+
     <%= form_with(scope: :session, url: sessions_path, local: true, class: "") do |f| %>
         <%= f.email_field :email, class: "form-control mt-3", placeholder: "Email"  %>
         <%= f.password_field :password, class: "form-control mt-3", placeholder: "Password" %>
         <%= f.submit t('.login'), class: "btn btn-lg btn-primary btn-block mt-4" %>
     <% end %>
+
     <%= form_with(scope: :session, url: sessions_path, local: true, class: "form-signin") do |f| %>
         <%= f.hidden_field :email, value: "gest@gmail.com"  %>
         <%= f.hidden_field :password, value: "hogehoge" %>
         <%= f.submit "Gest User", class: "btn btn-lg btn-success btn-block mt-2" %>
     <% end %>
+
+    <div class="text-center mt-5">You don't have an account? <%= link_to('SignUp here', new_user_path) %></div>
   </div>
 </div>
