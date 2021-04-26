@@ -23,6 +23,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to translations_path, notice: "You success to create new account! Wellcome!!"
     else
+      @user = User.new
+      @user.user_locale_statuses.build
       render :new
     end
   end

@@ -1,13 +1,10 @@
 <%# 入力エラー表示 %>
 <% if @user.errors.any? %>
-  <li id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> Reject save</h2>
-    <ul>
+  <div class="mt-5 offset-md-2 col-md-8">
     <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+      <p class="alert alert-danger"><%= message %></p>
     <% end %>
-    </ul>
-  </li>
+  </div>
 <% end %>
 
 <%# 入力フォーム %>
@@ -16,53 +13,54 @@
     <h2>Sign Up</h2>
     <p>It's free and only takes a minute.</p>
     <hr>
+
     <div class="form-group">
-      <label>Username</label>
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.label "Username", for: "name" %> 
+      <%= f.text_field :name, class: "form-control", id: "name"  %>
     </div>
 
-    <%= f.fields_for :user_locale_statuses do |form| %>
+    <%= f.fields_for :user_locale_statuses do |locale| %>
       <div class="form-group">
-        <%= form.label "Navive" %> 
-        <%= form.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true, class: "form-control") %>
+        <%= locale.label "Navive", for: "is_native" %> 
+        <%= locale.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true, class: "form-control", id: "is_native") %>
       </div>
-
-      <div class="form-group">
-        <%= form.label "Level" %> 
-        <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']], include_blank: true, class: "form-control") %>
-      </div> 
-      <%= form.hidden_field :is_native, value: 'true' %>
+      <%= locale.hidden_field :is_native, value: 'true' %>
     <% end %>
 
-    <%= f.fields_for :user_locale_statuses do |form| %>
+    <%= f.fields_for :user_locale_statuses do |locale| %>
       <div class="form-group">
-        <%= form.label "Learning" %> 
-        <%= form.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true, class: "form-control") %>
+        <%= locale.label "Learning", for:'is_wanted' %> 
+        <%= locale.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true, class: "form-control", id:'is_wanted') %>
       </div>
       
       <div class="form-group">
-        <%= form.label "Level" %> 
-        <%= form.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']], include_blank: true, class: "form-control") %>
+        <%= locale.label "Level", for: 'is_wanted_level' %> 
+        <%= locale.select(:wanted_level, [['Beginner'], ['Elementary'], ['Intermediate'], ['Advanced'], ['Proficient']], include_blank: true, class: "form-control", id:'is_wanted_level') %>
       </div> 
-      <%= form.hidden_field :is_wanted, value: 'true' %>
+      <%= locale.hidden_field :is_wanted, value: 'true' %>
     <% end %>
 
     <div class="form-group">
-      <label>Email Address</label>
-      <%= f.email_field :email, class: "form-control" %>
+      <%= f.label "Email Address", for: "email" %> 
+      <%= f.email_field :email, class: "form-control", id:"email" %>
     </div>
+
     <div class="form-group">
-      <label>Password</label>
-      <%= f.password_field :password, class: "form-control" %>
+      <label >Password</label>
+      <%= f.label "Password", for: "password" %> 
+      <%= f.password_field :password, class: "form-control",id:'password' %>
     </div>
+
     <div class="form-group">
-      <label>Confirm Password</label>
-      <%= f.password_field :password_confirmation, class: "form-control" %>
+      <%= f.label "Confirm Password", for: "confirm_password" %> 
+      <%= f.password_field :password_confirmation, class: "form-control", id:'confirm_password' %>
     </div>
+
     <div class="form-group">
       <%= f.submit "Sign Up", class: "btn btn-primary btn-block btn-lg" %>
     </div>
   <% end %>
+  
   <div class="text-center">Already have an account? <%= link_to('Login here', new_session_path) %></div>
 </div>
 
