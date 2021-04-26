@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to translations_path, notice: t('.logined_in')
     else
-      flash.now[:danger] = t('.login_failed')
+      flash.now[:alert] = t('.login_failed')
       render :new
     end
   end
