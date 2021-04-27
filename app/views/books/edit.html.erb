@@ -1,57 +1,57 @@
-<h1><%= t('.edit_book') %></h1>
-
-<%= form_with(model: @book, local: true) do |form| %>
-
-  <%# 入力エラー表示 %>
-  <% if @book.errors.any? %>
-    <li id="error_explanation">
-      <h2><%= pluralize(@book.errors.count, "error") %> Reject save</h2>
-      <ul>
-      <% @book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </li>
-  <% end %>
-
-  <%# 入力フォーム %>
-  <ul>
-    <li>
-      <%= form.label "Title" %>
-      <%= form.text_field(:title) %>
-    </li>
-
-    <li>
-      <%= form.label "Author" %>
-      <%= form.text_field(:author) %>
-    </li>
-
-    <li>
-      <%= form.label "Book image" %>
-      <%= form.file_field :image %>
-    </li>
-
-    <li>
-      <%= form.label "Issued date" %>
-      <%= form.date_field(:issued_date) %>
-    </li>
-
-    <%= form.fields_for :book_locale_statuses do |f| %>
-      <li>
-        <%= f.label "Difficulty" %>
-        <%= f.select(:difficulty, [['Unknown', 'Unknown'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']], include_blank: true) %>
-      </li>
-
-      <li>
-        <%= f.label "Language" %>
-        <%= f.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true) %>
-      </li>
-
-      <%= f.hidden_field :is_main, value: 'true' %>
+<h1 class="text-center"><%= t('.edit_book') %></h1>
+<hr>
+<%# 入力エラー表示 %>
+<% if @book.errors.any? %>
+  <div class="mt-5 offset-lg-3 col-lg-6">
+    <% @book.errors.full_messages.each do |message| %>
+      <p class="alert alert-danger"><%= message %></p>
     <% end %>
-
-    <li>
-      <%= form.submit "Submit", class: "btn btn-success center-block book_submit" %>
-    </li>
-  </ul>
+  </div>
 <% end %>
+
+<div class="mt-5 offset-lg-3 col-lg-6">
+  <%= form_with(model: @book, local: true) do |form| %>
+
+    <%# 入力フォーム %>
+    <ul>
+      <div class="form-group">
+        <%= form.label "Title", for: "title" %>
+        <%= form.text_field(:title, class: "form-control", id: "title") %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label "Author", for: "author" %>
+        <%= form.text_field(:author, class: "form-control", id: "author") %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label "Book image", for: "image" %>
+        <%= form.file_field(:image, id: "image") %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label "Issued date", for: "date" %>
+        <%= form.date_field(:issued_date, class: "form-control", id: "date") %>
+      </div>
+
+      <%= form.fields_for :book_locale_statuses do |locale| %>
+
+        <div class="form-group">
+          <%= locale.label "Language", for: "language" %>
+          <%= locale.collection_select(:locale_id, Locale.all, :id, :name, include_blank: true, class: "form-control", id: "language") %>
+        </div>
+
+        <div class="form-group">
+          <%= locale.label "Difficulty", for: "difficulty" %>
+          <%= locale.select(:difficulty, [['Unknown', 'Unknown'], ['Beginner', 'Beginner'], ['Intermediate' ,'Intermediate'], ['Advanced' ,'Advanced']], include_blank: true, class: "form-control", id: "difficulty") %>
+        </div>
+
+        <%= locale.hidden_field :is_main, value: 'true' %>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.submit "Submit", class: "btn btn-primary btn-block btn-lg" %>
+      </div>
+    </ul>
+  <% end %>
+</div>
