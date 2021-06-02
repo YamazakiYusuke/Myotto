@@ -37,7 +37,7 @@ User.create!(
   email: 'gest@gmail.com',
   password: 'hogehoge',
   profile: '私はゲストです',
-  admin: true
+  admin: false
 )
 
 User.last.user_locale_statuses.create!(
