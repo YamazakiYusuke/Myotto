@@ -39,10 +39,11 @@ class TranslationsController < ApplicationController
     @translation[:user_locale] = choice_user_locale(book)
     respond_to do |format|
       if @translation.save(translation_params)
-        format.js { flash.now[:notice] = "You posted a new trancelation" }
+        flash.now[:alert] = 'You posted a new trancelation.'
         format.js { render :create }
         format.html { redirect_to book_path(book.id)}
       else
+        flash.now[:alert] = 'Failed to post a trancelation'
         format.js { render :create_error }
       end
     end

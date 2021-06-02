@@ -33,9 +33,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to user_path(@user.id), notice: "You edited a account "
+    
+    if current_user && current_user.authenticate(params[:user][:current_password])
+      if @user.update(user_update_params)
+        redirect_to user_path(@user.id), notice: "You edited a account "
+      else
+        flash.now[:alert] = 'The change failed.'
+        render :edit
+      end
     else
+      flash.now[:alert] = 'The change failed. You should enter a correct password.'
       render :edit
     end
   end
@@ -52,6 +59,13 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :profile, :icon, :icon_cache, :email, :password, :password_confirmation,
                                   user_locale_statuses_attributes: [:locale_id, :is_native, :is_wanted, :wanted_level] )
+  end
+
+  def user_update_params
+    update_params = params.require(:user).permit(:name, :profile, :icon, :icon_cache, :email, :password, :password_confirmation)
+    update_params[:password] = params[:user][:current_password] if update_params[:password].blank?
+    update_params[:password_confirmation] = params[:user][:current_password] if update_params[:password_confirmation].blank?
+    update_params
   end
 
   def authority_user_edit_destroy
